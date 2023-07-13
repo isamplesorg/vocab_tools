@@ -62,6 +62,17 @@ skos:VocabularyShape
     ) ;
 .
 
+skos:VocabularyConceptSchemeShape
+    a sh:NodeShape ;
+    sh:targetNode skos:ConceptScheme ;
+    sh:property [
+        sh:path [ sh:inversePath rdf:type ] ;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:description "A vocabulary must have an instance of skos:ConceptScheme."@en ;
+    ] ;
+.
+
 skos:NarrowerConceptShape
     a sh:NodeShape ;
     sh:property [
