@@ -32,9 +32,6 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 SELECT ?vocab ?broader
 WHERE {
   ?vocab rdf:type skos:ConceptScheme .
-  OPTIONAL {
-    ?vocab ^skos:inScheme ?broader .
-  } .
 }
 """},
     "concepts": {
