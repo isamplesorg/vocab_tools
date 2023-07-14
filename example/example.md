@@ -1,11 +1,8 @@
-[10:35:39] INFO     Loaded vocabulary https://example.net/my/minimal/vocab                                                                 __init__.py:190
-           INFO     Loaded vocabulary https://example.net/my/extension/vocab                                                               __init__.py:190
-           INFO     Loaded vocabulary https://example.net/my/extension2/vocab                                                              __init__.py:190
 ---
 comment: | 
   WARNING: This file is generated. Any edits will be lost!
 title: "Minimal Example Vocabulary"
-date: "2023-07-14T10:35:39.199091+00:00"
+date: "2023-07-14T10:37:23.960996+00:00"
 subtitle: |
   This is an example of a minimal iSamples vocabulary.
 execute:
