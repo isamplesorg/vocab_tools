@@ -4,13 +4,42 @@ Python tools for validating and rendering iSamples vocabularies.
 
 ## Validate a vocabulary
 
+Valid vocabulary:
 ```
-$ vocab validate tests/data/example.ttl
-[06:47:07] INFO     Loaded vocabulary https://example.net/my/minimal/vocab
-           INFO     SHACL conformance: True
+$ vocab validate example/data/example.ttl
+Loaded vocabulary https://example.net/my/minimal/vocab
+SHACL conformance: True
 ```
 
+Vocabulary with no top concept:
+```
+$ vocab validate example/data/example_notop.ttl
+SHACL conformance: False
+Validation Report
+Conforms: False
+Results (2):
+20 of 21 applied.
+Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: skos:VocabularyShape
+	Focus Node: eg:vocab
+	Value Node: eg:vocab
+	Message: Node eg:vocab does not conform to one or more shapes in skos:ExtensionVocabularyShape , skos:BaseVocabularyShape
+Constraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: skos:VocabularyConceptShape
+	Focus Node: eg:thing
+	Value Node: eg:thing
+	Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape
 
+Vocabulary not in conformance. Skipping further tests.
+```
+
+## Generate Markdown
+
+```
+$ vocab validate example/data/example.ttl > example/example.md 
+```
 
 ## Installation
 
