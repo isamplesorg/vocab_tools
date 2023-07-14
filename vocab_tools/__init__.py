@@ -36,15 +36,85 @@ def rdfsT(term):
     return rdflib.URIRef(f"{NS['rdfs']}{term}")
 
 
+def find_concept_in_concept_list(
+    uri: str, concept_list: typing.List["VocabularyConcept"]
+) -> typing.Optional["VocabularyConcept"]:
+    for c in concept_list:
+        if str(c.uri) == str(uri):
+            return c
+    return None
+
+
 @dataclasses.dataclass
 class VocabularyConcept:
     uri: str
-    name: str  # Last part of hte URI, foo#name or foo/name
+    name: str  # Last part of the URI, foo#name or foo/name
     label: list[str]
     definition: str
     broader: list[str]
     narrower: list[str]
     vocabulary: str
+
+    def get_label(self):
+        tag = self.name
+        if len(self.label) > 0:
+            tag = self.label[0]
+        return tag
+
+    def md_link_label(self):
+        tag = self.get_label()
+        tag = tag.strip()
+        tag = tag.split("/")[-1]
+        tag = tag.lower().strip()
+        tag = tag.replace(",", "")
+        tag = tag.replace(" ", "-")
+        return tag
+
+    def md_link(self):
+        return f"[{self.get_label()}](#{self.md_link_label()})"
+
+    def markdown(
+        self, level=1, concept_list: typing.List["VocabularyConcept"] = None
+    ) -> typing.List[str]:
+        """Return lines of markdown describing self.
+
+        Level is the heading level for the block.
+
+        concept_list is an optional list of loaded VocabularyConcept instances.
+        """
+        if concept_list is None:
+            concept_list = []
+        res = [
+            f"{'#' * level} {self.get_label()}",
+            "[]{#" + self.md_link_label() + "}",
+            "",
+            f"Concept: [`{self.name}`]({self.uri}",
+            "",
+        ]
+        if len(self.broader) > 0:
+            res.append("Broader Concepts:")
+            res.append("")
+            for broader in self.broader:
+                if len(concept_list) > 0:
+                    bc = find_concept_in_concept_list(broader, concept_list)
+                    res.append(f"- {bc.md_link()}")
+                else:
+                    res.append(f"- {broader}")
+            res.append("")
+        if len(self.narrower) > 0:
+            res.append("Narrower Concepts:")
+            res.append("")
+            for narrower in self.narrower:
+                if len(concept_list) > 0:
+                    nc = find_concept_in_concept_list(narrower, concept_list)
+                    res.append(f"- {nc.md_link()}")
+                else:
+                    res.append(f"- {narrower}")
+            res.append("")
+        for line in self.definition.split("\n"):
+            res.append(line)
+        res.append("")
+        return res
 
 
 @dataclasses.dataclass
@@ -322,7 +392,6 @@ PREFIX rdfs: <{NS['rdfs']}>
             v = self._g.namespace_manager.expand_curie(v)
         except (ValueError, TypeError):
             pass
-
         if v is None:
             q = """SELECT ?s
             WHERE {
@@ -332,7 +401,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         else:
             q = """SELECT ?s
                 WHERE {
-                    ?s skos:inScheme ?vocabulary .
+                    ?s skos:inScheme | skos:topConceptOf ?vocabulary .
                     ?s rdf:type skos:Concept .
                 }"""
             qres = self.query(q, vocabulary=v)
@@ -402,9 +471,16 @@ PREFIX rdfs: <{NS['rdfs']}>
             qres = self.query(q, vocabulary=v, parent=concept)
         return self._one_res(qres, abbreviate=abbreviate)
 
-    def vocab_tree(self, v: str):
-        """Get the list of vocabularies progressively broader than vocabulary v.
+    def walk_narrower(self, concept_uri: str, level: int = 0):
         """
+        Yeilds narrower concepts by performing depth first traversal.
+        """
+        for uri in self.narrower(concept_uri):
+            yield uri, level
+            yield from self.walk_narrower(uri, level=level + 1)
+
+    def vocab_tree(self, v: str):
+        """Get the list of vocabularies progressively broader than vocabulary v."""
         q = """SELECT ?vocab
         WHERE  {
             ?src skos:inScheme+ ?vocab .

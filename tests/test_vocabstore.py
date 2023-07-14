@@ -90,3 +90,15 @@ def test_narrower():
     res = [str(v) for v in res]
     assert "https://example.net/my/minimal/solid" in res
     assert "https://example.net/my/extension/liquid" in res
+
+def test_walk_narrower():
+    s = vocab_tools.VocabularyStore()
+    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
+    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
+    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    c = s.concept("eg:thing")
+    counter = 0
+    for cn, depth in s.walk_narrower(c.uri, level=1):
+        counter += 1
+        print(f"{'-'*(depth)} {cn}")
+    assert counter == 4

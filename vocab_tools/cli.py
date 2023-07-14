@@ -13,6 +13,7 @@ import rdflib
 import rich.logging
 
 import vocab_tools
+import vocab_tools.tomarkdown
 
 DEFAULT_SHAPE = "data/vocabulary_shape.ttl"
 
@@ -125,6 +126,7 @@ def uijson(sources, extensions):
         child_dict["children"] = children
         return ui_dict
 
+    raise NotImplementedError("Json generation needs to be updated.")
     dataset = vocab_tools.VocabularyStore()
     for source in sources:
         dataset.load(source)
@@ -151,11 +153,21 @@ def uijson(sources, extensions):
 
 
 @main.command()
-def markdown():
+@click.argument("sources", nargs=-1)
+def markdown(sources):
     """Generate markdown representation of the vocabulary.
-
     """
-    raise NotImplementedError()
+    store = vocab_tools.VocabularyStore()
+    for source in sources:
+        store.load(source)
+    vocab = store.base_vocabulary()
+    # TODO: enable presentation of individual extensions
+    #   This will require the renderer to handle multiple top level concepts
+    #   with those concepts being the external concepts referenced by the extension.
+    vocab_docs = [vocab_tools.tomarkdown.describe_vocabulary(store, vocab.uri), ]
+    for document in vocab_docs:
+        for line in document:
+            print(line)
 
 
 @main.command("sparqlr")
