@@ -29,7 +29,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
-SELECT ?vocab ?broader
+SELECT ?vocab
 WHERE {
   ?vocab rdf:type skos:ConceptScheme .
 }
