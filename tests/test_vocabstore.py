@@ -1,7 +1,15 @@
 import vocab_tools
 import os.path
 
-THIS_FOLDER = os.path.dirname(__file__)
+THIS_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), "../example"))
+
+
+def _get_store_for_all():
+    s = vocab_tools.VocabularyStore()
+    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
+    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
+    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    return s
 
 
 def test_top_concept():
@@ -25,10 +33,7 @@ def test_concepts():
 
 
 def test_vocabularies():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     vs = s.vocabularies(abbreviate=False)
     uris = [str(uri) for uri in vs]
     assert len(uris) == 3
@@ -38,10 +43,7 @@ def test_vocabularies():
 
 
 def test_vocabulary():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     v = s.vocabulary("https://example.net/my/minimal/vocab")
     assert v.label == "Minimal Example Vocabulary"
     assert v.extends is None
@@ -51,39 +53,29 @@ def test_vocabulary():
 
 
 def test_basevocabulary():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     v = s.base_vocabulary()
     assert v.uri == "https://example.net/my/minimal/vocab"
 
 
 def test_vocabulary_tree():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     res = s.vocab_tree("https://example.net/my/extension2/vocab")
     assert len(res) == 2
     res = [str(v) for v in res]
     assert "https://example.net/my/minimal/vocab" in res
     assert "https://example.net/my/extension/vocab" in res
 
+
 def test_broader():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     c = s.concept("ext2:beer")
     res = s.broader(c.uri)
     assert str(res[0]) == "https://example.net/my/extension/liquid"
 
+
 def test_narrower():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     c = s.concept("eg:thing")
     res = s.narrower(c.uri)
     assert len(res) == 2
@@ -91,11 +83,9 @@ def test_narrower():
     assert "https://example.net/my/minimal/solid" in res
     assert "https://example.net/my/extension/liquid" in res
 
+
 def test_walk_narrower():
-    s = vocab_tools.VocabularyStore()
-    s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_example.ttl"))
-    s.load(os.path.join(THIS_FOLDER, "data/extension_extension.ttl"))
+    s = _get_store_for_all()
     c = s.concept("eg:thing")
     counter = 0
     for cn, depth in s.walk_narrower(c.uri, level=1):
