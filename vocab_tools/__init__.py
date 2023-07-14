@@ -88,7 +88,7 @@ class VocabularyConcept:
             f"{'#' * level} {self.get_label()}",
             "[]{#" + self.md_link_label() + "}",
             "",
-            f"Concept: [`{self.name}`]({self.uri}",
+            f"Concept: {self.md_link()}",
             "",
         ]
         if len(self.broader) > 0:

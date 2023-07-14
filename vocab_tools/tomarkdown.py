@@ -62,7 +62,7 @@ def describe_vocabulary(store:vocab_tools.VocabularyStore, vocab_uri:str)-> list
         label = f"{'  '*level}- [{concept.get_label()}](#{concept.md_link_label()})"
         res.append(label)
     res += ("", "")
-    res += top_concept.markdown(level=2)
+    res += top_concept.markdown(level=2, concept_list=all_concepts)
     res.append("")
     for uri, level in store.walk_narrower(top_concept.uri, level=3):
         concept = vocab_tools.find_concept_in_concept_list(uri, all_concepts)
