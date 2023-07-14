@@ -4,10 +4,6 @@
 @prefix eg: <https://example.net/my/minimal/> .
 @prefix ext: <https://example.net/my/extension/> .
 
-<https://example.net/my/extension/>
-    a owl:Ontology ;
-    owl:imports <http://localhost:8080/model/example.ttl> .
-
 ext:vocab
     rdf:type skos:ConceptScheme ;
     skos:prefLabel "Simple Vocabulary Extension"@en ;
@@ -21,4 +17,12 @@ ext:liquid
     skos:definition "A thing that was considered to be of a liquid state at the time of observation"@en ;
     skos:inScheme ext:vocab ;
     skos:broader eg:thing ;
+.
+
+ext:water
+    rdf:type skos:Concept ;
+    skos:prefLabel "Water"@en ;
+    skos:definition "A thing that was considered to be liquid water at the time of observation"@en ;
+    skos:inScheme ext:vocab ;
+    skos:broader ext:liquid ;
 .

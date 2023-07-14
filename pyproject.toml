@@ -17,6 +17,10 @@ pyshacl = {git = "https://github.com/datadavev/pySHACL.git", rev = "report_metri
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
 
+[tool.poetry.group.service.dependencies]
+rdflib-endpoint = {git = "https://github.com/vemonet/rdflib-endpoint.git", rev="main"}
+uvicorn = "^0.22.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

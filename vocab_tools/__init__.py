@@ -23,6 +23,7 @@ NS = {
 
 L = logging.getLogger("navocab")
 
+
 def skosT(term):
     return rdflib.URIRef(f"{NS['skos']}{term}")
 
@@ -38,7 +39,7 @@ def rdfsT(term):
 @dataclasses.dataclass
 class VocabularyConcept:
     uri: str
-    name: str
+    name: str  # Last part of hte URI, foo#name or foo/name
     label: list[str]
     definition: str
     broader: list[str]
@@ -75,7 +76,6 @@ PREFIX rdfs: <{NS['rdfs']}>
         self.store_identifier = store_identifier
         self._g = None
         self._terms = {}
-        self._litfts = ""
         self._literals = ""
         self._initialize_store(purge=purge_existing)
 
@@ -90,7 +90,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         self._g = graph
 
     @property
-    def g(self):
+    def graph(self):
         return self._g
 
     def load(
@@ -151,11 +151,16 @@ PREFIX rdfs: <{NS['rdfs']}>
             for vocab in vocabs:
                 if str(vocab) != str(loaded_vocabulary):
                     L.info("Extends: %s", vocab)
-                    self._g.add((rdflib.URIRef(loaded_vocabulary), rdfsT("subPropertyOf"), rdflib.URIRef(vocab)))
+                    self._g.add(
+                        (
+                            rdflib.URIRef(loaded_vocabulary),
+                            rdfsT("subPropertyOf"),
+                            rdflib.URIRef(vocab),
+                        )
+                    )
                     self._g.commit()
             return
         L.warning("Loaded vocabulary does not specify skos:ConceptScheme")
-
 
     def expand_name(self, n: typing.Optional[str]) -> typing.Optional[str]:
         if n is None:
@@ -166,7 +171,7 @@ PREFIX rdfs: <{NS['rdfs']}>
             pass
         return n
 
-    def compact_name(self, n:typing.Optional[str]) -> typing.Optional[str]:
+    def compact_name(self, n: typing.Optional[str]) -> typing.Optional[str]:
         if n is None:
             return n
         try:
@@ -191,7 +196,6 @@ PREFIX rdfs: <{NS['rdfs']}>
             return r[0]
         return None
 
-
     def namespaces(self) -> list[str, rdflib.URIRef]:
         return [n for n in self._g.namespace_manager.namespaces()]
 
@@ -199,72 +203,115 @@ PREFIX rdfs: <{NS['rdfs']}>
         self._g.namespace_manager.bind(prefix, uri, override=override)
 
     def query(self, q, **bindings):
-        sparql = rdflib.plugins.sparql.prepareQuery(
-                VocabularyStore._PFX + q)
-        qres = self._g.query(sparql, initBindings=bindings)
-        return qres
+        L.debug(q)
+        sparql = rdflib.plugins.sparql.prepareQuery(VocabularyStore._PFX + q)
+        return self._g.query(sparql, initBindings=bindings)
 
-    def vocabulary_list(self, abbreviate: bool = True) -> list[str]:
-        """List the vocabularies in the provided graph"""
-        q = (
-            VocabularyStore._PFX
-            + """SELECT ?s
-        WHERE {
-            ?s rdf:type skos:ConceptScheme .
-        }"""
-        )
-        qres = self._g.query(q)
-        return self._one_res(qres, abbreviate=abbreviate)
+    def vocabulary(self, uri: str) -> Vocabulary:
+        """Return a Vocabulary given its URI.
 
-    def vocabularies(self, abbreviate:bool=True)->list[Vocabulary]:
-        q = (
-            VocabularyStore._PFX
-            + """SELECT ?vocabulary ?label ?description ?extends
+        Raises KeyError if the vocabulary is not in the graph.
+        """
+        q = """SELECT ?vocabulary ?label ?definition ?extends
         WHERE {
             ?vocabulary rdf:type skos:ConceptScheme .
-            ?vocabulary skos:label|skos:prefLabel ?label .
-            OPTIONAL {?vocabulary skos:definition ?description .} .
-            OPTIONAL {?vocabulary rdfs:subPropertyOf ?extends .} .
+            ?vocabulary skos:prefLabel ?label .
+            OPTIONAL {?vocabulary skos:definition ?definition .} .
+            OPTIONAL {?vocabulary skos:inScheme ?extends .} .
         }"""
-        )
-        L.debug(q)
-        qres = self._g.query(q)
-        for row in qres:
-            _ext = row[3]
-            if _ext is not None:
-                if abbreviate:
-                    _ext = self.compact_name(_ext)
-            yield(Vocabulary(
-                uri=str(self.compact_name(row[0]) if abbreviate else row[0]),
-                label=str(row[1]),
-                description=str(row[2]),
-                extends=str(_ext) if _ext is not None else None
-            ))
+        qres = self.query(q, vocabulary=rdflib.URIRef(uri))
+        for res in qres:
+            _ext = res[3]
+            return Vocabulary(
+                uri=str(res[0]),
+                label=str(res[1]),
+                description=str(res[2]),
+                extends=str(_ext) if _ext is not None else None,
+            )
+        raise KeyError(f"Vocabulary '{uri}' not found.")
 
+    def base_vocabulary(self) -> Vocabulary:
+        """Return the base vocabulary.
 
-    def getVocabRoot(self, v: str, abbreviate: bool = False) -> list[str]:
-        """Get top concept of the specific vocabulary.
-
-        v is the URI of the vocabulary
+        This is the skos:ConceptScheme instance that has no skos:inScheme
         """
-        try:
-            v = self._g.namespace_manager.expand_curie(v)
-        except (ValueError, TypeError):
-            pass
-        q = rdflib.plugins.sparql.prepareQuery(
-            VocabularyStore._PFX
-            + """SELECT ?s
+        q = """SELECT DISTINCT ?vocabulary
         WHERE {
-            ?s skos:topConceptOf ?vocabulary .
+            ?vocabulary rdf:type skos:ConceptScheme .
+            ?subject ?predicate ?foo .
+            FILTER (?predicate != skos:inScheme) .
         }"""
+        qres = self.query(q)
+        for res in qres:
+            return self.vocabulary(res[0])
+        raise ValueError("No base vocabulary found.")
+
+    def vocabularies(self, abbreviate: bool = True) -> list[Vocabulary]:
+        """Return the base and all extension vocabularies in the graph."""
+        q = """SELECT ?vocabulary
+        WHERE {
+            ?vocabulary rdf:type skos:ConceptScheme .
+        }"""
+        qres = self.query(q)
+        return [row[0] for row in qres]
+
+    def concept(self, term: str):
+        """Given a URI, return the matching VocabularyConcept
+
+        Raises KeyError if not found.
+        """
+        term = self.expand_name(term)
+        if "#" in term:
+            ab = term.split("#")
+        else:
+            ab = term.split("/")
+        name = ab[-1]
+        labels = self.objects(term, skosT("prefLabel"))
+        labels += self.objects(term, skosT("label"))
+        tmp = self.objects(term, skosT("definition"))
+        definition = "\n".join(tmp)
+        broader = self.objects(term, skosT("broader"))
+        narrower = self.narrower(term)
+        vocabulary = self.objects(term, skosT("inScheme"))
+        if len(vocabulary) > 0:
+            vocabulary = vocabulary[0]
+        else:
+            # May be set with topConceptOf
+            vocabulary = self.objects(term, skosT("topConceptOf"))
+            if len(vocabulary) > 0:
+                vocabulary = vocabulary[0]
+            else:
+                vocabulary = None
+        return VocabularyConcept(
+            uri=str(term),
+            name=name,
+            label=labels,
+            definition=definition.strip(),
+            broader=broader,
+            narrower=narrower,
+            vocabulary=vocabulary,
         )
-        qres = self._g.query(q, initBindings={"vocabulary": v})
-        return self._one_res(qres, abbreviate=abbreviate)
+
+    def top_concept(self) -> VocabularyConcept:
+        """Get the root concept of the specified vocabulary.
+
+        This is the concept that is skos:topConceptOf and has no skos:broader
+        """
+        q = """SELECT DISTINCT ?subject
+        WHERE {
+            ?subject rdf:type skos:Concept .
+            ?subject skos:topConceptOf ?vocabulary .
+            ?subject ?predicate ?foo .
+            FILTER(?predicate != skos:broader) .
+        }"""
+        qres = self.query(q)
+        uri = self._one_res(qres)
+        if len(uri) < 1:
+            raise ValueError("No topConcept found")
+        return self.concept(uri[0])
 
     def concepts(
-        self,
-        v: typing.Optional[str] = None,
-        abbreviate: bool = False
+        self, v: typing.Optional[str] = None, abbreviate: bool = False
     ) -> list[str]:
         """List the concept URIs in the specific vocabulary.
 
@@ -277,37 +324,26 @@ PREFIX rdfs: <{NS['rdfs']}>
             pass
 
         if v is None:
-            q = (
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
             WHERE {
                 ?s rdf:type skos:Concept .
             }"""
-            )
-            qres = self._g.query(q)
+            qres = self.query(q)
         else:
-            q = (
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
                 WHERE {
                     ?s skos:inScheme ?vocabulary .
                     ?s rdf:type skos:Concept .
                 }"""
-            )
-            qres = self._g.query(q, initBindings={"vocabulary": v})
+            qres = self.query(q, vocabulary=v)
         return self._one_res(qres, abbreviate=abbreviate)
 
-    def get_objects(self, subject: str, predicate: str) -> list[str]:
-        q = rdflib.plugins.sparql.prepareQuery(
-            VocabularyStore._PFX
-            + """SELECT ?o
+    def _get_objects(self, subject: str, predicate: str) -> list[str]:
+        q = """SELECT ?o
         WHERE {
             ?subject ?predicate ?o .
         }"""
-        )
-        qres = self._g.query(
-            q, initBindings={"subject": subject, "predicate": predicate}
-        )
+        qres = self.query(q, subject=subject, predicate=predicate)
         res = []
         for row in qres:
             res.append(row[0])
@@ -315,7 +351,7 @@ PREFIX rdfs: <{NS['rdfs']}>
 
     def objects(self, subject: str, predicate: str) -> list[str]:
         res = []
-        qres = self.get_objects(subject, predicate)
+        qres = self._get_objects(subject, predicate)
         for row in qres:
             v = row
             v = str(v).strip()
@@ -323,28 +359,24 @@ PREFIX rdfs: <{NS['rdfs']}>
                 res.append(v)
         return res
 
-    def broader(self, concept: str, v: typing.Optional[str] = None, abbreviate: bool = False) -> list[str]:
-        concept = self.expand_name(concept)
+    def broader(
+        self, concept: str, v: typing.Optional[str] = None, abbreviate: bool = False
+    ) -> list[str]:
+        concept = rdflib.URIRef(self.expand_name(concept))
         if v is None:
-            q = rdflib.plugins.sparql.prepareQuery(
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
             WHERE {
                 ?child skos:broader ?s .
             }"""
-            )
-            qres = self._g.query(q, initBindings={"child": concept})
+            qres = self.query(q, child=concept)
         else:
             v = self.expand_name(v)
-            q = rdflib.plugins.sparql.prepareQuery(
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
             WHERE {
                 ?s skos:inScheme ?vocabulary .
                 ?child skos:broader ?s .
             }"""
-            )
-            qres = self._g.query(q, initBindings={"vocabulary": v, "child": concept})
+            qres = self.query(q, vocabulary=v, child=concept)
         res = []
         # Should only ever be a single broader term in a well constructed taxonomy,
         # but who knows how well these things are constructed?
@@ -353,157 +385,30 @@ PREFIX rdfs: <{NS['rdfs']}>
     def narrower(
         self, concept: str, v: typing.Optional[str] = None, abbreviate: bool = False
     ) -> list[str]:
-        concept = self.expand_name(concept)
+        concept = rdflib.URIRef(self.expand_name(concept))
         if v is None:
-            q = rdflib.plugins.sparql.prepareQuery(
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
             WHERE {
                 ?s skos:broader ?parent .
             }"""
-            )
-            qres = self._g.query(q, initBindings={"parent": concept})
+            qres = self.query(q, parent=concept)
         else:
             v = self.expand_name(v)
-            q = rdflib.plugins.sparql.prepareQuery(
-                VocabularyStore._PFX
-                + """SELECT ?s
+            q = """SELECT ?s
             WHERE {
                 ?s skos:inScheme ?vocabulary .
                 ?s skos:broader ?parent .
             }"""
-            )
-            qres = self._g.query(q, initBindings={"vocabulary": v, "parent": concept})
+            qres = self.query(q, vocabulary=v, parent=concept)
         return self._one_res(qres, abbreviate=abbreviate)
 
     def vocab_tree(self, v: str):
+        """Get the list of vocabularies progressively broader than vocabulary v.
         """
-        Get the list of vocabularies progressively broader than vocabulary v.
-
-        This is a bit messy. The approach is to get a concept of v,
-        then for each broader concept, add its vocab to the list.
-
+        q = """SELECT ?vocab
+        WHERE  {
+            ?src skos:inScheme+ ?vocab .
+        } 
         """
-        def _broader(v, c, level=0, max=100):
-            ns = self.broader(c, v, False)
-            for n in ns:
-                yield(self.concept(n))
-                if level < max:
-                    _broader(v, n, level=level + 1, max=max)
-
-        # Maximum number of concept hierarchies to examine
-        MAX_TO_CHECK = 5
-        vocab = str(self.expand_name(v))
-        n_checked = 0
-        vocabs = [vocab, ]
-        for _concept in self.concepts(vocab):
-            for _c in _broader(None, _concept, level=0, max=100):
-                if _c.vocabulary is not None:
-                    _vocab = str(_c.vocabulary)
-                    if _vocab not in vocabs:
-                        vocabs.append(_vocab)
-            n_checked += 1
-            if n_checked > MAX_TO_CHECK:
-                break
-        vocabs.reverse()
-        return vocabs
-
-
-    def concept(self, term: str):
-        term = self.expand_name(term)
-        if "#" in term:
-            ab = term.split("#")
-        else:
-            ab = term.split("/")
-        name = ab[-1]
-        # _v = self.objects(term, skosT("inScheme"))[0]
-        _v = None
-        labels = self.objects(term, skosT("prefLabel"))
-        labels += self.objects(term, skosT("label"))
-        tmp = self.objects(term, skosT("definition"))
-        definition = "\n".join(tmp)
-        broader = self.objects(term, skosT("broader"))
-        narrower = self.narrower(term, _v)
-        vocabulary = self.objects(term, skosT("inScheme"))
-        if len(vocabulary) >0:
-            vocabulary = vocabulary[0]
-        else:
-            vocabulary = None
-        return VocabularyConcept(
-            uri=str(term),
-            name=name,
-            label=labels,
-            definition=definition.strip(),
-            broader=broader,
-            narrower=narrower,
-            vocabulary = vocabulary
-        )
-
-    def match(
-        self, q, predicate=None, abbreviate: bool = False
-    ) -> list[tuple[rdflib.URIRef, rdflib.URIRef, str, float]]:
-        """
-        Return a list of subject,predicate,object,rank that match the provided FTS query.
-
-        Rank is the sqlite FTS rank property, https://www.sqlite.org/fts5.html#the_bm25_function
-        and indicates the relevance of the result to the query. Lower values (i.e. more negative)
-        indicate higher relevance.
-        """
-        where_clause = f"{self._litfts} MATCH :query"
-        if predicate is not None:
-            predicate = self.expand_name(predicate)
-            where_clause = f"a.predicate = :predicate AND {where_clause}"
-        sql = sqlalchemy.text(
-            f"""SELECT a.subject, a.predicate, a.object, b.rank FROM {self._literals} AS a
-            INNER JOIN {self._litfts} AS b on a.rowid=b.rowid 
-            WHERE {where_clause} ORDER BY rank;"""
-        )
-        rows = self._g.store.engine.execute(sql, {"query": q, "predicate": predicate})
-        result = []
-        for row in rows:
-            if abbreviate:
-                result.append((
-                    rdflib.URIRef(row[0]).n3(self._g.namespace_manager),
-                    rdflib.URIRef(row[1]).n3(self._g.namespace_manager),
-                    str(row[2]),
-                    row[3]
-                ))
-            else:
-                result.append(
-                    (rdflib.URIRef(row[0]), rdflib.URIRef(row[1]), str(row[2]), row[3])
-                )
-        return result
-
-    def resolve(self, uri: str):
-        """
-        WIP
-        Lookup the specified uri.
-        If not present in the graph try and retrieve from uri as URL.
-        """
-        # look for the object with iri in the current graph first
-        res = []
-        for t in self._g.predicate_objects(rdflib.URIRef(uri)):
-            res.append(t)
-        if len(res) > 0:
-            return res
-        g = rdflib.ConjunctiveGraph()
-        self._g += g.parse(uri)
-        for t in self._g.predicate_objects(rdflib.URIRef(uri)):
-            res.append(t)
-        return res
-
-    def asDict(self, _index=0):
-        """Dict representation of self that can be serialized to linkml yaml for an enum.
-
-        """
-        _name = self.vocabulary_list(abbreviate=False)[_index]
-        res = {
-            _name:{
-                "description":"",
-                "permissable_values": []
-            }
-        }
-        qres = self.query("SELECT ?o WHERE {?subject ?predicate ?o.}", subject=_name, predicate="skos:definition")
-        L.debug(qres)
-        res[_name]["description"] = self._one_res(qres)
-        return res
+        qres = self.query(q, src=rdflib.URIRef(self.expand_name(v)))
+        return [v[0] for v in qres]

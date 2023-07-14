@@ -90,6 +90,7 @@ skos:TopConceptShape
     sh:property [
         sh:path skos:topConceptOf ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:dataType skos:ConceptScheme ;
         sh:node skos:VocabularyShape ;
     ];
