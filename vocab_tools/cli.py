@@ -60,7 +60,7 @@ def validate(source: str, vocab:typing.List[str], shape:typing.Optional[str]):
     dataset.load(source)
     shape_graph = get_shape(shape)
     conforms, results_graph, results = pyshacl.validate(
-        dataset.g,
+        dataset.graph,
         shacl_graph = shape_graph,
         inference='rdfs',
         abort_on_first=False,
@@ -170,7 +170,8 @@ def sparqler(sources, host, port):
     try:
         import vocab_tools.sparqlr
     except ImportError:
-        L.error("Please pip install rdflib-endpoint to enable the sparqlet service.")
+        L.error("Please pip install rdflib-endpoint and uvicorn to enable the sparqlet service.")
+        L.info("pip install uvicorn git+https://github.com/vemonet/rdflib-endpoint.git@main")
         return
     store = vocab_tools.VocabularyStore()
     for source in sources:
