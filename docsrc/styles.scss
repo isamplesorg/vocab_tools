@@ -1,0 +1,44 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: 'Noto Sans', 'Arial', 'Sans-Serif' ;
+$font-family-monospace: 'JetBrains mono', 'Courier', monospace;
+//$code-block-bg: #f7f7f7 ;
+
+/*-- scss:rules --*/
+.quarto-title-meta {
+    font-family: var(--bs-font-monospace);
+    /*font-size: 0.7rem;*/
+}
+
+/* 
+These id* classes are used for display of parts of identifiers 
+
+  scheme:group/valueextra
+         +-prefix--+
+*/
+.idscheme {
+    font-family: var(--bs-font-monospace);
+    background-color:#FFC0B9;
+}
+.idgroup {
+    font-family: var(--bs-font-monospace);
+    background-color:#FFF6E7;
+}
+.idprefix {
+    font-family: var(--bs-font-monospace);
+    background-color:#DFE0DF;
+}
+.idvalue {
+    font-family: var(--bs-font-monospace);
+    background-color:#c0df85;
+}
+.idextra {
+    font-family: var(--bs-font-monospace);
+    background-color:#DDA15E;
+}
+
+/* Output from knitr bash, need to specify class manually */
+.bash-stdout {
+    background-color:#f7f7f7;
+    border-left: 0.3rem solid #DDA15E;
+    font-family: 'Courier New', Courier !important;
+}

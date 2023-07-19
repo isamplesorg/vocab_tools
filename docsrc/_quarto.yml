@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: ../docs
+  preview:
+    port: 4200
+    browser: true
+    watch-inputs: true
+
+website:
+  title: "iSamples Vocabulary Tools"
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: vocabularies.qmd
+        text: Vocabularies
+      - href: validation.qmd
+        text: Validation
+      - href: conversion.qmd
+        text: Conversion
+      - about.qmd
+format:
+  html:
+    theme: 
+      - cosmo
+      - styles.scss
+    toc: true
+bibliography: bibliography.bib
+
+

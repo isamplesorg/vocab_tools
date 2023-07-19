@@ -16,6 +16,8 @@ pyshacl = {git = "https://github.com/datadavev/pySHACL.git", rev = "report_metri
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
+jupyter = "^1.0.0"
+graphviz = "^0.20.1"
 
 [tool.poetry.group.service.dependencies]
 rdflib-endpoint = {git = "https://github.com/vemonet/rdflib-endpoint.git", rev="main"}

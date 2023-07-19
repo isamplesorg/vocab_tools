@@ -1,0 +1,189 @@
+---
+title: Vocabularies in iSamples
+reference-location: margin
+format:
+  html: 
+    code-overflow: wrap
+jupyter: python3
+filters:
+    - include-code-files
+    - lightbox
+lightbox: auto
+---
+
+```{python}
+#| echo: false
+
+import io
+import graphviz
+import rdflib
+import rdflib.tools.rdf2dot
+
+def rdfdot(filenames=None, data=None):
+    g = rdflib.ConjunctiveGraph()
+    if data is not None:
+        g.parse(data=data)
+    else:
+        for filename in filenames:
+            g.parse(filename)
+    fp = io.StringIO()
+    rdflib.tools.rdf2dot.rdf2dot(g, fp)
+    return graphviz.Source(fp.getvalue())
+```
+
+Vocabularies in iSamples are used to provide discrete groups for categorizing physical sample records.
+
+A vocabulary in iSamples is composed of a number of concepts arranged in a hierarchy with a top level broad concept and progressively narrower concepts (e.g. @fig-broader). Concepts and the relationships between them are defined using the Simple Knowledge Organization System ([SKOS](https://www.w3.org/2004/02/skos/)) common data model.
+
+```{python }
+#| echo: false
+#| label: fig-broader
+#| fig-cap: "Two concepts in a vocabulary with an statement that `thing` is a broader concept than `liquid`"
+#| fig-align: center
+
+data = """@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix eg: <https://example.net/my/minimal/> .
+eg:thing .
+eg:liquid
+  skos:broader eg:thing;
+.
+"""
+rdfdot(data=data)
+```
+
+A vocabulary as used in iSamples is an [RDF graph](https://en.wikipedia.org/wiki/Resource_Description_Framework) composed of one instance of [`skos:ConceptScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)[^skos] and one or more instances of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept). 
+
+[^skos]: Herein "`skos`" is a [namespace name](https://www.w3.org/TR/1999/REC-xml-names-19990114/#dt-NSName) that refers to `http://www.w3.org/2004/02/skos/core#`
+
+The top level (i.e. broadest definition) `skos:Concept` must include a [`skos:topConceptOf`](https://www.w3.org/2009/08/skos-reference/skos.html#topConceptOf) predicate, the object of which is the vocabulary `skos:ConceptScheme` instance. If a `skos:Concept` does not include a `skos:topConceptOf` predicate, then it must contain a [`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme) predicate that refers to the `skos:ConceptScheme` instance.[^a] 
+
+A `skos:Concept` instance that does not include a `skos:topConceptOf` predicate must include a [`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader) predicate, the object of which is an instance of `skos:Concept` with a broader definition.
+
+Each `skos:Concept` instance must include a [`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel) and should include a [`skos:definition`](https://www.w3.org/2009/08/skos-reference/skos.html#definition) that provides a clear textual description of the concept.[^b]
+
+The following is a simple vocabulary that defines two concepts (for structural reference only). The `thing` concept is the broadest concept as indicated by the `skos:topConceptOf` property, and the `liquid` concept is a narrower definition of `thing`, as indicated by the `skos:broader` property with `thing` as the object. The concepts are contained within the vocabulary with URI `https://example.net/my/minimal/vocab` as indicated by the `skos:topConceptOf` and `skos:inScheme` references by the concepts. A graph representation of the vocabulary is shown in @fig-minimal.
+
+```{.ttl include="../example/data/example.ttl"}
+#|  
+#| code-overflow: wrap 
+#| caption: "test"
+```
+
+```{python }
+#| echo: false
+#| label: fig-minimal
+#| fig-cap: 'A minimal vocabulary that defines two concepts "thing" and "living_thing" within the vocabulary `<https://example.net/my/minimal/vocabulary>`.'
+
+rdfdot(filenames=["../example/data/example.ttl", ])
+```
+
+## Extending a Vocabulary
+
+A vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts ("narrower terms"). 
+
+In iSamples, a vocabulary extension is a vocabulary where the `skos:ConceptScheme` instance includes a `skos:inScheme` predicate that refers to the `skos:ConceptScheme` of the vocabulary being extended. This is used programmatically to identify the vocabulary being extended and to help ensure that `skos:Concept` instances directly or indirectly extend the base vocabulary.
+
+An extension vocabulary must include one or more instances of `skos:Concept`. Each instance must have a `skos:broader` predicate. Following a path of `skos:broader` properties must lead to a `skos:Concept` that is a `skos:topConceptOf` the base vocabulary directly or indirectly referred to by the `skos:inScheme` property of the `skos:ConceptScheme` instance of the extension vocabulary. A graph rendering of the extension is shown in @fig-extension.
+
+```
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix eg: <https://example.net/my/minimal/> .
+@prefix ext: <https://example.net/my/extension/> .
+
+ext:vocab
+    rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Simple Vocabulary Extension"@en ;
+    skos:inScheme eg:vocab ;
+.    
+
+ext:liquid 
+    rdf:type skos:Concept ;
+    skos:prefLabel "liquid"@en ;
+    skos:definition "A thing that was considered to be of a liquid state at the time of observation"@en ;
+    skos:inScheme ext:vocab ;
+    skos:broader eg:thing ;
+.
+```
+```{python}
+#| echo: false
+#| label: fig-extension
+#| fig-cap: "An extension vocabulary that extends `<https://example.net/my/minimal/vocabulary>` with a single concept."
+
+rdfdot(filenames=["../example/data/extension_example.ttl", ])
+```
+
+The entire vocabulary is interpreted by loading the extension and referenced vocabularies into the RDF processing environment. The combined minimal vocabulary and it's extension is shown in @fig-combined.
+
+```{python}
+#| echo: false
+#| label: fig-combined
+#| fig-cap: "A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph."
+
+rdfdot(
+    filenames=[
+        "../example/data/example.ttl",
+        "../example/data/extension_example.ttl", 
+    ]
+)
+```
+
+## Other Semantic Relations
+
+In many cases it is desireable to cross reference vocabulary concepts with concepts defined elsewhere. There are several `skos` predicates describing [semantic](https://www.w3.org/TR/2009/REC-skos-reference-20090818/#semantic-relations) and [mapping](https://www.w3.org/TR/2009/REC-skos-reference-20090818/#mapping) relations that can be helpful for describing the relationships between terms and vocabularies. These include:
+
+* `skos:narrower`
+* `skos:related`
+* `skos:broaderTransitive`
+* `skos:narrowerTransitive`
+* `skos:closeMatch`
+* `skos:exactMatch`
+* `skos:broadMatch`
+* `skos:narrowMatch`
+* `skos:relatedMatch`
+
+
+## Additional Vocabulary and Concept Metadata
+
+Additional properties may be associated with the vocabulary or any of their defined concepts to provide metadata apart from the structural or semantic aspects of the graph. 
+
+The `skos:historyNote` property is used to add human readable notes concerning revision history. A `skos:historyNote` entry should follow a convention of `ISO-Date Initials Note`, for example:
+
+```{.ttl}
+eg:vocab
+    rdf:type skos:ConceptScheme ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> ;
+    skos:prefLabel "Minimal Example Vocabulary"@en ;
+    skos:definition "This is an example of a minimal iSamples vocabulary."@en ;
+    skos:historyNote "2023-07-15 DAV Created this example vocabulary."@en ;
+.
+```
+
+Informational note properties for `skos` include:
+
+* `skos:note`
+* `skos:changeNote`
+* `skos:definition`
+* `skos:editorialNote`
+* `skos:example`
+* `skos:historyNote`
+* `skos:scopeNote`
+
+Authorship information may also be provided using a property such as [`dct:creator`](http://purl.org/dc/terms/creator) or [`dct:contributor`](http://purl.org/dc/terms/contributor) to directly (within the vocabulary document) or indirectly (by URI reference to an RDF resource) reference a record of type [`foaf:Person`](http://xmlns.com/foaf/0.1/#term_Person), [`prov:Person`](https://www.w3.org/ns/prov#Person) or [`owl:NamedIndividual`](https://www.w3.org/2002/07/owl#NamedIndividual):
+
+```{.ttl}
+eg:vocab
+    rdf:type skos:ConceptScheme ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> ;
+    skos:prefLabel "Minimal Example Vocabulary"@en ;
+    skos:definition "This is an example of a minimal iSamples vocabulary."@en ;
+    skos:historyNote "2023-07-15 DAV Created this example vocabulary."@en ;
+    dct:creator <https://orcid.org/0000-0002-6513-4996> ;
+.
+```
+
+[^a]: The containing vocabulary may be inferred by traversing semantic relations such as `skos:broader` to find a semantically related concept that includes `skos:inScheme` or `skos:topConceptOf`, but including `skos:inScheme` with each concept provides a more explicit construct for consumers and simplifies processing.
+
+[^b]: Only one `skos:prefLabel` and one `skos:definition` per language is permitted.
+
