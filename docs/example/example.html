@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-07-19">
+<meta name="dcterms.date" content="2023-07-27">
 
 <title>iSamples Vocabulary Tools - Minimal Example Vocabulary</title>
 <style>
@@ -140,11 +140,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thing" id="toc-thing" class="nav-link active" data-scroll-target="#thing">thing</a>
-  <ul class="collapse">
-  <li><a href="#solid" id="toc-solid" class="nav-link" data-scroll-target="#solid">solid</a></li>
-  <li><a href="#liquid" id="toc-liquid" class="nav-link" data-scroll-target="#liquid">liquid</a></li>
-  </ul></li>
+  <li><a href="#thing" id="toc-thing" class="nav-link active" data-scroll-target="#thing">Thing</a></li>
+  <li><a href="#solid" id="toc-solid" class="nav-link" data-scroll-target="#solid">Solid</a></li>
+  <li><a href="#liquid" id="toc-liquid" class="nav-link" data-scroll-target="#liquid">Liquid</a></li>
+  <li><a href="#water" id="toc-water" class="nav-link" data-scroll-target="#water">Water</a></li>
+  <li><a href="#beer" id="toc-beer" class="nav-link" data-scroll-target="#beer">Beer</a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 19, 2023</p>
+      <p class="date">July 27, 2023</p>
     </div>
   </div>
   
@@ -175,14 +175,25 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Namespace: <a href="https://example.net/my/minimal/vocab"><code>https://example.net/my/minimal/vocab</code></a></p>
-<p><strong>History</strong></p>
-<p><strong>Concepts</strong></p>
+<p>Vocabularies and extensions:</p>
 <ul>
-<li><a href="#thing">thing</a>
+<li><code>Minimal Example Vocabulary</code> <a href="https://example.net/my/minimal/vocab"><code>https://example.net/my/minimal/vocab</code></a>
 <ul>
-<li><a href="#solid">solid</a></li>
-<li><a href="#liquid">liquid</a>
+<li><code>Simple Vocabulary Extension</code> <a href="https://example.net/my/extension/vocab"><code>https://example.net/my/extension/vocab</code></a>
+<ul>
+<li><code>Extension of a vocabulary extension</code> <a href="https://example.net/my/extension2/vocab"><code>https://example.net/my/extension2/vocab</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>History:</p>
+<p>&nbsp;2023-07-01 DV Created for structural reference.<br>
+&nbsp;2023-07-26 DV Adjusted descriptions.</p>
+<p>Concept Hierarchy:</p>
+<ul>
+<li><a href="#thing">Thing</a>
+<ul>
+<li><a href="#solid">Solid</a></li>
+<li><a href="#liquid">Liquid</a>
 <ul>
 <li><a href="#water">Water</a></li>
 <li><a href="#beer">Beer</a></li>
@@ -190,62 +201,79 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 <section id="thing" class="level2">
-<h2 class="anchored" data-anchor-id="thing">thing</h2>
+<h2 class="anchored" data-anchor-id="thing">Thing</h2>
 <p><span id="thing"></span></p>
-<p>Concept: <a href="#thing">thing</a></p>
-<p>Narrower Concepts:</p>
-<ul>
-<li><a href="#solid">solid</a></li>
-<li><a href="#liquid">liquid</a></li>
-</ul>
-<p>Any physical thing</p>
-<section id="solid" class="level3">
-<h3 class="anchored" data-anchor-id="solid">solid</h3>
+<p>The concept <code>Thing</code><br>
+with URI <code>https://example.net/my/minimal/thing</code><br>
+is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
+<p>This is the top concept of the vocabulary.</p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#solid"><code>Solid</code></a>, <a href="#liquid"><code>Liquid</code></a></p>
+<p>Definition:<br>
+&nbsp;Any physical thing.<br>
+&nbsp;This concept is for demonstration purposes only.</p>
+<p>History:<br>
+&nbsp;2023-07-26 DV Added explanatory notes.</p>
+</section>
+<section id="solid" class="level2">
+<h2 class="anchored" data-anchor-id="solid">Solid</h2>
 <p><span id="solid"></span></p>
-<p>Concept: <a href="#solid">solid</a></p>
-<p>Broader Concepts:</p>
-<ul>
-<li><a href="#thing">thing</a></li>
-</ul>
-<p>A thing that was considered solid at the time of observation</p>
+<p>The concept <code>Solid</code><br>
+with URI <code>https://example.net/my/minimal/solid</code><br>
+is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
+<p>Path from the top concept:<br>
+&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#solid"><code>Solid</code></a></p>
+<p>Definition:<br>
+&nbsp;A thing that was considered solid at the time of observation.<br>
+&nbsp;This concept is for demonstration purposes only.</p>
+<p>History:<br>
+&nbsp;2023-07-26 DV Added explanatory notes.</p>
 </section>
-<section id="liquid" class="level3">
-<h3 class="anchored" data-anchor-id="liquid">liquid</h3>
+<section id="liquid" class="level2">
+<h2 class="anchored" data-anchor-id="liquid">Liquid</h2>
 <p><span id="liquid"></span></p>
-<p>Concept: <a href="#liquid">liquid</a></p>
-<p>Broader Concepts:</p>
-<ul>
-<li><a href="#thing">thing</a></li>
-</ul>
-<p>Narrower Concepts:</p>
-<ul>
-<li><a href="#water">Water</a></li>
-<li><a href="#beer">Beer</a></li>
-</ul>
-<p>A thing that was considered to be of a liquid state at the time of observation</p>
-<section id="water" class="level4">
-<h4 class="anchored" data-anchor-id="water">Water</h4>
+<p>The concept <code>Liquid</code><br>
+with URI <code>https://example.net/my/extension/liquid</code><br>
+is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
+<p>Path from the top concept:<br>
+&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#water"><code>Water</code></a>, <a href="#beer"><code>Beer</code></a></p>
+<p>Definition:<br>
+&nbsp;A thing that was considered to be of a liquid state at the time of observation.<br>
+&nbsp;This concept is for demonstration purposes only.</p>
+</section>
+<section id="water" class="level2">
+<h2 class="anchored" data-anchor-id="water">Water</h2>
 <p><span id="water"></span></p>
-<p>Concept: <a href="#water">Water</a></p>
-<p>Broader Concepts:</p>
-<ul>
-<li><a href="#liquid">liquid</a></li>
-</ul>
-<p>A thing that was considered to be liquid water at the time of observation</p>
+<p>The concept <code>Water</code><br>
+with URI <code>https://example.net/my/extension/water</code><br>
+is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
+<p>Path from the top concept:<br>
+&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#water"><code>Water</code></a></p>
+<p>Definition:<br>
+&nbsp;A thing that was considered to be liquid water at the time of observation.<br>
+&nbsp;This concept is for demonstration purposes only.</p>
+<p>Notes:<br>
+&nbsp;This is the first line of a note.<br>
+&nbsp;&nbsp;Here’s the second line.<br>
+&nbsp;There may be multiple notes in a concept.</p>
+<p>Alternate labels:<br>
+&nbsp;<code>Aqua</code>, <code>H2O</code></p>
 </section>
-<section id="beer" class="level4">
-<h4 class="anchored" data-anchor-id="beer">Beer</h4>
+<section id="beer" class="level2">
+<h2 class="anchored" data-anchor-id="beer">Beer</h2>
 <p><span id="beer"></span></p>
-<p>Concept: <a href="#beer">Beer</a></p>
-<p>Broader Concepts:</p>
-<ul>
-<li><a href="#liquid">liquid</a></li>
-</ul>
-<p>A thing that was considered to be beer in a liquid state at the time of observation</p>
+<p>The concept <code>Beer</code><br>
+with URI <code>https://example.net/my/extension2/beer</code><br>
+is defined in vocabulary <code>https://example.net/my/extension2/vocab</code></p>
+<p>Path from the top concept:<br>
+&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a></p>
+<p>Definition:<br>
+&nbsp;A thing that was considered to be beer in a liquid state at the time of observation.<br>
+&nbsp;This concept is for demonstration purposes only.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

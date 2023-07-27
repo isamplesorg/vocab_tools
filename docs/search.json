@@ -39,14 +39,14 @@
     "href": "example/example.html",
     "title": "Minimal Example Vocabulary",
     "section": "",
-    "text": "Namespace: https://example.net/my/minimal/vocab\nHistory\nConcepts"
+    "text": "Vocabularies and extensions:\nHistory:\n2023-07-01 DV Created for structural reference.\n 2023-07-26 DV Adjusted descriptions.\nConcept Hierarchy:"
   },
   {
     "objectID": "example/example.html#thing",
     "href": "example/example.html#thing",
     "title": "Minimal Example Vocabulary",
-    "section": "thing",
-    "text": "thing\n\nConcept: thing\nNarrower Concepts:\n\nsolid\nliquid\n\nAny physical thing\n\nsolid\n\nConcept: solid\nBroader Concepts:\n\nthing\n\nA thing that was considered solid at the time of observation\n\n\nliquid\n\nConcept: liquid\nBroader Concepts:\n\nthing\n\nNarrower Concepts:\n\nWater\nBeer\n\nA thing that was considered to be of a liquid state at the time of observation\n\nWater\n\nConcept: Water\nBroader Concepts:\n\nliquid\n\nA thing that was considered to be liquid water at the time of observation\n\n\nBeer\n\nConcept: Beer\nBroader Concepts:\n\nliquid\n\nA thing that was considered to be beer in a liquid state at the time of observation"
+    "section": "Thing",
+    "text": "Thing\n\nThe concept Thing\nwith URI https://example.net/my/minimal/thing\nis defined in vocabulary https://example.net/my/minimal/vocab\nThis is the top concept of the vocabulary.\nImmediately narrower concepts:\nSolid, Liquid\nDefinition:\n Any physical thing.\n This concept is for demonstration purposes only.\nHistory:\n 2023-07-26 DV Added explanatory notes."
   },
   {
     "objectID": "vocabularies.html",
@@ -89,5 +89,313 @@
     "title": "About vocab_tools",
     "section": "",
     "text": "Placeholder"
+  },
+  {
+    "objectID": "example/example.html#solid",
+    "href": "example/example.html#solid",
+    "title": "Minimal Example Vocabulary",
+    "section": "Solid",
+    "text": "Solid\n\nThe concept Solid\nwith URI https://example.net/my/minimal/solid\nis defined in vocabulary https://example.net/my/minimal/vocab\nPath from the top concept:\n  Thing-&gt;Solid\nDefinition:\n A thing that was considered solid at the time of observation.\n This concept is for demonstration purposes only.\nHistory:\n 2023-07-26 DV Added explanatory notes."
+  },
+  {
+    "objectID": "example/example.html#liquid",
+    "href": "example/example.html#liquid",
+    "title": "Minimal Example Vocabulary",
+    "section": "Liquid",
+    "text": "Liquid\n\nThe concept Liquid\nwith URI https://example.net/my/extension/liquid\nis defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:\n  Thing-&gt;Liquid\nImmediately narrower concepts:\nWater, Beer\nDefinition:\n A thing that was considered to be of a liquid state at the time of observation.\n This concept is for demonstration purposes only."
+  },
+  {
+    "objectID": "example/example.html#water",
+    "href": "example/example.html#water",
+    "title": "Minimal Example Vocabulary",
+    "section": "Water",
+    "text": "Water\n\nThe concept Water\nwith URI https://example.net/my/extension/water\nis defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Water\nDefinition:\n A thing that was considered to be liquid water at the time of observation.\n This concept is for demonstration purposes only.\nNotes:\n This is the first line of a note.\n  Here’s the second line.\n There may be multiple notes in a concept.\nAlternate labels:\n Aqua, H2O"
+  },
+  {
+    "objectID": "example/example.html#beer",
+    "href": "example/example.html#beer",
+    "title": "Minimal Example Vocabulary",
+    "section": "Beer",
+    "text": "Beer\n\nThe concept Beer\nwith URI https://example.net/my/extension2/beer\nis defined in vocabulary https://example.net/my/extension2/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer\nDefinition:\n A thing that was considered to be beer in a liquid state at the time of observation.\n This concept is for demonstration purposes only."
+  },
+  {
+    "objectID": "example/example.html#ale",
+    "href": "example/example.html#ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Ale",
+    "text": "Ale\n\nThe concept Ale\nwith URI https://example.net/my/beer/ale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale\nImmediately narrower concepts:\nCalifornia Common, Cream Ale, Irish Ale, Stout / Porter, Pale Ale, Mild Ale, Vegetable Ale, American Wild Ale, Lambic, Sahti, Belgian French Ale, Rye Ale, German Ale\nDefinition:\n Ale."
+  },
+  {
+    "objectID": "example/example.html#california-common",
+    "href": "example/example.html#california-common",
+    "title": "Minimal Example Vocabulary",
+    "section": "California Common",
+    "text": "California Common\n\nThe concept California Common\nwith URI https://example.net/my/beer/californiacommon\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;California Common\nDefinition:\n California common"
+  },
+  {
+    "objectID": "example/example.html#cream-ale",
+    "href": "example/example.html#cream-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Cream Ale",
+    "text": "Cream Ale\n\nThe concept Cream Ale\nwith URI https://example.net/my/beer/creamale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Cream Ale\nDefinition:\n Cream ale."
+  },
+  {
+    "objectID": "example/example.html#irish-ale",
+    "href": "example/example.html#irish-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Irish Ale",
+    "text": "Irish Ale\n\nThe concept Irish Ale\nwith URI https://example.net/my/beer/irishale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Irish Ale\nDefinition:\n Irish ale"
+  },
+  {
+    "objectID": "example/example.html#stout-porter",
+    "href": "example/example.html#stout-porter",
+    "title": "Minimal Example Vocabulary",
+    "section": "Stout / Porter",
+    "text": "Stout / Porter\n\nThe concept Stout / Porter\nwith URI https://example.net/my/beer/stoutporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter\nImmediately narrower concepts:\nBaltic Porter, American Porter, American Stout, Oatmeal Stout, American Double Stout, Russian Imperial Stout, Flavored Stout, Sweet Stout, English Porter\nDefinition:\n Stouts and Porters."
+  },
+  {
+    "objectID": "example/example.html#pale-ale",
+    "href": "example/example.html#pale-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pale Ale",
+    "text": "Pale Ale\n\nThe concept Pale Ale\nwith URI https://example.net/my/beer/paleale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Pale Ale\nDefinition:\n Pale ale.s"
+  },
+  {
+    "objectID": "example/example.html#mild-ale",
+    "href": "example/example.html#mild-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Mild Ale",
+    "text": "Mild Ale\n\nThe concept Mild Ale\nwith URI https://example.net/my/beer/mildale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Mild Ale\nDefinition:\n Mild ale."
+  },
+  {
+    "objectID": "example/example.html#vegetable-ale",
+    "href": "example/example.html#vegetable-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Vegetable Ale",
+    "text": "Vegetable Ale\n\nThe concept Vegetable Ale\nwith URI https://example.net/my/beer/vegetableale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale\nImmediately narrower concepts:\nChile Ale, Pumpkin Ale\nDefinition:\n Vegetable ale."
+  },
+  {
+    "objectID": "example/example.html#american-wild-ale",
+    "href": "example/example.html#american-wild-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Wild Ale",
+    "text": "American Wild Ale\n\nThe concept American Wild Ale\nwith URI https://example.net/my/beer/americanwildale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;American Wild Ale\nDefinition:\n American wild ale"
+  },
+  {
+    "objectID": "example/example.html#lambic",
+    "href": "example/example.html#lambic",
+    "title": "Minimal Example Vocabulary",
+    "section": "Lambic",
+    "text": "Lambic\n\nThe concept Lambic\nwith URI https://example.net/my/beer/lambic\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic\nImmediately narrower concepts:\nFaro, Gueuze, Fruit, Unblended\nDefinition:\n Lambic."
+  },
+  {
+    "objectID": "example/example.html#sahti",
+    "href": "example/example.html#sahti",
+    "title": "Minimal Example Vocabulary",
+    "section": "Sahti",
+    "text": "Sahti\n\nThe concept Sahti\nwith URI https://example.net/my/beer/sahti\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Sahti\nDefinition:\n Sahti."
+  },
+  {
+    "objectID": "example/example.html#belgian-french-ale",
+    "href": "example/example.html#belgian-french-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Belgian French Ale",
+    "text": "Belgian French Ale\n\nThe concept Belgian French Ale\nwith URI https://example.net/my/beer/belgianfrenchale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Belgian French Ale\nDefinition:\n Belgian French ale."
+  },
+  {
+    "objectID": "example/example.html#rye-ale",
+    "href": "example/example.html#rye-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Rye Ale",
+    "text": "Rye Ale\n\nThe concept Rye Ale\nwith URI https://example.net/my/beer/ryeale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Rye Ale\nDefinition:\n Rye ale."
+  },
+  {
+    "objectID": "example/example.html#german-ale",
+    "href": "example/example.html#german-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "German Ale",
+    "text": "German Ale\n\nThe concept German Ale\nwith URI https://example.net/my/beer/germanale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;German Ale\nDefinition:\n German ale."
+  },
+  {
+    "objectID": "example/example.html#lager",
+    "href": "example/example.html#lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "Lager",
+    "text": "Lager\n\nThe concept Lager\nwith URI https://example.net/my/beer/lager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager\nImmediately narrower concepts:\nAmerican Lager, Pilsner, European Strong Lager, European Lager, German Lager\nDefinition:\n Lager."
+  },
+  {
+    "objectID": "example/example.html#baltic-porter",
+    "href": "example/example.html#baltic-porter",
+    "title": "Minimal Example Vocabulary",
+    "section": "Baltic Porter",
+    "text": "Baltic Porter\n\nThe concept Baltic Porter\nwith URI https://example.net/my/beer/balticporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Baltic Porter\nDefinition:\n Baltic Porter."
+  },
+  {
+    "objectID": "example/example.html#american-lager",
+    "href": "example/example.html#american-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Lager",
+    "text": "American Lager\n\nThe concept American Lager\nwith URI https://example.net/my/beer/americanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;American Lager\nDefinition:\n American lager."
+  },
+  {
+    "objectID": "example/example.html#pilsner",
+    "href": "example/example.html#pilsner",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pilsner",
+    "text": "Pilsner\n\nThe concept Pilsner\nwith URI https://example.net/my/beer/pilsner\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;Pilsner\nDefinition:\n Pilsner"
+  },
+  {
+    "objectID": "example/example.html#european-strong-lager",
+    "href": "example/example.html#european-strong-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "European Strong Lager",
+    "text": "European Strong Lager\n\nThe concept European Strong Lager\nwith URI https://example.net/my/beer/europeanstronglager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Strong Lager\nDefinition:\n European strong lager."
+  },
+  {
+    "objectID": "example/example.html#european-lager",
+    "href": "example/example.html#european-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "European Lager",
+    "text": "European Lager\n\nThe concept European Lager\nwith URI https://example.net/my/beer/europeanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Lager\nDefinition:\n European lager."
+  },
+  {
+    "objectID": "example/example.html#german-lager",
+    "href": "example/example.html#german-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "German Lager",
+    "text": "German Lager\n\nThe concept German Lager\nwith URI https://example.net/my/beer/germanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;German Lager\nDefinition:\n German lager."
+  },
+  {
+    "objectID": "example/example.html#chile-ale",
+    "href": "example/example.html#chile-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Chile Ale",
+    "text": "Chile Ale\n\nThe concept Chile Ale\nwith URI https://example.net/my/beer/chileale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale\nImmediately narrower concepts:\nWinkoop Patty's Chile, Rogue Chipotle Ale, Dogfish Head Theobroma, Twisted Pine Ghostface Killah, No Label Don Jalapeno\nDefinition:\n Chile ale."
+  },
+  {
+    "objectID": "example/example.html#winkoop-pattys-chile",
+    "href": "example/example.html#winkoop-pattys-chile",
+    "title": "Minimal Example Vocabulary",
+    "section": "Winkoop Patty’s Chile",
+    "text": "Winkoop Patty’s Chile\n\nThe concept Winkoop Patty's Chile\nwith URI https://example.net/my/beer/wynkooppattyschile\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Winkoop Patty's Chile\nDefinition:\n Winkoop Patty’s Chile."
+  },
+  {
+    "objectID": "example/example.html#rogue-chipotle-ale",
+    "href": "example/example.html#rogue-chipotle-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Rogue Chipotle Ale",
+    "text": "Rogue Chipotle Ale\n\nThe concept Rogue Chipotle Ale\nwith URI https://example.net/my/beer/roguechipotleale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Rogue Chipotle Ale\nDefinition:\n Rogue Chipotle ale."
+  },
+  {
+    "objectID": "example/example.html#dogfish-head-theobroma",
+    "href": "example/example.html#dogfish-head-theobroma",
+    "title": "Minimal Example Vocabulary",
+    "section": "Dogfish Head Theobroma",
+    "text": "Dogfish Head Theobroma\n\nThe concept Dogfish Head Theobroma\nwith URI https://example.net/my/beer/dogfishheadtheobroma\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Dogfish Head Theobroma\nDefinition:\n Dogfish Head Theobroma."
+  },
+  {
+    "objectID": "example/example.html#twisted-pine-ghostface-killah",
+    "href": "example/example.html#twisted-pine-ghostface-killah",
+    "title": "Minimal Example Vocabulary",
+    "section": "Twisted Pine Ghostface Killah",
+    "text": "Twisted Pine Ghostface Killah\n\nThe concept Twisted Pine Ghostface Killah\nwith URI https://example.net/my/beer/twistedpineghostfacekillah\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Twisted Pine Ghostface Killah\nDefinition:\n Twisted Pine Ghostface Killah."
+  },
+  {
+    "objectID": "example/example.html#no-label-don-jalapeno",
+    "href": "example/example.html#no-label-don-jalapeno",
+    "title": "Minimal Example Vocabulary",
+    "section": "No Label Don Jalapeno",
+    "text": "No Label Don Jalapeno\n\nThe concept No Label Don Jalapeno\nwith URI https://example.net/my/beer/nolabeldonjalapeno\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;No Label Don Jalapeno\nDefinition:\n No label Don Jalapeno."
+  },
+  {
+    "objectID": "example/example.html#pumpkin-ale",
+    "href": "example/example.html#pumpkin-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pumpkin Ale",
+    "text": "Pumpkin Ale\n\nThe concept Pumpkin Ale\nwith URI https://example.net/my/beer/pumpkinale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Pumpkin Ale\nDefinition:\n Pumpkin ale."
+  },
+  {
+    "objectID": "example/example.html#faro",
+    "href": "example/example.html#faro",
+    "title": "Minimal Example Vocabulary",
+    "section": "Faro",
+    "text": "Faro\n\nThe concept Faro\nwith URI https://example.net/my/beer/faro\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Faro\nDefinition:\n Faro."
+  },
+  {
+    "objectID": "example/example.html#gueuze",
+    "href": "example/example.html#gueuze",
+    "title": "Minimal Example Vocabulary",
+    "section": "Gueuze",
+    "text": "Gueuze\n\nThe concept Gueuze\nwith URI https://example.net/my/beer/Gueuze\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Gueuze\nDefinition:\n Gueuze."
+  },
+  {
+    "objectID": "example/example.html#fruit",
+    "href": "example/example.html#fruit",
+    "title": "Minimal Example Vocabulary",
+    "section": "Fruit",
+    "text": "Fruit\n\nThe concept Fruit\nwith URI https://example.net/my/beer/fruit\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Fruit\nDefinition:\n Fruit."
+  },
+  {
+    "objectID": "example/example.html#unblended",
+    "href": "example/example.html#unblended",
+    "title": "Minimal Example Vocabulary",
+    "section": "Unblended",
+    "text": "Unblended\n\nThe concept Unblended\nwith URI https://example.net/my/beer/unblended\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Unblended\nDefinition:\n Unblended."
+  },
+  {
+    "objectID": "example/example.html#american-porter",
+    "href": "example/example.html#american-porter",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Porter",
+    "text": "American Porter\n\nThe concept American Porter\nwith URI https://example.net/my/beer/americanporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Porter\nDefinition:\n American porter."
+  },
+  {
+    "objectID": "example/example.html#american-stout",
+    "href": "example/example.html#american-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Stout",
+    "text": "American Stout\n\nThe concept American Stout\nwith URI https://example.net/my/beer/americanstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Stout\nDefinition:\n American stout."
+  },
+  {
+    "objectID": "example/example.html#american-double-stout",
+    "href": "example/example.html#american-double-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Double Stout",
+    "text": "American Double Stout\n\nThe concept American Double Stout\nwith URI https://example.net/my/beer/americandoublestout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Double Stout\nDefinition:\n American double stout."
+  },
+  {
+    "objectID": "example/example.html#russian-imperial-stout",
+    "href": "example/example.html#russian-imperial-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Russian Imperial Stout",
+    "text": "Russian Imperial Stout\n\nThe concept Russian Imperial Stout\nwith URI https://example.net/my/beer/russianimperialstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Russian Imperial Stout\nDefinition:\n Russian imperial stout."
+  },
+  {
+    "objectID": "example/example.html#flavored-stout",
+    "href": "example/example.html#flavored-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Flavored Stout",
+    "text": "Flavored Stout\n\nThe concept Flavored Stout\nwith URI https://example.net/my/beer/flavoredstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Flavored Stout\nDefinition:\n Flavored stout, ugh."
+  },
+  {
+    "objectID": "example/example.html#sweet-stout",
+    "href": "example/example.html#sweet-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Sweet Stout",
+    "text": "Sweet Stout\n\nThe concept Sweet Stout\nwith URI https://example.net/my/beer/sweetstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Sweet Stout\nDefinition:\n Sweet stout."
+  },
+  {
+    "objectID": "example/example.html#english-porter",
+    "href": "example/example.html#english-porter",
+    "title": "Minimal Example Vocabulary",
+    "section": "English Porter",
+    "text": "English Porter\n\nThe concept English Porter\nwith URI https://example.net/my/beer/englishporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;English Porter\nDefinition:\n English porter."
+  },
+  {
+    "objectID": "example/example.html#oatmeal-stout",
+    "href": "example/example.html#oatmeal-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Oatmeal Stout",
+    "text": "Oatmeal Stout\n\nThe concept Oatmeal Stout\nwith URI https://example.net/my/beer/oatmealstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Oatmeal Stout\nDefinition:\n Oatmeal stout."
   }
 ]
