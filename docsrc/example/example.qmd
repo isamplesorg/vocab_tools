@@ -2,91 +2,135 @@
 comment: | 
   WARNING: This file is generated. Any edits will be lost!
 title: "Minimal Example Vocabulary"
-date: "2023-07-19T07:05:21.273707+00:00"
+date: "2023-07-27T13:47:40.403948+00:00"
 subtitle: |
   This is an example of a minimal iSamples vocabulary.
 execute:
   echo: false
 ---
 
-Namespace: 
-[`https://example.net/my/minimal/vocab`](https://example.net/my/minimal/vocab)
+Vocabularies and extensions: 
 
-**History**
+- `Minimal Example Vocabulary` [`https://example.net/my/minimal/vocab`](https://example.net/my/minimal/vocab)
+  - `Simple Vocabulary Extension` [`https://example.net/my/extension/vocab`](https://example.net/my/extension/vocab)
+    - `Extension of a vocabulary extension` [`https://example.net/my/extension2/vocab`](https://example.net/my/extension2/vocab)
+
+History:
+
+|  2023-07-01 DV Created for structural reference.
+|  2023-07-26 DV Adjusted descriptions.
 
 
-**Concepts**
+Concept Hierarchy:
 
-  - [thing](#thing)
-    - [solid](#solid)
-    - [liquid](#liquid)
+  - [Thing](#thing)
+    - [Solid](#solid)
+    - [Liquid](#liquid)
       - [Water](#water)
       - [Beer](#beer)
 
 
-## thing
+## Thing
 []{#thing}
 
-Concept: [thing](#thing)
+| The concept `Thing` 
+| with URI `https://example.net/my/minimal/thing` 
+| is defined in vocabulary `https://example.net/my/minimal/vocab`
 
-Narrower Concepts:
-
-- [solid](#solid)
-- [liquid](#liquid)
-
-Any physical thing
+This is the top concept of the vocabulary.
 
 
-### solid
+Immediately narrower concepts:
+
+[`Solid`](#solid), [`Liquid`](#liquid)
+
+| Definition:
+|  Any physical thing. 
+|  This concept is for demonstration purposes only.
+
+| History:
+|  2023-07-26 DV Added explanatory notes.
+
+
+## Solid
 []{#solid}
 
-Concept: [solid](#solid)
+| The concept `Solid` 
+| with URI `https://example.net/my/minimal/solid` 
+| is defined in vocabulary `https://example.net/my/minimal/vocab`
 
-Broader Concepts:
-
-- [thing](#thing)
-
-A thing that was considered solid at the time of observation
+| Path from the top concept:
+|   [`Thing`](#thing)` -> `[`Solid`](#solid)
 
 
-### liquid
+
+| Definition:
+|  A thing that was considered solid at the time of observation. 
+|  This concept is for demonstration purposes only.
+
+| History:
+|  2023-07-26 DV Added explanatory notes.
+
+
+## Liquid
 []{#liquid}
 
-Concept: [liquid](#liquid)
+| The concept `Liquid` 
+| with URI `https://example.net/my/extension/liquid` 
+| is defined in vocabulary `https://example.net/my/extension/vocab`
 
-Broader Concepts:
-
-- [thing](#thing)
-
-Narrower Concepts:
-
-- [Water](#water)
-- [Beer](#beer)
-
-A thing that was considered to be of a liquid state at the time of observation
+| Path from the top concept:
+|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)
 
 
-#### Water
+Immediately narrower concepts:
+
+[`Water`](#water), [`Beer`](#beer)
+
+| Definition:
+|  A thing that was considered to be of a liquid state at the time of observation. 
+|  This concept is for demonstration purposes only.
+
+
+## Water
 []{#water}
 
-Concept: [Water](#water)
+| The concept `Water` 
+| with URI `https://example.net/my/extension/water` 
+| is defined in vocabulary `https://example.net/my/extension/vocab`
 
-Broader Concepts:
-
-- [liquid](#liquid)
-
-A thing that was considered to be liquid water at the time of observation
+| Path from the top concept:
+|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Water`](#water)
 
 
-#### Beer
+
+| Definition:
+|  A thing that was considered to be liquid water at the time of observation. 
+|  This concept is for demonstration purposes only.
+
+| Notes:
+|  This is the first line of a note.
+|   Here's the second line.
+|  There may be multiple notes in a concept.
+
+| Alternate labels:
+|  `Aqua`, `H2O`
+
+
+## Beer
 []{#beer}
 
-Concept: [Beer](#beer)
+| The concept `Beer` 
+| with URI `https://example.net/my/extension2/beer` 
+| is defined in vocabulary `https://example.net/my/extension2/vocab`
 
-Broader Concepts:
+| Path from the top concept:
+|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)
 
-- [liquid](#liquid)
 
-A thing that was considered to be beer in a liquid state at the time of observation
+
+| Definition:
+|  A thing that was considered to be beer in a liquid state at the time of observation. 
+|  This concept is for demonstration purposes only.
 
 
