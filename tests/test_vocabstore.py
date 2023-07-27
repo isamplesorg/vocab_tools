@@ -58,9 +58,9 @@ def test_basevocabulary():
     assert v.uri == "https://example.net/my/minimal/vocab"
 
 
-def test_vocabulary_tree():
+def test_vocabulary_path():
     s = _get_store_for_all()
-    res = s.vocab_tree("https://example.net/my/extension2/vocab")
+    res = s.vocab_path("https://example.net/my/extension2/vocab")
     assert len(res) == 2
     res = [str(v) for v in res]
     assert "https://example.net/my/minimal/vocab" in res
