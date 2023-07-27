@@ -8,19 +8,23 @@ eg:vocab
     owl:imports <http://www.w3.org/2004/02/skos/core> ;
     skos:prefLabel "Minimal Example Vocabulary"@en ;
     skos:definition "This is an example of a minimal iSamples vocabulary."@en ;
+    skos:historyNote "2023-07-01 DV Created for structural reference."@en ;
+    skos:historyNote "2023-07-26 DV Adjusted descriptions."@en ;
 .
 
 eg:thing
     rdf:type skos:Concept ;
     skos:topConceptOf eg:vocab ;
-    skos:prefLabel "thing"@en ;
-    skos:definition "Any physical thing"@en ;
+    skos:prefLabel "Thing"@en ;
+    skos:definition "Any physical thing. \nThis concept is for demonstration purposes only."@en ;
+    skos:historyNote "2023-07-26 DV Added explanatory notes." ;
 .
 
 eg:solid
     rdf:type skos:Concept ;
     skos:inScheme eg:vocab ;
     skos:broader eg:thing ;
-    skos:prefLabel "solid"@en ;
-    skos:definition "A thing that was considered solid at the time of observation"@en ;
+    skos:prefLabel "Solid"@en ;
+    skos:definition "A thing that was considered solid at the time of observation. \nThis concept is for demonstration purposes only."@en ;
+    skos:historyNote "2023-07-26 DV Added explanatory notes." ;
 .

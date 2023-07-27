@@ -14,8 +14,9 @@ ext2:vocab
 
 ext2:beer
     rdf:type skos:Concept ;
+    skos:topConceptOf ext2:vocab ;
     skos:prefLabel "Beer"@en ;
-    skos:definition "A thing that was considered to be beer in a liquid state at the time of observation"@en ;
+    skos:definition "A thing that was considered to be beer in a liquid state at the time of observation. \nThis concept is for demonstration purposes only."@en ;
     skos:inScheme ext2:vocab ;
     skos:broader ext:liquid ;
 .

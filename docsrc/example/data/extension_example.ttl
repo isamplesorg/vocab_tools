@@ -13,8 +13,8 @@ ext:vocab
 
 ext:liquid
     rdf:type skos:Concept ;
-    skos:prefLabel "liquid"@en ;
-    skos:definition "A thing that was considered to be of a liquid state at the time of observation"@en ;
+    skos:prefLabel "Liquid"@en ;
+    skos:definition "A thing that was considered to be of a liquid state at the time of observation. \nThis concept is for demonstration purposes only."@en ;
     skos:inScheme ext:vocab ;
     skos:broader eg:thing ;
 .
@@ -22,7 +22,11 @@ ext:liquid
 ext:water
     rdf:type skos:Concept ;
     skos:prefLabel "Water"@en ;
-    skos:definition "A thing that was considered to be liquid water at the time of observation"@en ;
+    skos:altLabel "Aqua"@en ;
+    skos:altLabel "H2O" ;
+    skos:note "This is the first line of a note.\n Here's the second line."@en ;
+    skos:note "There may be multiple notes in a concept."@en ;
+    skos:definition "A thing that was considered to be liquid water at the time of observation. \nThis concept is for demonstration purposes only."@en ;
     skos:inScheme ext:vocab ;
     skos:broader ext:liquid ;
 .
