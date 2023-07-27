@@ -49,11 +49,17 @@ def find_concept_in_concept_list(
 class VocabularyConcept:
     uri: str
     name: str  # Last part of the URI, foo#name or foo/name
-    label: list[str]
+    label: typing.List[str]
     definition: str
-    broader: list[str]
-    narrower: list[str]
+    broader: typing.List[str]
+    narrower: typing.List[str]
     vocabulary: str
+    history: typing.List[str] = dataclasses.field(default_factory=list)
+    notes: typing.List[str] = dataclasses.field(default_factory=list)
+    scopenote: typing.List[str] = dataclasses.field(default_factory=list)
+    related: typing.List[str] = dataclasses.field(default_factory=list)
+    example: typing.List[str] = dataclasses.field(default_factory=list)
+    changenote: typing.List[str] = dataclasses.field(default_factory=list)
 
     def get_label(self):
         tag = self.name
@@ -68,9 +74,12 @@ class VocabularyConcept:
         tag = tag.lower().strip()
         tag = tag.replace(",", "")
         tag = tag.replace(" ", "-")
+        tag = tag.replace("'", "")
         return tag
 
-    def md_link(self):
+    def md_link(self, fixed_width=False):
+        if fixed_width:
+            return f"[`{self.get_label()}`](#{self.md_link_label()})"
         return f"[{self.get_label()}](#{self.md_link_label()})"
 
     def markdown(
@@ -87,6 +96,8 @@ class VocabularyConcept:
         res = [
             f"{'#' * level} {self.get_label()}",
             "[]{#" + self.md_link_label() + "}",
+            "",
+            f"`{self.uri}` in vocabulary `{self.vocabulary}`",
             "",
             f"Concept: {self.md_link()}",
             "",
@@ -123,6 +134,7 @@ class Vocabulary:
     label: str
     description: str
     extends: typing.Optional[str] = None
+    history: typing.List[str] = dataclasses.field(default_factory=list)
 
 
 class VocabularyStore:
@@ -169,6 +181,10 @@ PREFIX rdfs: <{NS['rdfs']}>
         format: str = DEFAULT_FORMAT,
         bindings: typing.Optional[dict] = None,
     ):
+        """
+        Loads a vocabulary into the store.
+
+        """
         g_loaded = self._g.parse(source, format=format)
         if bindings is not None:
             for k, v in bindings.items():
@@ -266,6 +282,27 @@ PREFIX rdfs: <{NS['rdfs']}>
             return r[0]
         return None
 
+    def _get_objects(self, subject: str, predicate: str) -> list[str]:
+        q = """SELECT ?o
+        WHERE {
+            ?subject ?predicate ?o .
+        }"""
+        qres = self.query(q, subject=subject, predicate=predicate)
+        res = []
+        for row in qres:
+            res.append(row[0])
+        return res
+
+    def objects(self, subject: str, predicate: str) -> list[str]:
+        res = []
+        qres = self._get_objects(subject, predicate)
+        for row in qres:
+            v = row
+            v = str(v).strip()
+            if len(v) > 0:
+                res.append(v)
+        return res
+
     def namespaces(self) -> list[str, rdflib.URIRef]:
         return [n for n in self._g.namespace_manager.namespaces()]
 
@@ -282,21 +319,28 @@ PREFIX rdfs: <{NS['rdfs']}>
 
         Raises KeyError if the vocabulary is not in the graph.
         """
-        q = """SELECT ?vocabulary ?label ?definition ?extends
+        q = """SELECT ?vocabulary ?label ?definition ?extends ?history
         WHERE {
             ?vocabulary rdf:type skos:ConceptScheme .
             ?vocabulary skos:prefLabel ?label .
             OPTIONAL {?vocabulary skos:definition ?definition .} .
             OPTIONAL {?vocabulary skos:inScheme ?extends .} .
         }"""
+        qh = """SELECT ?history
+        WHERE {
+            ?vocabulary skos:historyNote ?history .
+        }"""
         qres = self.query(q, vocabulary=rdflib.URIRef(uri))
         for res in qres:
             _ext = res[3]
+            qhres = self.query(qh, vocabulary=res[0])
+            _hist = [h[0] for h in qhres]
             return Vocabulary(
                 uri=str(res[0]),
                 label=str(res[1]),
                 description=str(res[2]),
                 extends=str(_ext) if _ext is not None else None,
+                history=_hist,
             )
         raise KeyError(f"Vocabulary '{uri}' not found.")
 
@@ -316,8 +360,11 @@ PREFIX rdfs: <{NS['rdfs']}>
             return self.vocabulary(res[0])
         raise ValueError("No base vocabulary found.")
 
-    def vocabularies(self, abbreviate: bool = True) -> list[Vocabulary]:
-        """Return the base and all extension vocabularies in the graph."""
+    def vocabularies(self, abbreviate: bool = True) -> list[str]:
+        """Return the base and all extension vocabulary URIs in the graph.
+
+        Anything that is of type skos:ConceptScheme.
+        """
         q = """SELECT ?vocabulary
         WHERE {
             ?vocabulary rdf:type skos:ConceptScheme .
@@ -337,11 +384,13 @@ PREFIX rdfs: <{NS['rdfs']}>
             ab = term.split("/")
         name = ab[-1]
         labels = self.objects(term, skosT("prefLabel"))
-        labels += self.objects(term, skosT("label"))
+        labels += self.objects(term, skosT("altLabel"))
+        labels += self.objects(term, rdfT("label"))
         tmp = self.objects(term, skosT("definition"))
         definition = "\n".join(tmp)
         broader = self.objects(term, skosT("broader"))
         narrower = self.narrower(term)
+        notes = self.objects(term, skosT("note"))
         vocabulary = self.objects(term, skosT("inScheme"))
         if len(vocabulary) > 0:
             vocabulary = vocabulary[0]
@@ -352,6 +401,7 @@ PREFIX rdfs: <{NS['rdfs']}>
                 vocabulary = vocabulary[0]
             else:
                 vocabulary = None
+        history = self.objects(term, skosT("historyNote"))
         return VocabularyConcept(
             uri=str(term),
             name=name,
@@ -360,6 +410,12 @@ PREFIX rdfs: <{NS['rdfs']}>
             broader=broader,
             narrower=narrower,
             vocabulary=vocabulary,
+            history=history,
+            notes=notes,
+            scopenote=self.objects(term, skosT("changeNote")),
+            related=self.objects(term, skosT("related")),
+            example=self.objects(term, skosT("example")),
+            changenote=self.objects(term, skosT("changeNote")),
         )
 
     def top_concept(self) -> VocabularyConcept:
@@ -407,26 +463,6 @@ PREFIX rdfs: <{NS['rdfs']}>
             qres = self.query(q, vocabulary=v)
         return self._one_res(qres, abbreviate=abbreviate)
 
-    def _get_objects(self, subject: str, predicate: str) -> list[str]:
-        q = """SELECT ?o
-        WHERE {
-            ?subject ?predicate ?o .
-        }"""
-        qres = self.query(q, subject=subject, predicate=predicate)
-        res = []
-        for row in qres:
-            res.append(row[0])
-        return res
-
-    def objects(self, subject: str, predicate: str) -> list[str]:
-        res = []
-        qres = self._get_objects(subject, predicate)
-        for row in qres:
-            v = row
-            v = str(v).strip()
-            if len(v) > 0:
-                res.append(v)
-        return res
 
     def broader(
         self, concept: str, v: typing.Optional[str] = None, abbreviate: bool = False
@@ -473,18 +509,52 @@ PREFIX rdfs: <{NS['rdfs']}>
 
     def walk_narrower(self, concept_uri: str, level: int = 0):
         """
-        Yeilds narrower concepts by performing depth first traversal.
+        Yields narrower concepts by performing depth first traversal.
+
+        Yielded content is URI, depth
+        where depth is the path length from the starting URI.
         """
         for uri in self.narrower(concept_uri):
             yield uri, level
             yield from self.walk_narrower(uri, level=level + 1)
 
-    def vocab_tree(self, v: str):
-        """Get the list of vocabularies progressively broader than vocabulary v."""
+    def walk_broader(self, concept_uri: str, level: int = 0):
+        yield concept_uri, level
+        for uri in self.broader(concept_uri):
+            yield from self.walk_broader(uri, level=level + 1)
+
+    def vocab_path(self, v: str) -> typing.List[str]:
+        """Get the list of vocabularies progressively broader than vocabulary v.
+
+        Result is a list of extension URIs
+        """
         q = """SELECT ?vocab
         WHERE  {
             ?src skos:inScheme+ ?vocab .
         } 
+        """
+        qres = self.query(q, src=rdflib.URIRef(self.expand_name(v)))
+        return [v[0] for v in qres]
+
+    def walk_vocab_tree(self, v: str, level: int = 0):
+        q = """SELECT ?vocab
+        WHERE {
+            ?src ^skos:inScheme ?vocab .
+            ?vocab rdf:type skos:ConceptScheme .
+        }
+        """
+        yield v, level
+        qres = self.query(q, src=rdflib.URIRef(self.expand_name(v)))
+        for res in qres:
+            uri = res[0]
+            yield from self.walk_vocab_tree(uri, level=level + 1)
+
+    def vocab_tree(self, v:str) -> typing.List[str]:
+        q = """SELECT ?vocab
+        WHERE {
+            ?src ^skos:inScheme+ ?vocab .
+            ?vocab rdf:type skos:ConceptScheme .
+        }
         """
         qres = self.query(q, src=rdflib.URIRef(self.expand_name(v)))
         return [v[0] for v in qres]
