@@ -10,7 +10,10 @@ import rdflib
 import rdflib.namespace
 import rdflib.plugins.sparql
 
+#TODO: this is too specific:
 STORE_IDENTIFIER = "https://w3id.org/isample/vocabulary"
+
+#TODO: should use namespaces from rdflib
 NS = {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
