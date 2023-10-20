@@ -10,9 +10,11 @@ packages = [{include = "vocab_tools"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "^7"
-rich = "^13.4.2"
-rdflib = "^6.3.2"
+rich = "^13"
+rdflib = "^6"
 pyshacl = {git = "https://github.com/datadavev/pySHACL.git", rev = "report_metrics"}
+rdflib-endpoint = {git = "https://github.com/vemonet/rdflib-endpoint.git", rev="main", optional=true}
+uvicorn = {version = "^0", optional=true}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
@@ -20,8 +22,6 @@ jupyter = "^1.0.0"
 graphviz = "^0.20.1"
 
 [tool.poetry.group.service.dependencies]
-rdflib-endpoint = {git = "https://github.com/vemonet/rdflib-endpoint.git", rev="main"}
-uvicorn = "^0.22.0"
 
 [build-system]
 requires = ["poetry-core"]
