@@ -9,7 +9,7 @@ packages = [{include = "vocab_tools"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-click = "^7"
+click = "^8"
 rich = "^13"
 rdflib = "^7"
 
