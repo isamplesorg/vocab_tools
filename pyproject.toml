@@ -11,7 +11,7 @@ packages = [{include = "vocab_tools"}]
 python = "^3.9"
 click = "^7"
 rich = "^13"
-rdflib = "^6"
+rdflib = "^7"
 
 [tool.poetry.group.dev]
 optional=true
