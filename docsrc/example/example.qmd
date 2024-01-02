@@ -2,7 +2,7 @@
 comment: | 
   WARNING: This file is generated. Any edits will be lost!
 title: "Minimal Example Vocabulary"
-date: "2023-07-27T13:47:40.403948+00:00"
+date: "2024-01-02T13:16:41.187230+00:00"
 subtitle: |
   This is an example of a minimal iSamples vocabulary.
 execute:
@@ -14,28 +14,68 @@ Vocabularies and extensions:
 - `Minimal Example Vocabulary` [`https://example.net/my/minimal/vocab`](https://example.net/my/minimal/vocab)
   - `Simple Vocabulary Extension` [`https://example.net/my/extension/vocab`](https://example.net/my/extension/vocab)
     - `Extension of a vocabulary extension` [`https://example.net/my/extension2/vocab`](https://example.net/my/extension2/vocab)
+      - `Vocabulary of beers` [`https://example.net/my/beer/vocab`](https://example.net/my/beer/vocab)
 
-History:
+**History:**
 
-|  2023-07-01 DV Created for structural reference.
-|  2023-07-26 DV Adjusted descriptions.
+2023-07-01 DV Created for structural reference. <br /> 2023-07-26 DV Adjusted descriptions.
 
 
-Concept Hierarchy:
+**Concept Hierarchy:**
 
   - [Thing](#thing)
     - [Solid](#solid)
     - [Liquid](#liquid)
       - [Water](#water)
       - [Beer](#beer)
+        - [Ale](#ale)
+          - [California Common](#california-common)
+          - [Cream Ale](#cream-ale)
+          - [Irish Ale](#irish-ale)
+          - [Stout / Porter](#porter)
+            - [Baltic Porter](#baltic-porter)
+            - [American Porter](#american-porter)
+            - [American Stout](#american-stout)
+            - [Oatmeal Stout](#oatmeal-stout)
+            - [American Double Stout](#american-double-stout)
+            - [Russian Imperial Stout](#russian-imperial-stout)
+            - [Flavored Stout](#flavored-stout)
+            - [Sweet Stout](#sweet-stout)
+            - [English Porter](#english-porter)
+          - [Pale Ale](#pale-ale)
+          - [Mild Ale](#mild-ale)
+          - [Vegetable Ale](#vegetable-ale)
+            - [Chile Ale](#chile-ale)
+              - [Winkoop Patty's Chile](#winkoop-pattys-chile)
+              - [Rogue Chipotle Ale](#rogue-chipotle-ale)
+              - [Dogfish Head Theobroma](#dogfish-head-theobroma)
+              - [Twisted Pine Ghostface Killah](#twisted-pine-ghostface-killah)
+              - [No Label Don Jalapeno](#no-label-don-jalapeno)
+            - [Pumpkin Ale](#pumpkin-ale)
+          - [American Wild Ale](#american-wild-ale)
+          - [Lambic](#lambic)
+            - [Faro](#faro)
+            - [Gueuze](#gueuze)
+            - [Fruit](#fruit)
+            - [Unblended](#unblended)
+          - [Sahti](#sahti)
+          - [Belgian French Ale](#belgian-french-ale)
+          - [Rye Ale](#rye-ale)
+          - [German Ale](#german-ale)
+        - [Lager](#lager)
+          - [American Lager](#american-lager)
+          - [Pilsner](#pilsner)
+          - [European Strong Lager](#european-strong-lager)
+          - [European Lager](#european-lager)
+          - [German Lager](#german-lager)
 
 
 ## Thing
 []{#thing}
 
-| The concept `Thing` 
-| with URI `https://example.net/my/minimal/thing` 
-| is defined in vocabulary `https://example.net/my/minimal/vocab`
+The concept `Thing` <br/> 
+with URI `https://example.net/my/minimal/thing` <br/> 
+is defined in vocabulary `https://example.net/my/minimal/vocab`
 
 This is the top concept of the vocabulary.
 
@@ -44,93 +84,798 @@ Immediately narrower concepts:
 
 [`Solid`](#solid), [`Liquid`](#liquid)
 
-| Definition:
-|  Any physical thing. 
-|  This concept is for demonstration purposes only.
+**Definition:**
 
-| History:
-|  2023-07-26 DV Added explanatory notes.
+Any physical thing.  <br/> This concept is for demonstration purposes only.
+
+**History:**
+
+2023-07-26 DV Added explanatory notes.
 
 
 ## Solid
 []{#solid}
 
-| The concept `Solid` 
-| with URI `https://example.net/my/minimal/solid` 
-| is defined in vocabulary `https://example.net/my/minimal/vocab`
+The concept `Solid` <br/> 
+with URI `https://example.net/my/minimal/solid` <br/> 
+is defined in vocabulary `https://example.net/my/minimal/vocab`
 
-| Path from the top concept:
-|   [`Thing`](#thing)` -> `[`Solid`](#solid)
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Solid`](#solid)
 
 
 
-| Definition:
-|  A thing that was considered solid at the time of observation. 
-|  This concept is for demonstration purposes only.
+**Definition:**
 
-| History:
-|  2023-07-26 DV Added explanatory notes.
+A thing that was considered solid at the time of observation.  <br/> This concept is for demonstration purposes only.
+
+**History:**
+
+2023-07-26 DV Added explanatory notes.
 
 
 ## Liquid
 []{#liquid}
 
-| The concept `Liquid` 
-| with URI `https://example.net/my/extension/liquid` 
-| is defined in vocabulary `https://example.net/my/extension/vocab`
+The concept `Liquid` <br/> 
+with URI `https://example.net/my/extension/liquid` <br/> 
+is defined in vocabulary `https://example.net/my/extension/vocab`
 
-| Path from the top concept:
-|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)
 
 
 Immediately narrower concepts:
 
 [`Water`](#water), [`Beer`](#beer)
 
-| Definition:
-|  A thing that was considered to be of a liquid state at the time of observation. 
-|  This concept is for demonstration purposes only.
+**Definition:**
+
+A thing that was considered to be of a liquid state at the time of observation.  <br/> This concept is for demonstration purposes only.
 
 
 ## Water
 []{#water}
 
-| The concept `Water` 
-| with URI `https://example.net/my/extension/water` 
-| is defined in vocabulary `https://example.net/my/extension/vocab`
+The concept `Water` <br/> 
+with URI `https://example.net/my/extension/water` <br/> 
+is defined in vocabulary `https://example.net/my/extension/vocab`
 
-| Path from the top concept:
-|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Water`](#water)
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Water`](#water)
 
 
 
-| Definition:
-|  A thing that was considered to be liquid water at the time of observation. 
-|  This concept is for demonstration purposes only.
+**Definition:**
 
-| Notes:
-|  This is the first line of a note.
-|   Here's the second line.
-|  There may be multiple notes in a concept.
+A thing that was considered to be liquid water at the time of observation.  <br/> This concept is for demonstration purposes only.
 
-| Alternate labels:
-|  `Aqua`, `H2O`
+**Notes:**
+
+This is the first line of a note. <br/>  Here's the second line.
+
+There may be multiple notes in a concept.
+
+**Alternate labels:**
+
+`Aqua`, `H2O`
 
 
 ## Beer
 []{#beer}
 
-| The concept `Beer` 
-| with URI `https://example.net/my/extension2/beer` 
-| is defined in vocabulary `https://example.net/my/extension2/vocab`
+The concept `Beer` <br/> 
+with URI `https://example.net/my/extension2/beer` <br/> 
+is defined in vocabulary `https://example.net/my/extension2/vocab`
 
-| Path from the top concept:
-|   [`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)
+
+
+Immediately narrower concepts:
+
+[`Ale`](#ale), [`Lager`](#lager)
+
+**Definition:**
+
+A thing that was considered to be beer in a liquid state at the time of observation.  <br/> This concept is for demonstration purposes only.
+
+
+## Ale
+[]{#ale}
+
+The concept `Ale` <br/> 
+with URI `https://example.net/my/beer/ale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)
+
+
+Immediately narrower concepts:
+
+[`California Common`](#california-common), [`Cream Ale`](#cream-ale), [`Irish Ale`](#irish-ale), [`Stout / Porter`](#porter), [`Pale Ale`](#pale-ale), [`Mild Ale`](#mild-ale), [`Vegetable Ale`](#vegetable-ale), [`American Wild Ale`](#american-wild-ale), [`Lambic`](#lambic), [`Sahti`](#sahti), [`Belgian French Ale`](#belgian-french-ale), [`Rye Ale`](#rye-ale), [`German Ale`](#german-ale)
+
+**Definition:**
+
+Ale is a type of beer originating in medieval England, brewed using a warm fermentation method.
+
+
+## California Common
+[]{#california-common}
+
+The concept `California Common` <br/> 
+with URI `https://example.net/my/beer/californiacommon` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`California Common`](#california-common)
 
 
 
-| Definition:
-|  A thing that was considered to be beer in a liquid state at the time of observation. 
-|  This concept is for demonstration purposes only.
+**Definition:**
+
+California common
+
+
+## Cream Ale
+[]{#cream-ale}
+
+The concept `Cream Ale` <br/> 
+with URI `https://example.net/my/beer/creamale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Cream Ale`](#cream-ale)
+
+
+
+**Definition:**
+
+Cream ale.
+
+
+## Irish Ale
+[]{#irish-ale}
+
+The concept `Irish Ale` <br/> 
+with URI `https://example.net/my/beer/irishale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Irish Ale`](#irish-ale)
+
+
+
+**Definition:**
+
+Irish ale
+
+
+## Stout / Porter
+[]{#porter}
+
+The concept `Stout / Porter` <br/> 
+with URI `https://example.net/my/beer/stoutporter` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)
+
+
+Immediately narrower concepts:
+
+[`Baltic Porter`](#baltic-porter), [`American Porter`](#american-porter), [`American Stout`](#american-stout), [`Oatmeal Stout`](#oatmeal-stout), [`American Double Stout`](#american-double-stout), [`Russian Imperial Stout`](#russian-imperial-stout), [`Flavored Stout`](#flavored-stout), [`Sweet Stout`](#sweet-stout), [`English Porter`](#english-porter)
+
+**Definition:**
+
+Stouts and Porters.
+
+
+## Baltic Porter
+[]{#baltic-porter}
+
+The concept `Baltic Porter` <br/> 
+with URI `https://example.net/my/beer/balticporter` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`Baltic Porter`](#baltic-porter)
+
+
+
+**Definition:**
+
+Baltic Porter.
+
+
+## American Porter
+[]{#american-porter}
+
+The concept `American Porter` <br/> 
+with URI `https://example.net/my/beer/americanporter` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`American Porter`](#american-porter)
+
+
+
+**Definition:**
+
+American porter.
+
+
+## American Stout
+[]{#american-stout}
+
+The concept `American Stout` <br/> 
+with URI `https://example.net/my/beer/americanstout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`American Stout`](#american-stout)
+
+
+
+**Definition:**
+
+American stout.
+
+
+## Oatmeal Stout
+[]{#oatmeal-stout}
+
+The concept `Oatmeal Stout` <br/> 
+with URI `https://example.net/my/beer/oatmealstout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`Oatmeal Stout`](#oatmeal-stout)
+
+
+
+**Definition:**
+
+Oatmeal stout.
+
+
+## American Double Stout
+[]{#american-double-stout}
+
+The concept `American Double Stout` <br/> 
+with URI `https://example.net/my/beer/americandoublestout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`American Double Stout`](#american-double-stout)
+
+
+
+**Definition:**
+
+American double stout.
+
+
+## Russian Imperial Stout
+[]{#russian-imperial-stout}
+
+The concept `Russian Imperial Stout` <br/> 
+with URI `https://example.net/my/beer/russianimperialstout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`Russian Imperial Stout`](#russian-imperial-stout)
+
+
+
+**Definition:**
+
+Russian imperial stout.
+
+
+## Flavored Stout
+[]{#flavored-stout}
+
+The concept `Flavored Stout` <br/> 
+with URI `https://example.net/my/beer/flavoredstout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`Flavored Stout`](#flavored-stout)
+
+
+
+**Definition:**
+
+Flavored stout, ugh.
+
+
+## Sweet Stout
+[]{#sweet-stout}
+
+The concept `Sweet Stout` <br/> 
+with URI `https://example.net/my/beer/sweetstout` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`Sweet Stout`](#sweet-stout)
+
+
+
+**Definition:**
+
+Sweet stout.
+
+
+## English Porter
+[]{#english-porter}
+
+The concept `English Porter` <br/> 
+with URI `https://example.net/my/beer/englishporter` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Stout / Porter`](#porter)` -> `[`English Porter`](#english-porter)
+
+
+
+**Definition:**
+
+English porter.
+
+
+## Pale Ale
+[]{#pale-ale}
+
+The concept `Pale Ale` <br/> 
+with URI `https://example.net/my/beer/paleale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Pale Ale`](#pale-ale)
+
+
+
+**Definition:**
+
+Pale ale.s
+
+
+## Mild Ale
+[]{#mild-ale}
+
+The concept `Mild Ale` <br/> 
+with URI `https://example.net/my/beer/mildale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Mild Ale`](#mild-ale)
+
+
+
+**Definition:**
+
+Mild ale.
+
+
+## Vegetable Ale
+[]{#vegetable-ale}
+
+The concept `Vegetable Ale` <br/> 
+with URI `https://example.net/my/beer/vegetableale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)
+
+
+Immediately narrower concepts:
+
+[`Chile Ale`](#chile-ale), [`Pumpkin Ale`](#pumpkin-ale)
+
+**Definition:**
+
+Vegetable ale.
+
+
+## Chile Ale
+[]{#chile-ale}
+
+The concept `Chile Ale` <br/> 
+with URI `https://example.net/my/beer/chileale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)
+
+
+Immediately narrower concepts:
+
+[`Winkoop Patty's Chile`](#winkoop-pattys-chile), [`Rogue Chipotle Ale`](#rogue-chipotle-ale), [`Dogfish Head Theobroma`](#dogfish-head-theobroma), [`Twisted Pine Ghostface Killah`](#twisted-pine-ghostface-killah), [`No Label Don Jalapeno`](#no-label-don-jalapeno)
+
+**Definition:**
+
+Chile ale.
+
+
+## Winkoop Patty's Chile
+[]{#winkoop-pattys-chile}
+
+The concept `Winkoop Patty's Chile` <br/> 
+with URI `https://example.net/my/beer/wynkooppattyschile` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)` -> `[`Winkoop Patty's Chile`](#winkoop-pattys-chile)
+
+
+
+**Definition:**
+
+Winkoop Patty's Chile.
+
+
+## Rogue Chipotle Ale
+[]{#rogue-chipotle-ale}
+
+The concept `Rogue Chipotle Ale` <br/> 
+with URI `https://example.net/my/beer/roguechipotleale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)` -> `[`Rogue Chipotle Ale`](#rogue-chipotle-ale)
+
+
+
+**Definition:**
+
+Rogue Chipotle ale.
+
+
+## Dogfish Head Theobroma
+[]{#dogfish-head-theobroma}
+
+The concept `Dogfish Head Theobroma` <br/> 
+with URI `https://example.net/my/beer/dogfishheadtheobroma` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)` -> `[`Dogfish Head Theobroma`](#dogfish-head-theobroma)
+
+
+
+**Definition:**
+
+Dogfish Head Theobroma.
+
+
+## Twisted Pine Ghostface Killah
+[]{#twisted-pine-ghostface-killah}
+
+The concept `Twisted Pine Ghostface Killah` <br/> 
+with URI `https://example.net/my/beer/twistedpineghostfacekillah` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)` -> `[`Twisted Pine Ghostface Killah`](#twisted-pine-ghostface-killah)
+
+
+
+**Definition:**
+
+Twisted Pine Ghostface Killah.
+
+
+## No Label Don Jalapeno
+[]{#no-label-don-jalapeno}
+
+The concept `No Label Don Jalapeno` <br/> 
+with URI `https://example.net/my/beer/nolabeldonjalapeno` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Chile Ale`](#chile-ale)` -> `[`No Label Don Jalapeno`](#no-label-don-jalapeno)
+
+
+
+**Definition:**
+
+No label Don Jalapeno.
+
+
+## Pumpkin Ale
+[]{#pumpkin-ale}
+
+The concept `Pumpkin Ale` <br/> 
+with URI `https://example.net/my/beer/pumpkinale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Vegetable Ale`](#vegetable-ale)` -> `[`Pumpkin Ale`](#pumpkin-ale)
+
+
+
+**Definition:**
+
+Pumpkin ale.
+
+
+## American Wild Ale
+[]{#american-wild-ale}
+
+The concept `American Wild Ale` <br/> 
+with URI `https://example.net/my/beer/americanwildale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`American Wild Ale`](#american-wild-ale)
+
+
+
+**Definition:**
+
+American wild ale
+
+
+## Lambic
+[]{#lambic}
+
+The concept `Lambic` <br/> 
+with URI `https://example.net/my/beer/lambic` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Lambic`](#lambic)
+
+
+Immediately narrower concepts:
+
+[`Faro`](#faro), [`Gueuze`](#gueuze), [`Fruit`](#fruit), [`Unblended`](#unblended)
+
+**Definition:**
+
+Lambic.
+
+
+## Faro
+[]{#faro}
+
+The concept `Faro` <br/> 
+with URI `https://example.net/my/beer/faro` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Lambic`](#lambic)` -> `[`Faro`](#faro)
+
+
+
+**Definition:**
+
+Faro.
+
+
+## Gueuze
+[]{#gueuze}
+
+The concept `Gueuze` <br/> 
+with URI `https://example.net/my/beer/Gueuze` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Lambic`](#lambic)` -> `[`Gueuze`](#gueuze)
+
+
+
+**Definition:**
+
+Gueuze.
+
+
+## Fruit
+[]{#fruit}
+
+The concept `Fruit` <br/> 
+with URI `https://example.net/my/beer/fruit` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Lambic`](#lambic)` -> `[`Fruit`](#fruit)
+
+
+
+**Definition:**
+
+Fruit.
+
+
+## Unblended
+[]{#unblended}
+
+The concept `Unblended` <br/> 
+with URI `https://example.net/my/beer/unblended` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Lambic`](#lambic)` -> `[`Unblended`](#unblended)
+
+
+
+**Definition:**
+
+Unblended.
+
+
+## Sahti
+[]{#sahti}
+
+The concept `Sahti` <br/> 
+with URI `https://example.net/my/beer/sahti` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Sahti`](#sahti)
+
+
+
+**Definition:**
+
+Sahti.
+
+
+## Belgian French Ale
+[]{#belgian-french-ale}
+
+The concept `Belgian French Ale` <br/> 
+with URI `https://example.net/my/beer/belgianfrenchale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Belgian French Ale`](#belgian-french-ale)
+
+
+
+**Definition:**
+
+Belgian French ale.
+
+
+## Rye Ale
+[]{#rye-ale}
+
+The concept `Rye Ale` <br/> 
+with URI `https://example.net/my/beer/ryeale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`Rye Ale`](#rye-ale)
+
+
+
+**Definition:**
+
+Rye ale.
+
+
+## German Ale
+[]{#german-ale}
+
+The concept `German Ale` <br/> 
+with URI `https://example.net/my/beer/germanale` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Ale`](#ale)` -> `[`German Ale`](#german-ale)
+
+
+
+**Definition:**
+
+German ale.
+
+
+## Lager
+[]{#lager}
+
+The concept `Lager` <br/> 
+with URI `https://example.net/my/beer/lager` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)
+
+
+Immediately narrower concepts:
+
+[`American Lager`](#american-lager), [`Pilsner`](#pilsner), [`European Strong Lager`](#european-strong-lager), [`European Lager`](#european-lager), [`German Lager`](#german-lager)
+
+**Definition:**
+
+Lager is a type of beer originated in Bavaria, which has been brewed and conditioned at low temperature.
+
+
+## American Lager
+[]{#american-lager}
+
+The concept `American Lager` <br/> 
+with URI `https://example.net/my/beer/americanlager` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)` -> `[`American Lager`](#american-lager)
+
+
+
+**Definition:**
+
+American lager.
+
+
+## Pilsner
+[]{#pilsner}
+
+The concept `Pilsner` <br/> 
+with URI `https://example.net/my/beer/pilsner` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)` -> `[`Pilsner`](#pilsner)
+
+
+
+**Definition:**
+
+Pilsner
+
+
+## European Strong Lager
+[]{#european-strong-lager}
+
+The concept `European Strong Lager` <br/> 
+with URI `https://example.net/my/beer/europeanstronglager` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)` -> `[`European Strong Lager`](#european-strong-lager)
+
+
+
+**Definition:**
+
+European strong lager.
+
+
+## European Lager
+[]{#european-lager}
+
+The concept `European Lager` <br/> 
+with URI `https://example.net/my/beer/europeanlager` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)` -> `[`European Lager`](#european-lager)
+
+
+
+**Definition:**
+
+European lager.
+
+
+## German Lager
+[]{#german-lager}
+
+The concept `German Lager` <br/> 
+with URI `https://example.net/my/beer/germanlager` <br/> 
+is defined in vocabulary `https://example.net/my/beer/vocab`
+
+Path from the top concept: <br/>
+[`Thing`](#thing)` -> `[`Liquid`](#liquid)` -> `[`Beer`](#beer)` -> `[`Lager`](#lager)` -> `[`German Lager`](#german-lager)
+
+
+
+**Definition:**
+
+German lager.
 
 

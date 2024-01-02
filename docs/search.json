@@ -4,398 +4,431 @@
     "href": "validation.html",
     "title": "Vocabulary Validation",
     "section": "",
-    "text": "Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in vocab_tools/data and are included with the code when this packae is installed.\n1: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from github.com/datadavev/pyshacl and is kept in sync with changes from upstream.1 modified\nValidation is generally performed on a single base or extension vocabulary using the vocab validate command with the target vocabulary source file as the only parameter:\n\nvocab validate --help\n\nUsage: vocab validate [OPTIONS] SOURCE\n\n  Validate vocabulary structure.\n\nOptions:\n  -v, --vocab TEXT  Vocabulary to load\n  -s, --shape TEXT  SHACL shape file for vocabulary structure validation\n  --help            Show this message and exit.\n\n\nApplying the rules against a valid vocabulary generates output similar to the following:\n\nvocab validate example/data/example.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: True\n\n\nIf the vocabulary does not conform with the SHACL rules then error messages are emitted. These can sometimes be a bit difficult to dechipher, though the target node mentioned in the error output is a good starting point. This example shows the output when the vocabulary has no top concept (skos:topConceptOf):\n\nvocab validate example/data/example_notop.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n18 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyShape\n    Focus Node: eg:vocab\n    Value Node: eg:vocab\n    Message: Node eg:vocab does not conform to one or more shapes in skos:ExtensionVocabularyShape , skos:BaseVocabularyShape\n\n\nThis example demonstrates output when the vocabulary has no skos:ConceptScheme:\n\nvocab validate example/data/example_noconceptscheme.ttl\n\nLoaded vocabulary does not specify skos:ConceptScheme\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n21 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:description Literal(\"A vocabulary must have an instance of skos:ConceptScheme.\", lang=en) ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path [ sh:inversePath rdf:type ] ]\n    Focus Node: skos:ConceptScheme\n    Result Path: [ sh:inversePath rdf:type ]\n    Message: Less than 1 values on skos:ConceptScheme-&gt;[ sh:inversePath rdf:type ]\n\n\nA vocabulary concept has no skos:prefLabel:\n\nvocab validate example/data/example_nolabel.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n19 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept must have a preferred name\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:prefLabel ]\n    Focus Node: eg:solid\n    Result Path: skos:prefLabel\n    Message: Less than 1 values on eg:solid-&gt;skos:prefLabel\n\n\nA vocabulary concept has no skos:definition:\n\nvocab validate example/data/example_nodefinition.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nValidation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:warning\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept should have a textual definition\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:definition ; sh:severity sh:warning ]\n    Focus Node: eg:solid\n    Result Path: skos:definition\n    Message: Less than 1 values on eg:solid-&gt;skos:definition"
+    "text": "Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in vocab_tools/data and are included with the code when this packae is installed.\n1: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from github.com/datadavev/pyshacl and is kept in sync with changes from upstream.\n1 modifiedValidation is generally performed on a single base or extension vocabulary using the vocab validate command with the target vocabulary source file as the only parameter:\n\nvocab validate --help\n\nUsage: vocab validate [OPTIONS] SOURCE\n\n  Validate vocabulary structure.\n\nOptions:\n  -v, --vocab TEXT  Vocabulary to load\n  -s, --shape TEXT  SHACL shape file for vocabulary structure validation\n  --help            Show this message and exit.\n\n\nApplying the rules against a valid vocabulary generates output similar to the following:\n\nvocab validate example/data/example.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: True\n\n\nIf the vocabulary does not conform with the SHACL rules then error messages are emitted. These can sometimes be a bit difficult to dechipher, though the target node mentioned in the error output is a good starting point. This example shows the output when the vocabulary has no top concept (skos:topConceptOf):\n\nvocab validate example/data/example_notop.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n19 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyShape\n    Focus Node: eg:vocab\n    Value Node: eg:vocab\n    Message: Node eg:vocab does not conform to one or more shapes in skos:ExtensionVocabularyShape , skos:BaseVocabularyShape\n\n\nThis example demonstrates output when the vocabulary has no skos:ConceptScheme:\n\nvocab validate example/data/example_noconceptscheme.ttl\n\nLoaded vocabulary does not specify skos:ConceptScheme\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n18 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:description Literal(\"A vocabulary must have an instance of skos:ConceptScheme.\", lang=en) ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path [ sh:inversePath rdf:type ] ]\n    Focus Node: skos:ConceptScheme\n    Result Path: [ sh:inversePath rdf:type ]\n    Message: Less than 1 values on skos:ConceptScheme-&gt;[ sh:inversePath rdf:type ]\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\n\n\nA vocabulary concept has no skos:prefLabel:\n\nvocab validate example/data/example_nolabel.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept must have a preferred name\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:prefLabel ]\n    Focus Node: eg:solid\n    Result Path: skos:prefLabel\n    Message: Less than 1 values on eg:solid-&gt;skos:prefLabel\n\n\nA vocabulary concept has no skos:definition:\n\nvocab validate example/data/example_nodefinition.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nValidation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:warning\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept should have a textual definition\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:definition ; sh:severity sh:warning ]\n    Focus Node: eg:solid\n    Result Path: skos:definition\n    Message: Less than 1 values on eg:solid-&gt;skos:definition",
+    "crumbs": [
+      "Validation"
+    ]
   },
   {
     "objectID": "validation.html#validate-a-vocabulary",
     "href": "validation.html#validate-a-vocabulary",
     "title": "Vocabulary Validation",
     "section": "",
-    "text": "Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in vocab_tools/data and are included with the code when this packae is installed.\n1: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from github.com/datadavev/pyshacl and is kept in sync with changes from upstream.1 modified\nValidation is generally performed on a single base or extension vocabulary using the vocab validate command with the target vocabulary source file as the only parameter:\n\nvocab validate --help\n\nUsage: vocab validate [OPTIONS] SOURCE\n\n  Validate vocabulary structure.\n\nOptions:\n  -v, --vocab TEXT  Vocabulary to load\n  -s, --shape TEXT  SHACL shape file for vocabulary structure validation\n  --help            Show this message and exit.\n\n\nApplying the rules against a valid vocabulary generates output similar to the following:\n\nvocab validate example/data/example.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: True\n\n\nIf the vocabulary does not conform with the SHACL rules then error messages are emitted. These can sometimes be a bit difficult to dechipher, though the target node mentioned in the error output is a good starting point. This example shows the output when the vocabulary has no top concept (skos:topConceptOf):\n\nvocab validate example/data/example_notop.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n18 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyShape\n    Focus Node: eg:vocab\n    Value Node: eg:vocab\n    Message: Node eg:vocab does not conform to one or more shapes in skos:ExtensionVocabularyShape , skos:BaseVocabularyShape\n\n\nThis example demonstrates output when the vocabulary has no skos:ConceptScheme:\n\nvocab validate example/data/example_noconceptscheme.ttl\n\nLoaded vocabulary does not specify skos:ConceptScheme\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n21 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:description Literal(\"A vocabulary must have an instance of skos:ConceptScheme.\", lang=en) ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path [ sh:inversePath rdf:type ] ]\n    Focus Node: skos:ConceptScheme\n    Result Path: [ sh:inversePath rdf:type ]\n    Message: Less than 1 values on skos:ConceptScheme-&gt;[ sh:inversePath rdf:type ]\n\n\nA vocabulary concept has no skos:prefLabel:\n\nvocab validate example/data/example_nolabel.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n19 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept must have a preferred name\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:prefLabel ]\n    Focus Node: eg:solid\n    Result Path: skos:prefLabel\n    Message: Less than 1 values on eg:solid-&gt;skos:prefLabel\n\n\nA vocabulary concept has no skos:definition:\n\nvocab validate example/data/example_nodefinition.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nValidation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:warning\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept should have a textual definition\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:definition ; sh:severity sh:warning ]\n    Focus Node: eg:solid\n    Result Path: skos:definition\n    Message: Less than 1 values on eg:solid-&gt;skos:definition"
+    "text": "Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in vocab_tools/data and are included with the code when this packae is installed.\n1: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from github.com/datadavev/pyshacl and is kept in sync with changes from upstream.\n1 modifiedValidation is generally performed on a single base or extension vocabulary using the vocab validate command with the target vocabulary source file as the only parameter:\n\nvocab validate --help\n\nUsage: vocab validate [OPTIONS] SOURCE\n\n  Validate vocabulary structure.\n\nOptions:\n  -v, --vocab TEXT  Vocabulary to load\n  -s, --shape TEXT  SHACL shape file for vocabulary structure validation\n  --help            Show this message and exit.\n\n\nApplying the rules against a valid vocabulary generates output similar to the following:\n\nvocab validate example/data/example.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: True\n\n\nIf the vocabulary does not conform with the SHACL rules then error messages are emitted. These can sometimes be a bit difficult to dechipher, though the target node mentioned in the error output is a good starting point. This example shows the output when the vocabulary has no top concept (skos:topConceptOf):\n\nvocab validate example/data/example_notop.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n19 of 21 applied.\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyShape\n    Focus Node: eg:vocab\n    Value Node: eg:vocab\n    Message: Node eg:vocab does not conform to one or more shapes in skos:ExtensionVocabularyShape , skos:BaseVocabularyShape\n\n\nThis example demonstrates output when the vocabulary has no skos:ConceptScheme:\n\nvocab validate example/data/example_noconceptscheme.ttl\n\nLoaded vocabulary does not specify skos:ConceptScheme\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (2):\n18 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:description Literal(\"A vocabulary must have an instance of skos:ConceptScheme.\", lang=en) ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path [ sh:inversePath rdf:type ] ]\n    Focus Node: skos:ConceptScheme\n    Result Path: [ sh:inversePath rdf:type ]\n    Message: Less than 1 values on skos:ConceptScheme-&gt;[ sh:inversePath rdf:type ]\nConstraint Violation in OrConstraintComponent (http://www.w3.org/ns/shacl#OrConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: skos:VocabularyConceptShape\n    Focus Node: eg:thing\n    Value Node: eg:thing\n    Message: Node eg:thing does not conform to one or more shapes in skos:NarrowerConceptShape , skos:TopConceptShape\n\n\nA vocabulary concept has no skos:prefLabel:\n\nvocab validate example/data/example_nolabel.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:Violation\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept must have a preferred name\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:prefLabel ]\n    Focus Node: eg:solid\n    Result Path: skos:prefLabel\n    Message: Less than 1 values on eg:solid-&gt;skos:prefLabel\n\n\nA vocabulary concept has no skos:definition:\n\nvocab validate example/data/example_nodefinition.ttl\n\nLoaded vocabulary https://example.net/my/minimal/vocab\nSHACL conformance: False\nVocabulary not in conformance. Skipping further tests.\nValidation Report\nConforms: False\nResults (1):\n21 of 21 applied.\nValidation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n    Severity: sh:warning\n    Source Shape: [ sh:datatype rdf:langString ; sh:description Literal(\"A vocabulary concept should have a textual definition\", lang=en) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path skos:definition ; sh:severity sh:warning ]\n    Focus Node: eg:solid\n    Result Path: skos:definition\n    Message: Less than 1 values on eg:solid-&gt;skos:definition",
+    "crumbs": [
+      "Validation"
+    ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "Python tools for validating and rendering iSamples vocabularies."
+    "text": "Python tools for validating and rendering iSamples vocabularies.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "index.html#generate-markdown",
     "href": "index.html#generate-markdown",
     "title": "Home",
     "section": "Generate Markdown",
-    "text": "Generate Markdown\n$ vocab validate example/data/example.ttl &gt; example/example.md"
+    "text": "Generate Markdown\n$ vocab markdown example/data/example.ttl &gt; example/example.md \nWhere a vocabulary is made up from multiple parts (e.g. one or more extensions), all vocabulary parts may be loaded and documented as a single markdown file by including all the source files in the command. e.g.:\n$ vocab markdown example/data/example.ttl \\\n    example/data/extension_example.ttl \\\n    example/data/extension_extension.ttl \\\n    example/data/beer.ttl &gt; example/example.qmd",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "Home",
     "section": "Installation",
-    "text": "Installation\nUse poetry for development work.\nFor other use, create a python virtual environment and\npip install \\\ngit+https://github.com/isamplesorg/vocab_tools.git@main\nTo enable the SPARQL service endpoint, also install uvicorn and rdflib-endpoint:\npip install \\\nuvicorn git+https://github.com/vemonet/rdflib-endpoint.git@main"
+    "text": "Installation\nUse poetry for development work.\nFor other use, create a python virtual environment and\npip install \\\ngit+https://github.com/isamplesorg/vocab_tools.git@main\nTo enable the SPARQL service endpoint, also install uvicorn and rdflib-endpoint:\npip install \\\nuvicorn git+https://github.com/vemonet/rdflib-endpoint.git@main",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "example/example.html",
     "href": "example/example.html",
     "title": "Minimal Example Vocabulary",
     "section": "",
-    "text": "Vocabularies and extensions:\nHistory:\n2023-07-01 DV Created for structural reference.\n 2023-07-26 DV Adjusted descriptions.\nConcept Hierarchy:"
+    "text": "Vocabularies and extensions:\nHistory:\n2023-07-01 DV Created for structural reference.  2023-07-26 DV Adjusted descriptions.\nConcept Hierarchy:"
   },
   {
     "objectID": "example/example.html#thing",
     "href": "example/example.html#thing",
     "title": "Minimal Example Vocabulary",
     "section": "Thing",
-    "text": "Thing\n\nThe concept Thing\nwith URI https://example.net/my/minimal/thing\nis defined in vocabulary https://example.net/my/minimal/vocab\nThis is the top concept of the vocabulary.\nImmediately narrower concepts:\nSolid, Liquid\nDefinition:\n Any physical thing.\n This concept is for demonstration purposes only.\nHistory:\n 2023-07-26 DV Added explanatory notes."
-  },
-  {
-    "objectID": "vocabularies.html",
-    "href": "vocabularies.html",
-    "title": "Vocabularies in iSamples",
-    "section": "",
-    "text": "Vocabularies in iSamples are used to provide discrete groups for categorizing physical sample records.\nA vocabulary in iSamples is composed of a number of concepts arranged in a hierarchy with a top level broad concept and progressively narrower concepts (e.g. Figure 1). Concepts and the relationships between them are defined using the Simple Knowledge Organization System (SKOS) common data model.\nFigure 1: Two concepts in a vocabulary with an statement that thing is a broader concept than liquid\nA skos:Concept instance that does not include a skos:topConceptOf predicate must include a skos:broader predicate, the object of which is an instance of skos:Concept with a broader definition.\nThe following is a simple vocabulary that defines two concepts (for structural reference only). The thing concept is the broadest concept as indicated by the skos:topConceptOf property, and the liquid concept is a narrower definition of thing, as indicated by the skos:broader property with thing as the object. The concepts are contained within the vocabulary with URI https://example.net/my/minimal/vocab as indicated by the skos:topConceptOf and skos:inScheme references by the concepts. A graph representation of the vocabulary is shown in Figure 2.\nFigure 2: A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary &lt;https://example.net/my/minimal/vocabulary&gt;."
-  },
-  {
-    "objectID": "vocabularies.html#extending-a-vocabulary",
-    "href": "vocabularies.html#extending-a-vocabulary",
-    "title": "Vocabularies in iSamples",
-    "section": "Extending a Vocabulary",
-    "text": "Extending a Vocabulary\nA vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts (“narrower terms”).\nIn iSamples, a vocabulary extension is a vocabulary where the skos:ConceptScheme instance includes a skos:inScheme predicate that refers to the skos:ConceptScheme of the vocabulary being extended. This is used programmatically to identify the vocabulary being extended and to help ensure that skos:Concept instances directly or indirectly extend the base vocabulary.\nAn extension vocabulary must include one or more instances of skos:Concept. Each instance must have a skos:broader predicate. Following a path of skos:broader properties must lead to a skos:Concept that is a skos:topConceptOf the base vocabulary directly or indirectly referred to by the skos:inScheme property of the skos:ConceptScheme instance of the extension vocabulary. A graph rendering of the extension is shown in Figure 3.\n@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .\n@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .\n@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .\n@prefix eg: &lt;https://example.net/my/minimal/&gt; .\n@prefix ext: &lt;https://example.net/my/extension/&gt; .\n\next:vocab\n    rdf:type skos:ConceptScheme ;\n    skos:prefLabel \"Simple Vocabulary Extension\"@en ;\n    skos:inScheme eg:vocab ;\n.    \n\next:liquid \n    rdf:type skos:Concept ;\n    skos:prefLabel \"liquid\"@en ;\n    skos:definition \"A thing that was considered to be of a liquid state at the time of observation\"@en ;\n    skos:inScheme ext:vocab ;\n    skos:broader eg:thing ;\n.\n\n\n\n\n\nFigure 3: An extension vocabulary that extends &lt;https://example.net/my/minimal/vocabulary&gt; with a single concept.\n\n\n\n\nThe entire vocabulary is interpreted by loading the extension and referenced vocabularies into the RDF processing environment. The combined minimal vocabulary and it’s extension is shown in Figure 4.\n\n\n\n\n\nFigure 4: A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph."
-  },
-  {
-    "objectID": "vocabularies.html#other-semantic-relations",
-    "href": "vocabularies.html#other-semantic-relations",
-    "title": "Vocabularies in iSamples",
-    "section": "Other Semantic Relations",
-    "text": "Other Semantic Relations\nIn many cases it is desireable to cross reference vocabulary concepts with concepts defined elsewhere. There are several skos predicates describing semantic and mapping relations that can be helpful for describing the relationships between terms and vocabularies. These include:\n\nskos:narrower\nskos:related\nskos:broaderTransitive\nskos:narrowerTransitive\nskos:closeMatch\nskos:exactMatch\nskos:broadMatch\nskos:narrowMatch\nskos:relatedMatch"
-  },
-  {
-    "objectID": "vocabularies.html#additional-vocabulary-and-concept-metadata",
-    "href": "vocabularies.html#additional-vocabulary-and-concept-metadata",
-    "title": "Vocabularies in iSamples",
-    "section": "Additional Vocabulary and Concept Metadata",
-    "text": "Additional Vocabulary and Concept Metadata\nAdditional properties may be associated with the vocabulary or any of their defined concepts to provide metadata apart from the structural or semantic aspects of the graph.\nThe skos:historyNote property is used to add human readable notes concerning revision history. A skos:historyNote entry should follow a convention of ISO-Date Initials Note, for example:\neg:vocab\n    rdf:type skos:ConceptScheme ;\n    owl:imports &lt;http://www.w3.org/2004/02/skos/core&gt; ;\n    skos:prefLabel \"Minimal Example Vocabulary\"@en ;\n    skos:definition \"This is an example of a minimal iSamples vocabulary.\"@en ;\n    skos:historyNote \"2023-07-15 DAV Created this example vocabulary.\"@en ;\n.\nInformational note properties for skos include:\n\nskos:note\nskos:changeNote\nskos:definition\nskos:editorialNote\nskos:example\nskos:historyNote\nskos:scopeNote\n\nAuthorship information may also be provided using a property such as dct:creator or dct:contributor to directly (within the vocabulary document) or indirectly (by URI reference to an RDF resource) reference a record of type foaf:Person, prov:Person or owl:NamedIndividual:\neg:vocab\n    rdf:type skos:ConceptScheme ;\n    owl:imports &lt;http://www.w3.org/2004/02/skos/core&gt; ;\n    skos:prefLabel \"Minimal Example Vocabulary\"@en ;\n    skos:definition \"This is an example of a minimal iSamples vocabulary.\"@en ;\n    skos:historyNote \"2023-07-15 DAV Created this example vocabulary.\"@en ;\n    dct:creator &lt;https://orcid.org/0000-0002-6513-4996&gt; ;\n."
-  },
-  {
-    "objectID": "conversion.html",
-    "href": "conversion.html",
-    "title": "Vocabulary Conversion",
-    "section": "",
-    "text": "Placeholder\n\nGenerating markdown\nGenerating uijson\n\nExample markdown output."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About vocab_tools",
-    "section": "",
-    "text": "Placeholder"
+    "text": "Thing\n\nThe concept Thing  with URI https://example.net/my/minimal/thing  is defined in vocabulary https://example.net/my/minimal/vocab\nThis is the top concept of the vocabulary.\nImmediately narrower concepts:\nSolid, Liquid\nDefinition:\nAny physical thing.  This concept is for demonstration purposes only.\nHistory:\n2023-07-26 DV Added explanatory notes."
   },
   {
     "objectID": "example/example.html#solid",
     "href": "example/example.html#solid",
     "title": "Minimal Example Vocabulary",
     "section": "Solid",
-    "text": "Solid\n\nThe concept Solid\nwith URI https://example.net/my/minimal/solid\nis defined in vocabulary https://example.net/my/minimal/vocab\nPath from the top concept:\n  Thing-&gt;Solid\nDefinition:\n A thing that was considered solid at the time of observation.\n This concept is for demonstration purposes only.\nHistory:\n 2023-07-26 DV Added explanatory notes."
+    "text": "Solid\n\nThe concept Solid  with URI https://example.net/my/minimal/solid  is defined in vocabulary https://example.net/my/minimal/vocab\nPath from the top concept:  Thing-&gt;Solid\nDefinition:\nA thing that was considered solid at the time of observation.  This concept is for demonstration purposes only.\nHistory:\n2023-07-26 DV Added explanatory notes."
   },
   {
     "objectID": "example/example.html#liquid",
     "href": "example/example.html#liquid",
     "title": "Minimal Example Vocabulary",
     "section": "Liquid",
-    "text": "Liquid\n\nThe concept Liquid\nwith URI https://example.net/my/extension/liquid\nis defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:\n  Thing-&gt;Liquid\nImmediately narrower concepts:\nWater, Beer\nDefinition:\n A thing that was considered to be of a liquid state at the time of observation.\n This concept is for demonstration purposes only."
+    "text": "Liquid\n\nThe concept Liquid  with URI https://example.net/my/extension/liquid  is defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:  Thing-&gt;Liquid\nImmediately narrower concepts:\nWater, Beer\nDefinition:\nA thing that was considered to be of a liquid state at the time of observation.  This concept is for demonstration purposes only."
   },
   {
     "objectID": "example/example.html#water",
     "href": "example/example.html#water",
     "title": "Minimal Example Vocabulary",
     "section": "Water",
-    "text": "Water\n\nThe concept Water\nwith URI https://example.net/my/extension/water\nis defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Water\nDefinition:\n A thing that was considered to be liquid water at the time of observation.\n This concept is for demonstration purposes only.\nNotes:\n This is the first line of a note.\n  Here’s the second line.\n There may be multiple notes in a concept.\nAlternate labels:\n Aqua, H2O"
+    "text": "Water\n\nThe concept Water  with URI https://example.net/my/extension/water  is defined in vocabulary https://example.net/my/extension/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Water\nDefinition:\nA thing that was considered to be liquid water at the time of observation.  This concept is for demonstration purposes only.\nNotes:\nThis is the first line of a note.  Here’s the second line.\nThere may be multiple notes in a concept.\nAlternate labels:\nAqua, H2O"
   },
   {
     "objectID": "example/example.html#beer",
     "href": "example/example.html#beer",
     "title": "Minimal Example Vocabulary",
     "section": "Beer",
-    "text": "Beer\n\nThe concept Beer\nwith URI https://example.net/my/extension2/beer\nis defined in vocabulary https://example.net/my/extension2/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer\nDefinition:\n A thing that was considered to be beer in a liquid state at the time of observation.\n This concept is for demonstration purposes only."
+    "text": "Beer\n\nThe concept Beer  with URI https://example.net/my/extension2/beer  is defined in vocabulary https://example.net/my/extension2/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer\nImmediately narrower concepts:\nAle, Lager\nDefinition:\nA thing that was considered to be beer in a liquid state at the time of observation.  This concept is for demonstration purposes only."
   },
   {
     "objectID": "example/example.html#ale",
     "href": "example/example.html#ale",
     "title": "Minimal Example Vocabulary",
     "section": "Ale",
-    "text": "Ale\n\nThe concept Ale\nwith URI https://example.net/my/beer/ale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale\nImmediately narrower concepts:\nCalifornia Common, Cream Ale, Irish Ale, Stout / Porter, Pale Ale, Mild Ale, Vegetable Ale, American Wild Ale, Lambic, Sahti, Belgian French Ale, Rye Ale, German Ale\nDefinition:\n Ale."
+    "text": "Ale\n\nThe concept Ale  with URI https://example.net/my/beer/ale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale\nImmediately narrower concepts:\nCalifornia Common, Cream Ale, Irish Ale, Stout / Porter, Pale Ale, Mild Ale, Vegetable Ale, American Wild Ale, Lambic, Sahti, Belgian French Ale, Rye Ale, German Ale\nDefinition:\nAle is a type of beer originating in medieval England, brewed using a warm fermentation method."
   },
   {
     "objectID": "example/example.html#california-common",
     "href": "example/example.html#california-common",
     "title": "Minimal Example Vocabulary",
     "section": "California Common",
-    "text": "California Common\n\nThe concept California Common\nwith URI https://example.net/my/beer/californiacommon\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;California Common\nDefinition:\n California common"
+    "text": "California Common\n\nThe concept California Common  with URI https://example.net/my/beer/californiacommon  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;California Common\nDefinition:\nCalifornia common"
   },
   {
     "objectID": "example/example.html#cream-ale",
     "href": "example/example.html#cream-ale",
     "title": "Minimal Example Vocabulary",
     "section": "Cream Ale",
-    "text": "Cream Ale\n\nThe concept Cream Ale\nwith URI https://example.net/my/beer/creamale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Cream Ale\nDefinition:\n Cream ale."
+    "text": "Cream Ale\n\nThe concept Cream Ale  with URI https://example.net/my/beer/creamale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Cream Ale\nDefinition:\nCream ale."
   },
   {
     "objectID": "example/example.html#irish-ale",
     "href": "example/example.html#irish-ale",
     "title": "Minimal Example Vocabulary",
     "section": "Irish Ale",
-    "text": "Irish Ale\n\nThe concept Irish Ale\nwith URI https://example.net/my/beer/irishale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Irish Ale\nDefinition:\n Irish ale"
+    "text": "Irish Ale\n\nThe concept Irish Ale  with URI https://example.net/my/beer/irishale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Irish Ale\nDefinition:\nIrish ale"
   },
   {
     "objectID": "example/example.html#stout-porter",
     "href": "example/example.html#stout-porter",
     "title": "Minimal Example Vocabulary",
     "section": "Stout / Porter",
-    "text": "Stout / Porter\n\nThe concept Stout / Porter\nwith URI https://example.net/my/beer/stoutporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter\nImmediately narrower concepts:\nBaltic Porter, American Porter, American Stout, Oatmeal Stout, American Double Stout, Russian Imperial Stout, Flavored Stout, Sweet Stout, English Porter\nDefinition:\n Stouts and Porters."
-  },
-  {
-    "objectID": "example/example.html#pale-ale",
-    "href": "example/example.html#pale-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Pale Ale",
-    "text": "Pale Ale\n\nThe concept Pale Ale\nwith URI https://example.net/my/beer/paleale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Pale Ale\nDefinition:\n Pale ale.s"
-  },
-  {
-    "objectID": "example/example.html#mild-ale",
-    "href": "example/example.html#mild-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Mild Ale",
-    "text": "Mild Ale\n\nThe concept Mild Ale\nwith URI https://example.net/my/beer/mildale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Mild Ale\nDefinition:\n Mild ale."
-  },
-  {
-    "objectID": "example/example.html#vegetable-ale",
-    "href": "example/example.html#vegetable-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Vegetable Ale",
-    "text": "Vegetable Ale\n\nThe concept Vegetable Ale\nwith URI https://example.net/my/beer/vegetableale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale\nImmediately narrower concepts:\nChile Ale, Pumpkin Ale\nDefinition:\n Vegetable ale."
-  },
-  {
-    "objectID": "example/example.html#american-wild-ale",
-    "href": "example/example.html#american-wild-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "American Wild Ale",
-    "text": "American Wild Ale\n\nThe concept American Wild Ale\nwith URI https://example.net/my/beer/americanwildale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;American Wild Ale\nDefinition:\n American wild ale"
-  },
-  {
-    "objectID": "example/example.html#lambic",
-    "href": "example/example.html#lambic",
-    "title": "Minimal Example Vocabulary",
-    "section": "Lambic",
-    "text": "Lambic\n\nThe concept Lambic\nwith URI https://example.net/my/beer/lambic\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic\nImmediately narrower concepts:\nFaro, Gueuze, Fruit, Unblended\nDefinition:\n Lambic."
-  },
-  {
-    "objectID": "example/example.html#sahti",
-    "href": "example/example.html#sahti",
-    "title": "Minimal Example Vocabulary",
-    "section": "Sahti",
-    "text": "Sahti\n\nThe concept Sahti\nwith URI https://example.net/my/beer/sahti\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Sahti\nDefinition:\n Sahti."
-  },
-  {
-    "objectID": "example/example.html#belgian-french-ale",
-    "href": "example/example.html#belgian-french-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Belgian French Ale",
-    "text": "Belgian French Ale\n\nThe concept Belgian French Ale\nwith URI https://example.net/my/beer/belgianfrenchale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Belgian French Ale\nDefinition:\n Belgian French ale."
-  },
-  {
-    "objectID": "example/example.html#rye-ale",
-    "href": "example/example.html#rye-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Rye Ale",
-    "text": "Rye Ale\n\nThe concept Rye Ale\nwith URI https://example.net/my/beer/ryeale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Rye Ale\nDefinition:\n Rye ale."
-  },
-  {
-    "objectID": "example/example.html#german-ale",
-    "href": "example/example.html#german-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "German Ale",
-    "text": "German Ale\n\nThe concept German Ale\nwith URI https://example.net/my/beer/germanale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;German Ale\nDefinition:\n German ale."
-  },
-  {
-    "objectID": "example/example.html#lager",
-    "href": "example/example.html#lager",
-    "title": "Minimal Example Vocabulary",
-    "section": "Lager",
-    "text": "Lager\n\nThe concept Lager\nwith URI https://example.net/my/beer/lager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager\nImmediately narrower concepts:\nAmerican Lager, Pilsner, European Strong Lager, European Lager, German Lager\nDefinition:\n Lager."
+    "text": "Stout / Porter\n\nThe concept Stout / Porter  with URI https://example.net/my/beer/stoutporter  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter\nImmediately narrower concepts:\nBaltic Porter, American Porter, American Stout, Oatmeal Stout, American Double Stout, Russian Imperial Stout, Flavored Stout, Sweet Stout, English Porter\nDefinition:\nStouts and Porters."
   },
   {
     "objectID": "example/example.html#baltic-porter",
     "href": "example/example.html#baltic-porter",
     "title": "Minimal Example Vocabulary",
     "section": "Baltic Porter",
-    "text": "Baltic Porter\n\nThe concept Baltic Porter\nwith URI https://example.net/my/beer/balticporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Baltic Porter\nDefinition:\n Baltic Porter."
-  },
-  {
-    "objectID": "example/example.html#american-lager",
-    "href": "example/example.html#american-lager",
-    "title": "Minimal Example Vocabulary",
-    "section": "American Lager",
-    "text": "American Lager\n\nThe concept American Lager\nwith URI https://example.net/my/beer/americanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;American Lager\nDefinition:\n American lager."
-  },
-  {
-    "objectID": "example/example.html#pilsner",
-    "href": "example/example.html#pilsner",
-    "title": "Minimal Example Vocabulary",
-    "section": "Pilsner",
-    "text": "Pilsner\n\nThe concept Pilsner\nwith URI https://example.net/my/beer/pilsner\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;Pilsner\nDefinition:\n Pilsner"
-  },
-  {
-    "objectID": "example/example.html#european-strong-lager",
-    "href": "example/example.html#european-strong-lager",
-    "title": "Minimal Example Vocabulary",
-    "section": "European Strong Lager",
-    "text": "European Strong Lager\n\nThe concept European Strong Lager\nwith URI https://example.net/my/beer/europeanstronglager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Strong Lager\nDefinition:\n European strong lager."
-  },
-  {
-    "objectID": "example/example.html#european-lager",
-    "href": "example/example.html#european-lager",
-    "title": "Minimal Example Vocabulary",
-    "section": "European Lager",
-    "text": "European Lager\n\nThe concept European Lager\nwith URI https://example.net/my/beer/europeanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Lager\nDefinition:\n European lager."
-  },
-  {
-    "objectID": "example/example.html#german-lager",
-    "href": "example/example.html#german-lager",
-    "title": "Minimal Example Vocabulary",
-    "section": "German Lager",
-    "text": "German Lager\n\nThe concept German Lager\nwith URI https://example.net/my/beer/germanlager\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;German Lager\nDefinition:\n German lager."
-  },
-  {
-    "objectID": "example/example.html#chile-ale",
-    "href": "example/example.html#chile-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Chile Ale",
-    "text": "Chile Ale\n\nThe concept Chile Ale\nwith URI https://example.net/my/beer/chileale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale\nImmediately narrower concepts:\nWinkoop Patty's Chile, Rogue Chipotle Ale, Dogfish Head Theobroma, Twisted Pine Ghostface Killah, No Label Don Jalapeno\nDefinition:\n Chile ale."
-  },
-  {
-    "objectID": "example/example.html#winkoop-pattys-chile",
-    "href": "example/example.html#winkoop-pattys-chile",
-    "title": "Minimal Example Vocabulary",
-    "section": "Winkoop Patty’s Chile",
-    "text": "Winkoop Patty’s Chile\n\nThe concept Winkoop Patty's Chile\nwith URI https://example.net/my/beer/wynkooppattyschile\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Winkoop Patty's Chile\nDefinition:\n Winkoop Patty’s Chile."
-  },
-  {
-    "objectID": "example/example.html#rogue-chipotle-ale",
-    "href": "example/example.html#rogue-chipotle-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Rogue Chipotle Ale",
-    "text": "Rogue Chipotle Ale\n\nThe concept Rogue Chipotle Ale\nwith URI https://example.net/my/beer/roguechipotleale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Rogue Chipotle Ale\nDefinition:\n Rogue Chipotle ale."
-  },
-  {
-    "objectID": "example/example.html#dogfish-head-theobroma",
-    "href": "example/example.html#dogfish-head-theobroma",
-    "title": "Minimal Example Vocabulary",
-    "section": "Dogfish Head Theobroma",
-    "text": "Dogfish Head Theobroma\n\nThe concept Dogfish Head Theobroma\nwith URI https://example.net/my/beer/dogfishheadtheobroma\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Dogfish Head Theobroma\nDefinition:\n Dogfish Head Theobroma."
-  },
-  {
-    "objectID": "example/example.html#twisted-pine-ghostface-killah",
-    "href": "example/example.html#twisted-pine-ghostface-killah",
-    "title": "Minimal Example Vocabulary",
-    "section": "Twisted Pine Ghostface Killah",
-    "text": "Twisted Pine Ghostface Killah\n\nThe concept Twisted Pine Ghostface Killah\nwith URI https://example.net/my/beer/twistedpineghostfacekillah\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Twisted Pine Ghostface Killah\nDefinition:\n Twisted Pine Ghostface Killah."
-  },
-  {
-    "objectID": "example/example.html#no-label-don-jalapeno",
-    "href": "example/example.html#no-label-don-jalapeno",
-    "title": "Minimal Example Vocabulary",
-    "section": "No Label Don Jalapeno",
-    "text": "No Label Don Jalapeno\n\nThe concept No Label Don Jalapeno\nwith URI https://example.net/my/beer/nolabeldonjalapeno\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;No Label Don Jalapeno\nDefinition:\n No label Don Jalapeno."
-  },
-  {
-    "objectID": "example/example.html#pumpkin-ale",
-    "href": "example/example.html#pumpkin-ale",
-    "title": "Minimal Example Vocabulary",
-    "section": "Pumpkin Ale",
-    "text": "Pumpkin Ale\n\nThe concept Pumpkin Ale\nwith URI https://example.net/my/beer/pumpkinale\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Pumpkin Ale\nDefinition:\n Pumpkin ale."
-  },
-  {
-    "objectID": "example/example.html#faro",
-    "href": "example/example.html#faro",
-    "title": "Minimal Example Vocabulary",
-    "section": "Faro",
-    "text": "Faro\n\nThe concept Faro\nwith URI https://example.net/my/beer/faro\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Faro\nDefinition:\n Faro."
-  },
-  {
-    "objectID": "example/example.html#gueuze",
-    "href": "example/example.html#gueuze",
-    "title": "Minimal Example Vocabulary",
-    "section": "Gueuze",
-    "text": "Gueuze\n\nThe concept Gueuze\nwith URI https://example.net/my/beer/Gueuze\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Gueuze\nDefinition:\n Gueuze."
-  },
-  {
-    "objectID": "example/example.html#fruit",
-    "href": "example/example.html#fruit",
-    "title": "Minimal Example Vocabulary",
-    "section": "Fruit",
-    "text": "Fruit\n\nThe concept Fruit\nwith URI https://example.net/my/beer/fruit\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Fruit\nDefinition:\n Fruit."
-  },
-  {
-    "objectID": "example/example.html#unblended",
-    "href": "example/example.html#unblended",
-    "title": "Minimal Example Vocabulary",
-    "section": "Unblended",
-    "text": "Unblended\n\nThe concept Unblended\nwith URI https://example.net/my/beer/unblended\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Unblended\nDefinition:\n Unblended."
+    "text": "Baltic Porter\n\nThe concept Baltic Porter  with URI https://example.net/my/beer/balticporter  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Baltic Porter\nDefinition:\nBaltic Porter."
   },
   {
     "objectID": "example/example.html#american-porter",
     "href": "example/example.html#american-porter",
     "title": "Minimal Example Vocabulary",
     "section": "American Porter",
-    "text": "American Porter\n\nThe concept American Porter\nwith URI https://example.net/my/beer/americanporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Porter\nDefinition:\n American porter."
+    "text": "American Porter\n\nThe concept American Porter  with URI https://example.net/my/beer/americanporter  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Porter\nDefinition:\nAmerican porter."
   },
   {
     "objectID": "example/example.html#american-stout",
     "href": "example/example.html#american-stout",
     "title": "Minimal Example Vocabulary",
     "section": "American Stout",
-    "text": "American Stout\n\nThe concept American Stout\nwith URI https://example.net/my/beer/americanstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Stout\nDefinition:\n American stout."
-  },
-  {
-    "objectID": "example/example.html#american-double-stout",
-    "href": "example/example.html#american-double-stout",
-    "title": "Minimal Example Vocabulary",
-    "section": "American Double Stout",
-    "text": "American Double Stout\n\nThe concept American Double Stout\nwith URI https://example.net/my/beer/americandoublestout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Double Stout\nDefinition:\n American double stout."
-  },
-  {
-    "objectID": "example/example.html#russian-imperial-stout",
-    "href": "example/example.html#russian-imperial-stout",
-    "title": "Minimal Example Vocabulary",
-    "section": "Russian Imperial Stout",
-    "text": "Russian Imperial Stout\n\nThe concept Russian Imperial Stout\nwith URI https://example.net/my/beer/russianimperialstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Russian Imperial Stout\nDefinition:\n Russian imperial stout."
-  },
-  {
-    "objectID": "example/example.html#flavored-stout",
-    "href": "example/example.html#flavored-stout",
-    "title": "Minimal Example Vocabulary",
-    "section": "Flavored Stout",
-    "text": "Flavored Stout\n\nThe concept Flavored Stout\nwith URI https://example.net/my/beer/flavoredstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Flavored Stout\nDefinition:\n Flavored stout, ugh."
-  },
-  {
-    "objectID": "example/example.html#sweet-stout",
-    "href": "example/example.html#sweet-stout",
-    "title": "Minimal Example Vocabulary",
-    "section": "Sweet Stout",
-    "text": "Sweet Stout\n\nThe concept Sweet Stout\nwith URI https://example.net/my/beer/sweetstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Sweet Stout\nDefinition:\n Sweet stout."
-  },
-  {
-    "objectID": "example/example.html#english-porter",
-    "href": "example/example.html#english-porter",
-    "title": "Minimal Example Vocabulary",
-    "section": "English Porter",
-    "text": "English Porter\n\nThe concept English Porter\nwith URI https://example.net/my/beer/englishporter\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;English Porter\nDefinition:\n English porter."
+    "text": "American Stout\n\nThe concept American Stout  with URI https://example.net/my/beer/americanstout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Stout\nDefinition:\nAmerican stout."
   },
   {
     "objectID": "example/example.html#oatmeal-stout",
     "href": "example/example.html#oatmeal-stout",
     "title": "Minimal Example Vocabulary",
     "section": "Oatmeal Stout",
-    "text": "Oatmeal Stout\n\nThe concept Oatmeal Stout\nwith URI https://example.net/my/beer/oatmealstout\nis defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:\n  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Oatmeal Stout\nDefinition:\n Oatmeal stout."
+    "text": "Oatmeal Stout\n\nThe concept Oatmeal Stout  with URI https://example.net/my/beer/oatmealstout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Oatmeal Stout\nDefinition:\nOatmeal stout."
+  },
+  {
+    "objectID": "example/example.html#american-double-stout",
+    "href": "example/example.html#american-double-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Double Stout",
+    "text": "American Double Stout\n\nThe concept American Double Stout  with URI https://example.net/my/beer/americandoublestout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;American Double Stout\nDefinition:\nAmerican double stout."
+  },
+  {
+    "objectID": "example/example.html#russian-imperial-stout",
+    "href": "example/example.html#russian-imperial-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Russian Imperial Stout",
+    "text": "Russian Imperial Stout\n\nThe concept Russian Imperial Stout  with URI https://example.net/my/beer/russianimperialstout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Russian Imperial Stout\nDefinition:\nRussian imperial stout."
+  },
+  {
+    "objectID": "example/example.html#flavored-stout",
+    "href": "example/example.html#flavored-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Flavored Stout",
+    "text": "Flavored Stout\n\nThe concept Flavored Stout  with URI https://example.net/my/beer/flavoredstout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Flavored Stout\nDefinition:\nFlavored stout, ugh."
+  },
+  {
+    "objectID": "example/example.html#sweet-stout",
+    "href": "example/example.html#sweet-stout",
+    "title": "Minimal Example Vocabulary",
+    "section": "Sweet Stout",
+    "text": "Sweet Stout\n\nThe concept Sweet Stout  with URI https://example.net/my/beer/sweetstout  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;Sweet Stout\nDefinition:\nSweet stout."
+  },
+  {
+    "objectID": "example/example.html#english-porter",
+    "href": "example/example.html#english-porter",
+    "title": "Minimal Example Vocabulary",
+    "section": "English Porter",
+    "text": "English Porter\n\nThe concept English Porter  with URI https://example.net/my/beer/englishporter  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Stout / Porter-&gt;English Porter\nDefinition:\nEnglish porter."
+  },
+  {
+    "objectID": "example/example.html#pale-ale",
+    "href": "example/example.html#pale-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pale Ale",
+    "text": "Pale Ale\n\nThe concept Pale Ale  with URI https://example.net/my/beer/paleale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Pale Ale\nDefinition:\nPale ale.s"
+  },
+  {
+    "objectID": "example/example.html#mild-ale",
+    "href": "example/example.html#mild-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Mild Ale",
+    "text": "Mild Ale\n\nThe concept Mild Ale  with URI https://example.net/my/beer/mildale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Mild Ale\nDefinition:\nMild ale."
+  },
+  {
+    "objectID": "example/example.html#vegetable-ale",
+    "href": "example/example.html#vegetable-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Vegetable Ale",
+    "text": "Vegetable Ale\n\nThe concept Vegetable Ale  with URI https://example.net/my/beer/vegetableale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale\nImmediately narrower concepts:\nChile Ale, Pumpkin Ale\nDefinition:\nVegetable ale."
+  },
+  {
+    "objectID": "example/example.html#chile-ale",
+    "href": "example/example.html#chile-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Chile Ale",
+    "text": "Chile Ale\n\nThe concept Chile Ale  with URI https://example.net/my/beer/chileale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale\nImmediately narrower concepts:\nWinkoop Patty's Chile, Rogue Chipotle Ale, Dogfish Head Theobroma, Twisted Pine Ghostface Killah, No Label Don Jalapeno\nDefinition:\nChile ale."
+  },
+  {
+    "objectID": "example/example.html#winkoop-pattys-chile",
+    "href": "example/example.html#winkoop-pattys-chile",
+    "title": "Minimal Example Vocabulary",
+    "section": "Winkoop Patty’s Chile",
+    "text": "Winkoop Patty’s Chile\n\nThe concept Winkoop Patty's Chile  with URI https://example.net/my/beer/wynkooppattyschile  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Winkoop Patty's Chile\nDefinition:\nWinkoop Patty’s Chile."
+  },
+  {
+    "objectID": "example/example.html#rogue-chipotle-ale",
+    "href": "example/example.html#rogue-chipotle-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Rogue Chipotle Ale",
+    "text": "Rogue Chipotle Ale\n\nThe concept Rogue Chipotle Ale  with URI https://example.net/my/beer/roguechipotleale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Rogue Chipotle Ale\nDefinition:\nRogue Chipotle ale."
+  },
+  {
+    "objectID": "example/example.html#dogfish-head-theobroma",
+    "href": "example/example.html#dogfish-head-theobroma",
+    "title": "Minimal Example Vocabulary",
+    "section": "Dogfish Head Theobroma",
+    "text": "Dogfish Head Theobroma\n\nThe concept Dogfish Head Theobroma  with URI https://example.net/my/beer/dogfishheadtheobroma  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Dogfish Head Theobroma\nDefinition:\nDogfish Head Theobroma."
+  },
+  {
+    "objectID": "example/example.html#twisted-pine-ghostface-killah",
+    "href": "example/example.html#twisted-pine-ghostface-killah",
+    "title": "Minimal Example Vocabulary",
+    "section": "Twisted Pine Ghostface Killah",
+    "text": "Twisted Pine Ghostface Killah\n\nThe concept Twisted Pine Ghostface Killah  with URI https://example.net/my/beer/twistedpineghostfacekillah  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;Twisted Pine Ghostface Killah\nDefinition:\nTwisted Pine Ghostface Killah."
+  },
+  {
+    "objectID": "example/example.html#no-label-don-jalapeno",
+    "href": "example/example.html#no-label-don-jalapeno",
+    "title": "Minimal Example Vocabulary",
+    "section": "No Label Don Jalapeno",
+    "text": "No Label Don Jalapeno\n\nThe concept No Label Don Jalapeno  with URI https://example.net/my/beer/nolabeldonjalapeno  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Chile Ale-&gt;No Label Don Jalapeno\nDefinition:\nNo label Don Jalapeno."
+  },
+  {
+    "objectID": "example/example.html#pumpkin-ale",
+    "href": "example/example.html#pumpkin-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pumpkin Ale",
+    "text": "Pumpkin Ale\n\nThe concept Pumpkin Ale  with URI https://example.net/my/beer/pumpkinale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Vegetable Ale-&gt;Pumpkin Ale\nDefinition:\nPumpkin ale."
+  },
+  {
+    "objectID": "example/example.html#american-wild-ale",
+    "href": "example/example.html#american-wild-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Wild Ale",
+    "text": "American Wild Ale\n\nThe concept American Wild Ale  with URI https://example.net/my/beer/americanwildale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;American Wild Ale\nDefinition:\nAmerican wild ale"
+  },
+  {
+    "objectID": "example/example.html#lambic",
+    "href": "example/example.html#lambic",
+    "title": "Minimal Example Vocabulary",
+    "section": "Lambic",
+    "text": "Lambic\n\nThe concept Lambic  with URI https://example.net/my/beer/lambic  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic\nImmediately narrower concepts:\nFaro, Gueuze, Fruit, Unblended\nDefinition:\nLambic."
+  },
+  {
+    "objectID": "example/example.html#faro",
+    "href": "example/example.html#faro",
+    "title": "Minimal Example Vocabulary",
+    "section": "Faro",
+    "text": "Faro\n\nThe concept Faro  with URI https://example.net/my/beer/faro  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Faro\nDefinition:\nFaro."
+  },
+  {
+    "objectID": "example/example.html#gueuze",
+    "href": "example/example.html#gueuze",
+    "title": "Minimal Example Vocabulary",
+    "section": "Gueuze",
+    "text": "Gueuze\n\nThe concept Gueuze  with URI https://example.net/my/beer/Gueuze  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Gueuze\nDefinition:\nGueuze."
+  },
+  {
+    "objectID": "example/example.html#fruit",
+    "href": "example/example.html#fruit",
+    "title": "Minimal Example Vocabulary",
+    "section": "Fruit",
+    "text": "Fruit\n\nThe concept Fruit  with URI https://example.net/my/beer/fruit  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Fruit\nDefinition:\nFruit."
+  },
+  {
+    "objectID": "example/example.html#unblended",
+    "href": "example/example.html#unblended",
+    "title": "Minimal Example Vocabulary",
+    "section": "Unblended",
+    "text": "Unblended\n\nThe concept Unblended  with URI https://example.net/my/beer/unblended  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Lambic-&gt;Unblended\nDefinition:\nUnblended."
+  },
+  {
+    "objectID": "example/example.html#sahti",
+    "href": "example/example.html#sahti",
+    "title": "Minimal Example Vocabulary",
+    "section": "Sahti",
+    "text": "Sahti\n\nThe concept Sahti  with URI https://example.net/my/beer/sahti  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Sahti\nDefinition:\nSahti."
+  },
+  {
+    "objectID": "example/example.html#belgian-french-ale",
+    "href": "example/example.html#belgian-french-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Belgian French Ale",
+    "text": "Belgian French Ale\n\nThe concept Belgian French Ale  with URI https://example.net/my/beer/belgianfrenchale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Belgian French Ale\nDefinition:\nBelgian French ale."
+  },
+  {
+    "objectID": "example/example.html#rye-ale",
+    "href": "example/example.html#rye-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "Rye Ale",
+    "text": "Rye Ale\n\nThe concept Rye Ale  with URI https://example.net/my/beer/ryeale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;Rye Ale\nDefinition:\nRye ale."
+  },
+  {
+    "objectID": "example/example.html#german-ale",
+    "href": "example/example.html#german-ale",
+    "title": "Minimal Example Vocabulary",
+    "section": "German Ale",
+    "text": "German Ale\n\nThe concept German Ale  with URI https://example.net/my/beer/germanale  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Ale-&gt;German Ale\nDefinition:\nGerman ale."
+  },
+  {
+    "objectID": "example/example.html#lager",
+    "href": "example/example.html#lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "Lager",
+    "text": "Lager\n\nThe concept Lager  with URI https://example.net/my/beer/lager  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager\nImmediately narrower concepts:\nAmerican Lager, Pilsner, European Strong Lager, European Lager, German Lager\nDefinition:\nLager is a type of beer originated in Bavaria, which has been brewed and conditioned at low temperature."
+  },
+  {
+    "objectID": "example/example.html#american-lager",
+    "href": "example/example.html#american-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "American Lager",
+    "text": "American Lager\n\nThe concept American Lager  with URI https://example.net/my/beer/americanlager  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;American Lager\nDefinition:\nAmerican lager."
+  },
+  {
+    "objectID": "example/example.html#pilsner",
+    "href": "example/example.html#pilsner",
+    "title": "Minimal Example Vocabulary",
+    "section": "Pilsner",
+    "text": "Pilsner\n\nThe concept Pilsner  with URI https://example.net/my/beer/pilsner  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;Pilsner\nDefinition:\nPilsner"
+  },
+  {
+    "objectID": "example/example.html#european-strong-lager",
+    "href": "example/example.html#european-strong-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "European Strong Lager",
+    "text": "European Strong Lager\n\nThe concept European Strong Lager  with URI https://example.net/my/beer/europeanstronglager  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Strong Lager\nDefinition:\nEuropean strong lager."
+  },
+  {
+    "objectID": "example/example.html#european-lager",
+    "href": "example/example.html#european-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "European Lager",
+    "text": "European Lager\n\nThe concept European Lager  with URI https://example.net/my/beer/europeanlager  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;European Lager\nDefinition:\nEuropean lager."
+  },
+  {
+    "objectID": "example/example.html#german-lager",
+    "href": "example/example.html#german-lager",
+    "title": "Minimal Example Vocabulary",
+    "section": "German Lager",
+    "text": "German Lager\n\nThe concept German Lager  with URI https://example.net/my/beer/germanlager  is defined in vocabulary https://example.net/my/beer/vocab\nPath from the top concept:  Thing-&gt;Liquid-&gt;Beer-&gt;Lager-&gt;German Lager\nDefinition:\nGerman lager."
+  },
+  {
+    "objectID": "vocabularies.html",
+    "href": "vocabularies.html",
+    "title": "Vocabularies in iSamples",
+    "section": "",
+    "text": "Vocabularies in iSamples are used to provide discrete groups for categorizing physical sample records.\nA vocabulary in iSamples is composed of a number of concepts arranged in a hierarchy with a top level broad concept and progressively narrower concepts (e.g. Figure 1). Concepts and the relationships between them are defined using the Simple Knowledge Organization System (SKOS) common data model.\nFigure 1: Two concepts in a vocabulary with an statement that thing is a broader concept than liquid\nA vocabulary as used in iSamples is an RDF graph composed of one instance of skos:ConceptScheme1 and one or more instances of skos:Concept.\nThe top level (i.e. broadest definition) skos:Concept must include a skos:topConceptOf predicate, the object of which is the vocabulary skos:ConceptScheme instance. If a skos:Concept does not include a skos:topConceptOf predicate, then it must contain a skos:inScheme predicate that refers to the skos:ConceptScheme instance.2\nA skos:Concept instance that does not include a skos:topConceptOf predicate must include a skos:broader predicate, the object of which is an instance of skos:Concept with a broader definition.\nEach skos:Concept instance must include a skos:prefLabel and should include a skos:definition that provides a clear textual description of the concept.3\nThe following is a simple vocabulary that defines two concepts (for structural reference only). The thing concept is the broadest concept as indicated by the skos:topConceptOf property, and the liquid concept is a narrower definition of thing, as indicated by the skos:broader property with thing as the object. The concepts are contained within the vocabulary with URI https://example.net/my/minimal/vocab as indicated by the skos:topConceptOf and skos:inScheme references by the concepts. A graph representation of the vocabulary is shown in Figure 2.\nFigure 2: A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary &lt;https://example.net/my/minimal/vocabulary&gt;.",
+    "crumbs": [
+      "Vocabularies"
+    ]
+  },
+  {
+    "objectID": "vocabularies.html#extending-a-vocabulary",
+    "href": "vocabularies.html#extending-a-vocabulary",
+    "title": "Vocabularies in iSamples",
+    "section": "Extending a Vocabulary",
+    "text": "Extending a Vocabulary\nA vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts (“narrower terms”).\nIn iSamples, a vocabulary extension is a vocabulary where the skos:ConceptScheme instance includes a skos:inScheme predicate that refers to the skos:ConceptScheme of the vocabulary being extended. This is used programmatically to identify the vocabulary being extended and to help ensure that skos:Concept instances directly or indirectly extend the base vocabulary.\nAn extension vocabulary must include one or more instances of skos:Concept. Each instance must have a skos:broader predicate. Following a path of skos:broader properties must lead to a skos:Concept that is a skos:topConceptOf the base vocabulary directly or indirectly referred to by the skos:inScheme property of the skos:ConceptScheme instance of the extension vocabulary. A graph rendering of the extension is shown in Figure 3.\n@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .\n@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .\n@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .\n@prefix eg: &lt;https://example.net/my/minimal/&gt; .\n@prefix ext: &lt;https://example.net/my/extension/&gt; .\n\next:vocab\n    rdf:type skos:ConceptScheme ;\n    skos:prefLabel \"Simple Vocabulary Extension\"@en ;\n    skos:inScheme eg:vocab ;\n.    \n\next:liquid \n    rdf:type skos:Concept ;\n    skos:prefLabel \"liquid\"@en ;\n    skos:definition \"A thing that was considered to be of a liquid state at the time of observation\"@en ;\n    skos:inScheme ext:vocab ;\n    skos:broader eg:thing ;\n.\n\n\n\n\n\n\n\n\nFigure 3: An extension vocabulary that extends &lt;https://example.net/my/minimal/vocabulary&gt; with a single concept.\n\n\n\n\n\nThe entire vocabulary is interpreted by loading the extension and referenced vocabularies into the RDF processing environment. The combined minimal vocabulary and it’s extension is shown in Figure 4.\n\n\n\n\n\n\n\n\nFigure 4: A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph.",
+    "crumbs": [
+      "Vocabularies"
+    ]
+  },
+  {
+    "objectID": "vocabularies.html#other-semantic-relations",
+    "href": "vocabularies.html#other-semantic-relations",
+    "title": "Vocabularies in iSamples",
+    "section": "Other Semantic Relations",
+    "text": "Other Semantic Relations\nIn many cases it is desireable to cross reference vocabulary concepts with concepts defined elsewhere. There are several skos predicates describing semantic and mapping relations that can be helpful for describing the relationships between terms and vocabularies. These include:\n\nskos:narrower\nskos:related\nskos:broaderTransitive\nskos:narrowerTransitive\nskos:closeMatch\nskos:exactMatch\nskos:broadMatch\nskos:narrowMatch\nskos:relatedMatch",
+    "crumbs": [
+      "Vocabularies"
+    ]
+  },
+  {
+    "objectID": "vocabularies.html#additional-vocabulary-and-concept-metadata",
+    "href": "vocabularies.html#additional-vocabulary-and-concept-metadata",
+    "title": "Vocabularies in iSamples",
+    "section": "Additional Vocabulary and Concept Metadata",
+    "text": "Additional Vocabulary and Concept Metadata\nAdditional properties may be associated with the vocabulary or any of their defined concepts to provide metadata apart from the structural or semantic aspects of the graph.\nThe skos:historyNote property is used to add human readable notes concerning revision history. A skos:historyNote entry should follow a convention of ISO-Date Initials Note, for example:\neg:vocab\n    rdf:type skos:ConceptScheme ;\n    owl:imports &lt;http://www.w3.org/2004/02/skos/core&gt; ;\n    skos:prefLabel \"Minimal Example Vocabulary\"@en ;\n    skos:definition \"This is an example of a minimal iSamples vocabulary.\"@en ;\n    skos:historyNote \"2023-07-15 DAV Created this example vocabulary.\"@en ;\n.\nInformational note properties for skos include:\n\nskos:note\nskos:changeNote\nskos:definition\nskos:editorialNote\nskos:example\nskos:historyNote\nskos:scopeNote\n\nAuthorship information may also be provided using a property such as dct:creator or dct:contributor to directly (within the vocabulary document) or indirectly (by URI reference to an RDF resource) reference a record of type foaf:Person, prov:Person or owl:NamedIndividual:\neg:vocab\n    rdf:type skos:ConceptScheme ;\n    owl:imports &lt;http://www.w3.org/2004/02/skos/core&gt; ;\n    skos:prefLabel \"Minimal Example Vocabulary\"@en ;\n    skos:definition \"This is an example of a minimal iSamples vocabulary.\"@en ;\n    skos:historyNote \"2023-07-15 DAV Created this example vocabulary.\"@en ;\n    dct:creator &lt;https://orcid.org/0000-0002-6513-4996&gt; ;\n.",
+    "crumbs": [
+      "Vocabularies"
+    ]
+  },
+  {
+    "objectID": "conversion.html",
+    "href": "conversion.html",
+    "title": "Vocabulary Conversion",
+    "section": "",
+    "text": "Placeholder\n\nGenerating markdown\nGenerating uijson\n\nExample markdown output.",
+    "crumbs": [
+      "Conversion"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About vocab_tools",
+    "section": "",
+    "text": "Placeholder",
+    "crumbs": [
+      "About vocab_tools"
+    ]
   }
 ]

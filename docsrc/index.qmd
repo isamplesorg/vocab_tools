@@ -11,7 +11,18 @@ Python tools for validating and rendering iSamples vocabularies.
 ## Generate Markdown
 
 ```
-$ vocab validate example/data/example.ttl > example/example.md 
+$ vocab markdown example/data/example.ttl > example/example.md 
+```
+
+Where a vocabulary is made up from multiple parts (e.g. one or more extensions), all vocabulary 
+parts may be loaded and documented as a single markdown file by including all the source files 
+in the command. e.g.:
+
+```
+$ vocab markdown example/data/example.ttl \
+    example/data/extension_example.ttl \
+    example/data/extension_extension.ttl \
+    example/data/beer.ttl > example/example.qmd
 ```
 
 ## Installation

@@ -1,0 +1,300 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ext2: <https://example.net/my/extension2/> .
+@prefix beer: <https://example.net/my/beer/> .
+
+beer:vocab
+    rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Vocabulary of beers"@en ;
+    skos:definition '''This is an example of a vocabulary describing a few types of beer.
+It is transcribed from the diagram created by PopChart,
+at https://popchart.co/collections/prints/products/the-magnificent-multitude-of-beer'''@en ;
+    skos:inScheme ext2:vocab ;
+.
+beer:ale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Ale"@en ;
+    skos:definition "Ale is a type of beer originating in medieval England, brewed using a warm fermentation method."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader ext2:beer ;
+.
+
+beer:californiacommon
+    rdf:type skos:Concept ;
+    skos:prefLabel "California Common"@en ;
+    skos:definition "California common"@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:creamale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Cream Ale"@en ;
+    skos:definition "Cream ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:irishale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Irish Ale"@en ;
+    skos:definition "Irish ale"@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:stoutporter
+    rdf:type skos:Concept ;
+    skos:prefLabel "Stout / Porter"@en ;
+    skos:definition "Stouts and Porters."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:paleale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Pale Ale"@en ;
+    skos:definition "Pale ale.s"@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:mildale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Mild Ale"@en ;
+    skos:definition "Mild ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:vegetableale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Vegetable Ale"@en ;
+    skos:definition "Vegetable ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:americanwildale
+    rdf:type skos:Concept ;
+    skos:prefLabel "American Wild Ale"@en ;
+    skos:definition "American wild ale"@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:lambic
+    rdf:type skos:Concept ;
+    skos:prefLabel "Lambic"@en ;
+    skos:definition "Lambic."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:sahti
+    rdf:type skos:Concept ;
+    skos:prefLabel "Sahti"@en ;
+    skos:definition "Sahti."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:belgianfrenchale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Belgian French Ale"@en ;
+    skos:definition "Belgian French ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:ryeale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Rye Ale"@en ;
+    skos:definition "Rye ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:germanale
+    rdf:type skos:Concept ;
+    skos:prefLabel "German Ale"@en ;
+    skos:definition "German ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:ale ;
+.
+beer:lager
+    rdf:type skos:Concept ;
+    skos:prefLabel "Lager"@en ;
+    skos:definition "Lager is a type of beer originated in Bavaria, which has been brewed and conditioned at low temperature."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader ext2:beer ;
+.
+
+beer:balticporter
+    rdf:type skos:Concept ;
+    skos:prefLabel "Baltic Porter"@en ;
+    skos:definition "Baltic Porter."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+    skos:related beer:lager ;
+.
+
+beer:americanlager
+    rdf:type skos:Concept ;
+    skos:prefLabel "American Lager"@en ;
+    skos:definition "American lager."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lager ;
+    skos:related beer:californiacommon ;
+.
+
+beer:pilsner
+    rdf:type skos:Concept ;
+    skos:prefLabel "Pilsner"@en ;
+    skos:definition "Pilsner"@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lager ;
+.
+beer:europeanstronglager
+    rdf:type skos:Concept ;
+    skos:prefLabel "European Strong Lager"@en ;
+    skos:definition "European strong lager."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lager ;
+.
+beer:europeanlager
+    rdf:type skos:Concept ;
+    skos:prefLabel "European Lager"@en ;
+    skos:definition "European lager."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lager ;
+.
+beer:germanlager
+    rdf:type skos:Concept ;
+    skos:prefLabel "German Lager"@en ;
+    skos:definition "German lager."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lager ;
+.
+beer:chileale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Chile Ale"@en ;
+    skos:definition "Chile ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:vegetableale ;
+.
+beer:pumpkinale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Pumpkin Ale"@en ;
+    skos:definition "Pumpkin ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:vegetableale ;
+.
+beer:wynkooppattyschile
+    rdf:type skos:Concept ;
+    skos:prefLabel "Winkoop Patty's Chile"@en ;
+    skos:definition "Winkoop Patty's Chile."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:chileale ;
+.
+beer:roguechipotleale
+    rdf:type skos:Concept ;
+    skos:prefLabel "Rogue Chipotle Ale"@en ;
+    skos:definition "Rogue Chipotle ale."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:chileale ;
+.
+beer:dogfishheadtheobroma
+    rdf:type skos:Concept ;
+    skos:prefLabel "Dogfish Head Theobroma"@en ;
+    skos:definition "Dogfish Head Theobroma."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:chileale ;
+.
+beer:twistedpineghostfacekillah
+    rdf:type skos:Concept ;
+    skos:prefLabel "Twisted Pine Ghostface Killah"@en ;
+    skos:definition "Twisted Pine Ghostface Killah."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:chileale ;
+.
+beer:nolabeldonjalapeno
+    rdf:type skos:Concept ;
+    skos:prefLabel "No Label Don Jalapeno"@en ;
+    skos:definition "No label Don Jalapeno."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:chileale ;
+.
+beer:faro
+    rdf:type skos:Concept ;
+    skos:prefLabel "Faro"@en ;
+    skos:definition "Faro."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lambic ;
+.
+beer:Gueuze
+    rdf:type skos:Concept ;
+    skos:prefLabel "Gueuze"@en ;
+    skos:definition "Gueuze."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lambic ;
+.
+beer:fruit
+    rdf:type skos:Concept ;
+    skos:prefLabel "Fruit"@en ;
+    skos:definition "Fruit."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lambic ;
+.
+beer:unblended
+    rdf:type skos:Concept ;
+    skos:prefLabel "Unblended"@en ;
+    skos:definition "Unblended."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:lambic ;
+.
+beer:americanporter
+    rdf:type skos:Concept ;
+    skos:prefLabel "American Porter"@en ;
+    skos:definition "American porter."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:americanstout
+    rdf:type skos:Concept ;
+    skos:prefLabel "American Stout"@en ;
+    skos:definition "American stout."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:oatmealstout
+    rdf:type skos:Concept ;
+    skos:prefLabel "Oatmeal Stout"@en ;
+    skos:definition "Oatmeal stout."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:americandoublestout
+    rdf:type skos:Concept ;
+    skos:prefLabel "American Double Stout"@en ;
+    skos:definition "American double stout."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:russianimperialstout
+    rdf:type skos:Concept ;
+    skos:prefLabel "Russian Imperial Stout"@en ;
+    skos:definition "Russian imperial stout."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:flavoredstout
+    rdf:type skos:Concept ;
+    skos:prefLabel "Flavored Stout"@en ;
+    skos:definition "Flavored stout, ugh."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:sweetstout
+    rdf:type skos:Concept ;
+    skos:prefLabel "Sweet Stout"@en ;
+    skos:definition "Sweet stout."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.
+beer:englishporter
+    rdf:type skos:Concept ;
+    skos:prefLabel "English Porter"@en ;
+    skos:definition "English porter."@en ;
+    skos:inScheme beer:vocab ;
+    skos:broader beer:stoutporter ;
+.

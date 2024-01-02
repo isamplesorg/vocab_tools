@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.428">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -48,7 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -75,9 +81,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vocabularies.html">Vocabularies</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vocabularies.html">Vocabularies</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -164,25 +170,31 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
+
 <p>Vocabularies in iSamples are used to provide discrete groups for categorizing physical sample records.</p>
-<p>A vocabulary in iSamples is composed of a number of concepts arranged in a hierarchy with a top level broad concept and progressively narrower concepts (e.g. <a href="#fig-broader">Figure&nbsp;1</a>). Concepts and the relationships between them are defined using the Simple Knowledge Organization System (<a href="https://www.w3.org/2004/02/skos/">SKOS</a>) common data model.</p>
-<div class="cell" data-execution_count="2">
+<p>A vocabulary in iSamples is composed of a number of concepts arranged in a hierarchy with a top level broad concept and progressively narrower concepts (e.g. <a href="#fig-broader" class="quarto-xref">Figure&nbsp;1</a>). Concepts and the relationships between them are defined using the Simple Knowledge Organization System (<a href="https://www.w3.org/2004/02/skos/">SKOS</a>) common data model.</p>
+<div id="cell-fig-broader" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
-<div id="fig-broader" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><a href="vocabularies_files/figure-html/fig-broader-output-1.svg" class="lightbox" title="Two concepts in a vocabulary with an statement that thing is a broader concept than liquid" data-gallery="quarto-lightbox-gallery-1"><img src="vocabularies_files/figure-html/fig-broader-output-1.svg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Two concepts in a vocabulary with an statement that <code>thing</code> is a broader concept than <code>liquid</code></figcaption>
+<div id="fig-broader" class="quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-broader-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vocabularies_files/figure-html/fig-broader-output-1.svg" class="lightbox" data-description="Figure&nbsp;1: Two concepts in a vocabulary with an statement that thing is a broader concept than liquid" data-gallery="quarto-lightbox-gallery-1"><img src="vocabularies_files/figure-html/fig-broader-output-1.svg" class="img-fluid quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-broader-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Two concepts in a vocabulary with an statement that <code>thing</code> is a broader concept than <code>liquid</code>
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="page-columns page-full"><p>A vocabulary as used in iSamples is an <a href="https://en.wikipedia.org/wiki/Resource_Description_Framework">RDF graph</a> composed of one instance of <a href="https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme"><code>skos:ConceptScheme</code></a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and one or more instances of <a href="https://www.w3.org/2009/08/skos-reference/skos.html#Concept"><code>skos:Concept</code></a>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Herein “<code>skos</code>” is a <a href="https://www.w3.org/TR/1999/REC-xml-names-19990114/#dt-NSName">namespace name</a> that refers to <code>http://www.w3.org/2004/02/skos/core#</code></p></li></div></div>
-<div class="page-columns page-full"><p>The top level (i.e.&nbsp;broadest definition) <code>skos:Concept</code> must include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#topConceptOf"><code>skos:topConceptOf</code></a> predicate, the object of which is the vocabulary <code>skos:ConceptScheme</code> instance. If a <code>skos:Concept</code> does not include a <code>skos:topConceptOf</code> predicate, then it must contain a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#inScheme"><code>skos:inScheme</code></a> predicate that refers to the <code>skos:ConceptScheme</code> instance.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;The containing vocabulary may be inferred by traversing semantic relations such as <code>skos:broader</code> to find a semantically related concept that includes <code>skos:inScheme</code> or <code>skos:topConceptOf</code>, but including <code>skos:inScheme</code> with each concept provides a more explicit construct for consumers and simplifies processing.</p></li></div></div>
+<p>A vocabulary as used in iSamples is an <a href="https://en.wikipedia.org/wiki/Resource_Description_Framework">RDF graph</a> composed of one instance of <a href="https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme"><code>skos:ConceptScheme</code></a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and one or more instances of <a href="https://www.w3.org/2009/08/skos-reference/skos.html#Concept"><code>skos:Concept</code></a>.</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Herein “<code>skos</code>” is a <a href="https://www.w3.org/TR/1999/REC-xml-names-19990114/#dt-NSName">namespace name</a> that refers to <code>http://www.w3.org/2004/02/skos/core#</code></p></li><li id="fn2"><p><sup>2</sup>&nbsp;The containing vocabulary may be inferred by traversing semantic relations such as <code>skos:broader</code> to find a semantically related concept that includes <code>skos:inScheme</code> or <code>skos:topConceptOf</code>, but including <code>skos:inScheme</code> with each concept provides a more explicit construct for consumers and simplifies processing.</p></li></div><p>The top level (i.e.&nbsp;broadest definition) <code>skos:Concept</code> must include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#topConceptOf"><code>skos:topConceptOf</code></a> predicate, the object of which is the vocabulary <code>skos:ConceptScheme</code> instance. If a <code>skos:Concept</code> does not include a <code>skos:topConceptOf</code> predicate, then it must contain a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#inScheme"><code>skos:inScheme</code></a> predicate that refers to the <code>skos:ConceptScheme</code> instance.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>A <code>skos:Concept</code> instance that does not include a <code>skos:topConceptOf</code> predicate must include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#broader"><code>skos:broader</code></a> predicate, the object of which is an instance of <code>skos:Concept</code> with a broader definition.</p>
-<div class="page-columns page-full"><p>Each <code>skos:Concept</code> instance must include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel"><code>skos:prefLabel</code></a> and should include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#definition"><code>skos:definition</code></a> that provides a clear textual description of the concept.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Only one <code>skos:prefLabel</code> and one <code>skos:definition</code> per language is permitted.</p></li></div></div>
-<p>The following is a simple vocabulary that defines two concepts (for structural reference only). The <code>thing</code> concept is the broadest concept as indicated by the <code>skos:topConceptOf</code> property, and the <code>liquid</code> concept is a narrower definition of <code>thing</code>, as indicated by the <code>skos:broader</code> property with <code>thing</code> as the object. The concepts are contained within the vocabulary with URI <code>https://example.net/my/minimal/vocab</code> as indicated by the <code>skos:topConceptOf</code> and <code>skos:inScheme</code> references by the concepts. A graph representation of the vocabulary is shown in <a href="#fig-minimal">Figure&nbsp;2</a>.</p>
+<p>Each <code>skos:Concept</code> instance must include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel"><code>skos:prefLabel</code></a> and should include a <a href="https://www.w3.org/2009/08/skos-reference/skos.html#definition"><code>skos:definition</code></a> that provides a clear textual description of the concept.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Only one <code>skos:prefLabel</code> and one <code>skos:definition</code> per language is permitted.</p></li></div><p>The following is a simple vocabulary that defines two concepts (for structural reference only). The <code>thing</code> concept is the broadest concept as indicated by the <code>skos:topConceptOf</code> property, and the <code>liquid</code> concept is a narrower definition of <code>thing</code>, as indicated by the <code>skos:broader</code> property with <code>thing</code> as the object. The concepts are contained within the vocabulary with URI <code>https://example.net/my/minimal/vocab</code> as indicated by the <code>skos:topConceptOf</code> and <code>skos:inScheme</code> references by the concepts. A graph representation of the vocabulary is shown in <a href="#fig-minimal" class="quarto-xref">Figure&nbsp;2</a>.</p>
 <pre class="ttl"><code>@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
@@ -193,29 +205,37 @@ eg:vocab
     owl:imports &lt;http://www.w3.org/2004/02/skos/core&gt; ;
     skos:prefLabel "Minimal Example Vocabulary"@en ;
     skos:definition "This is an example of a minimal iSamples vocabulary."@en ;
+    skos:historyNote "2023-07-01 DV Created for structural reference."@en ;
+    skos:historyNote "2023-07-26 DV Adjusted descriptions."@en ;
 .
 
 eg:thing
     rdf:type skos:Concept ;
     skos:topConceptOf eg:vocab ;
-    skos:prefLabel "thing"@en ;
-    skos:definition "Any physical thing"@en ;
+    skos:prefLabel "Thing"@en ;
+    skos:definition "Any physical thing. \nThis concept is for demonstration purposes only."@en ;
+    skos:historyNote "2023-07-26 DV Added explanatory notes." ;
 .
 
 eg:solid
     rdf:type skos:Concept ;
     skos:inScheme eg:vocab ;
     skos:broader eg:thing ;
-    skos:prefLabel "solid"@en ;
-    skos:definition "A thing that was considered solid at the time of observation"@en ;
+    skos:prefLabel "Solid"@en ;
+    skos:definition "A thing that was considered solid at the time of observation. \nThis concept is for demonstration purposes only."@en ;
+    skos:historyNote "2023-07-26 DV Added explanatory notes." ;
 .
 </code></pre>
-<div class="cell" data-execution_count="3">
+<div id="cell-fig-minimal" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div id="fig-minimal" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><a href="vocabularies_files/figure-html/fig-minimal-output-1.svg" class="lightbox" title="A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary <https://example.net/my/minimal/vocabulary>." data-gallery="quarto-lightbox-gallery-2"><img src="vocabularies_files/figure-html/fig-minimal-output-1.svg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;2: A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary <code>&lt;https://example.net/my/minimal/vocabulary&gt;</code>.</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-minimal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vocabularies_files/figure-html/fig-minimal-output-1.svg" class="lightbox" data-description="Figure&nbsp;2: A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary <https://example.net/my/minimal/vocabulary>." data-gallery="quarto-lightbox-gallery-2"><img src="vocabularies_files/figure-html/fig-minimal-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-minimal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: A minimal vocabulary that defines two concepts “thing” and “living_thing” within the vocabulary <code>&lt;https://example.net/my/minimal/vocabulary&gt;</code>.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -224,7 +244,7 @@ eg:solid
 <h2 class="anchored" data-anchor-id="extending-a-vocabulary">Extending a Vocabulary</h2>
 <p>A vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts (“narrower terms”).</p>
 <p>In iSamples, a vocabulary extension is a vocabulary where the <code>skos:ConceptScheme</code> instance includes a <code>skos:inScheme</code> predicate that refers to the <code>skos:ConceptScheme</code> of the vocabulary being extended. This is used programmatically to identify the vocabulary being extended and to help ensure that <code>skos:Concept</code> instances directly or indirectly extend the base vocabulary.</p>
-<p>An extension vocabulary must include one or more instances of <code>skos:Concept</code>. Each instance must have a <code>skos:broader</code> predicate. Following a path of <code>skos:broader</code> properties must lead to a <code>skos:Concept</code> that is a <code>skos:topConceptOf</code> the base vocabulary directly or indirectly referred to by the <code>skos:inScheme</code> property of the <code>skos:ConceptScheme</code> instance of the extension vocabulary. A graph rendering of the extension is shown in <a href="#fig-extension">Figure&nbsp;3</a>.</p>
+<p>An extension vocabulary must include one or more instances of <code>skos:Concept</code>. Each instance must have a <code>skos:broader</code> predicate. Following a path of <code>skos:broader</code> properties must lead to a <code>skos:Concept</code> that is a <code>skos:topConceptOf</code> the base vocabulary directly or indirectly referred to by the <code>skos:inScheme</code> property of the <code>skos:ConceptScheme</code> instance of the extension vocabulary. A graph rendering of the extension is shown in <a href="#fig-extension" class="quarto-xref">Figure&nbsp;3</a>.</p>
 <pre><code>@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
@@ -244,23 +264,31 @@ ext:liquid
     skos:inScheme ext:vocab ;
     skos:broader eg:thing ;
 .</code></pre>
-<div class="cell" data-execution_count="4">
+<div id="cell-fig-extension" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div id="fig-extension" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><a href="vocabularies_files/figure-html/fig-extension-output-1.svg" class="lightbox" title="An extension vocabulary that extends <https://example.net/my/minimal/vocabulary> with a single concept." data-gallery="quarto-lightbox-gallery-3"><img src="vocabularies_files/figure-html/fig-extension-output-1.svg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;3: An extension vocabulary that extends <code>&lt;https://example.net/my/minimal/vocabulary&gt;</code> with a single concept.</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vocabularies_files/figure-html/fig-extension-output-1.svg" class="lightbox" data-description="Figure&nbsp;3: An extension vocabulary that extends <https://example.net/my/minimal/vocabulary> with a single concept." data-gallery="quarto-lightbox-gallery-3"><img src="vocabularies_files/figure-html/fig-extension-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: An extension vocabulary that extends <code>&lt;https://example.net/my/minimal/vocabulary&gt;</code> with a single concept.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The entire vocabulary is interpreted by loading the extension and referenced vocabularies into the RDF processing environment. The combined minimal vocabulary and it’s extension is shown in <a href="#fig-combined">Figure&nbsp;4</a>.</p>
-<div class="cell" data-execution_count="5">
+<p>The entire vocabulary is interpreted by loading the extension and referenced vocabularies into the RDF processing environment. The combined minimal vocabulary and it’s extension is shown in <a href="#fig-combined" class="quarto-xref">Figure&nbsp;4</a>.</p>
+<div id="cell-fig-combined" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div id="fig-combined" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><a href="vocabularies_files/figure-html/fig-combined-output-1.svg" class="lightbox" title="A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph." data-gallery="quarto-lightbox-gallery-4"><img src="vocabularies_files/figure-html/fig-combined-output-1.svg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;4: A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph.</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-combined-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vocabularies_files/figure-html/fig-combined-output-1.svg" class="lightbox" data-description="Figure&nbsp;4: A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph." data-gallery="quarto-lightbox-gallery-4"><img src="vocabularies_files/figure-html/fig-combined-output-1.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-combined-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: A rendering of the base vocabulary and an extension illustrating the entire vocabulary graph.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -396,10 +424,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -409,8 +436,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -423,6 +459,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -466,6 +624,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -491,6 +650,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -551,7 +736,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":false});</script>
+
 
 
 

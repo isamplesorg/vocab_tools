@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.428">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-07-27">
+<meta name="dcterms.date" content="2024-01-02">
 
 <title>iSamples Vocabulary Tools - Minimal Example Vocabulary</title>
 <style>
@@ -46,7 +46,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -73,11 +79,11 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
       iSamples Vocabulary Tools
       </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -145,6 +151,46 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#liquid" id="toc-liquid" class="nav-link" data-scroll-target="#liquid">Liquid</a></li>
   <li><a href="#water" id="toc-water" class="nav-link" data-scroll-target="#water">Water</a></li>
   <li><a href="#beer" id="toc-beer" class="nav-link" data-scroll-target="#beer">Beer</a></li>
+  <li><a href="#ale" id="toc-ale" class="nav-link" data-scroll-target="#ale">Ale</a></li>
+  <li><a href="#california-common" id="toc-california-common" class="nav-link" data-scroll-target="#california-common">California Common</a></li>
+  <li><a href="#cream-ale" id="toc-cream-ale" class="nav-link" data-scroll-target="#cream-ale">Cream Ale</a></li>
+  <li><a href="#irish-ale" id="toc-irish-ale" class="nav-link" data-scroll-target="#irish-ale">Irish Ale</a></li>
+  <li><a href="#stout-porter" id="toc-stout-porter" class="nav-link" data-scroll-target="#stout-porter">Stout / Porter</a></li>
+  <li><a href="#baltic-porter" id="toc-baltic-porter" class="nav-link" data-scroll-target="#baltic-porter">Baltic Porter</a></li>
+  <li><a href="#american-porter" id="toc-american-porter" class="nav-link" data-scroll-target="#american-porter">American Porter</a></li>
+  <li><a href="#american-stout" id="toc-american-stout" class="nav-link" data-scroll-target="#american-stout">American Stout</a></li>
+  <li><a href="#oatmeal-stout" id="toc-oatmeal-stout" class="nav-link" data-scroll-target="#oatmeal-stout">Oatmeal Stout</a></li>
+  <li><a href="#american-double-stout" id="toc-american-double-stout" class="nav-link" data-scroll-target="#american-double-stout">American Double Stout</a></li>
+  <li><a href="#russian-imperial-stout" id="toc-russian-imperial-stout" class="nav-link" data-scroll-target="#russian-imperial-stout">Russian Imperial Stout</a></li>
+  <li><a href="#flavored-stout" id="toc-flavored-stout" class="nav-link" data-scroll-target="#flavored-stout">Flavored Stout</a></li>
+  <li><a href="#sweet-stout" id="toc-sweet-stout" class="nav-link" data-scroll-target="#sweet-stout">Sweet Stout</a></li>
+  <li><a href="#english-porter" id="toc-english-porter" class="nav-link" data-scroll-target="#english-porter">English Porter</a></li>
+  <li><a href="#pale-ale" id="toc-pale-ale" class="nav-link" data-scroll-target="#pale-ale">Pale Ale</a></li>
+  <li><a href="#mild-ale" id="toc-mild-ale" class="nav-link" data-scroll-target="#mild-ale">Mild Ale</a></li>
+  <li><a href="#vegetable-ale" id="toc-vegetable-ale" class="nav-link" data-scroll-target="#vegetable-ale">Vegetable Ale</a></li>
+  <li><a href="#chile-ale" id="toc-chile-ale" class="nav-link" data-scroll-target="#chile-ale">Chile Ale</a></li>
+  <li><a href="#winkoop-pattys-chile" id="toc-winkoop-pattys-chile" class="nav-link" data-scroll-target="#winkoop-pattys-chile">Winkoop Patty’s Chile</a></li>
+  <li><a href="#rogue-chipotle-ale" id="toc-rogue-chipotle-ale" class="nav-link" data-scroll-target="#rogue-chipotle-ale">Rogue Chipotle Ale</a></li>
+  <li><a href="#dogfish-head-theobroma" id="toc-dogfish-head-theobroma" class="nav-link" data-scroll-target="#dogfish-head-theobroma">Dogfish Head Theobroma</a></li>
+  <li><a href="#twisted-pine-ghostface-killah" id="toc-twisted-pine-ghostface-killah" class="nav-link" data-scroll-target="#twisted-pine-ghostface-killah">Twisted Pine Ghostface Killah</a></li>
+  <li><a href="#no-label-don-jalapeno" id="toc-no-label-don-jalapeno" class="nav-link" data-scroll-target="#no-label-don-jalapeno">No Label Don Jalapeno</a></li>
+  <li><a href="#pumpkin-ale" id="toc-pumpkin-ale" class="nav-link" data-scroll-target="#pumpkin-ale">Pumpkin Ale</a></li>
+  <li><a href="#american-wild-ale" id="toc-american-wild-ale" class="nav-link" data-scroll-target="#american-wild-ale">American Wild Ale</a></li>
+  <li><a href="#lambic" id="toc-lambic" class="nav-link" data-scroll-target="#lambic">Lambic</a></li>
+  <li><a href="#faro" id="toc-faro" class="nav-link" data-scroll-target="#faro">Faro</a></li>
+  <li><a href="#gueuze" id="toc-gueuze" class="nav-link" data-scroll-target="#gueuze">Gueuze</a></li>
+  <li><a href="#fruit" id="toc-fruit" class="nav-link" data-scroll-target="#fruit">Fruit</a></li>
+  <li><a href="#unblended" id="toc-unblended" class="nav-link" data-scroll-target="#unblended">Unblended</a></li>
+  <li><a href="#sahti" id="toc-sahti" class="nav-link" data-scroll-target="#sahti">Sahti</a></li>
+  <li><a href="#belgian-french-ale" id="toc-belgian-french-ale" class="nav-link" data-scroll-target="#belgian-french-ale">Belgian French Ale</a></li>
+  <li><a href="#rye-ale" id="toc-rye-ale" class="nav-link" data-scroll-target="#rye-ale">Rye Ale</a></li>
+  <li><a href="#german-ale" id="toc-german-ale" class="nav-link" data-scroll-target="#german-ale">German Ale</a></li>
+  <li><a href="#lager" id="toc-lager" class="nav-link" data-scroll-target="#lager">Lager</a></li>
+  <li><a href="#american-lager" id="toc-american-lager" class="nav-link" data-scroll-target="#american-lager">American Lager</a></li>
+  <li><a href="#pilsner" id="toc-pilsner" class="nav-link" data-scroll-target="#pilsner">Pilsner</a></li>
+  <li><a href="#european-strong-lager" id="toc-european-strong-lager" class="nav-link" data-scroll-target="#european-strong-lager">European Strong Lager</a></li>
+  <li><a href="#european-lager" id="toc-european-lager" class="nav-link" data-scroll-target="#european-lager">European Lager</a></li>
+  <li><a href="#german-lager" id="toc-german-lager" class="nav-link" data-scroll-target="#german-lager">German Lager</a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 27, 2023</p>
+      <p class="date">January 2, 2024</p>
     </div>
   </div>
   
@@ -173,7 +219,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <p>Vocabularies and extensions:</p>
 <ul>
@@ -181,14 +229,16 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><code>Simple Vocabulary Extension</code> <a href="https://example.net/my/extension/vocab"><code>https://example.net/my/extension/vocab</code></a>
 <ul>
-<li><code>Extension of a vocabulary extension</code> <a href="https://example.net/my/extension2/vocab"><code>https://example.net/my/extension2/vocab</code></a></li>
+<li><code>Extension of a vocabulary extension</code> <a href="https://example.net/my/extension2/vocab"><code>https://example.net/my/extension2/vocab</code></a>
+<ul>
+<li><code>Vocabulary of beers</code> <a href="https://example.net/my/beer/vocab"><code>https://example.net/my/beer/vocab</code></a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
-<p>History:</p>
-<p>&nbsp;2023-07-01 DV Created for structural reference.<br>
-&nbsp;2023-07-26 DV Adjusted descriptions.</p>
-<p>Concept Hierarchy:</p>
+<p><strong>History:</strong></p>
+<p>2023-07-01 DV Created for structural reference. <br> 2023-07-26 DV Adjusted descriptions.</p>
+<p><strong>Concept Hierarchy:</strong></p>
 <ul>
 <li><a href="#thing">Thing</a>
 <ul>
@@ -196,82 +246,450 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="#liquid">Liquid</a>
 <ul>
 <li><a href="#water">Water</a></li>
-<li><a href="#beer">Beer</a></li>
+<li><a href="#beer">Beer</a>
+<ul>
+<li><a href="#ale">Ale</a>
+<ul>
+<li><a href="#california-common">California Common</a></li>
+<li><a href="#cream-ale">Cream Ale</a></li>
+<li><a href="#irish-ale">Irish Ale</a></li>
+<li><a href="#porter">Stout / Porter</a>
+<ul>
+<li><a href="#baltic-porter">Baltic Porter</a></li>
+<li><a href="#american-porter">American Porter</a></li>
+<li><a href="#american-stout">American Stout</a></li>
+<li><a href="#oatmeal-stout">Oatmeal Stout</a></li>
+<li><a href="#american-double-stout">American Double Stout</a></li>
+<li><a href="#russian-imperial-stout">Russian Imperial Stout</a></li>
+<li><a href="#flavored-stout">Flavored Stout</a></li>
+<li><a href="#sweet-stout">Sweet Stout</a></li>
+<li><a href="#english-porter">English Porter</a></li>
+</ul></li>
+<li><a href="#pale-ale">Pale Ale</a></li>
+<li><a href="#mild-ale">Mild Ale</a></li>
+<li><a href="#vegetable-ale">Vegetable Ale</a>
+<ul>
+<li><a href="#chile-ale">Chile Ale</a>
+<ul>
+<li><a href="#winkoop-pattys-chile">Winkoop Patty’s Chile</a></li>
+<li><a href="#rogue-chipotle-ale">Rogue Chipotle Ale</a></li>
+<li><a href="#dogfish-head-theobroma">Dogfish Head Theobroma</a></li>
+<li><a href="#twisted-pine-ghostface-killah">Twisted Pine Ghostface Killah</a></li>
+<li><a href="#no-label-don-jalapeno">No Label Don Jalapeno</a></li>
+</ul></li>
+<li><a href="#pumpkin-ale">Pumpkin Ale</a></li>
+</ul></li>
+<li><a href="#american-wild-ale">American Wild Ale</a></li>
+<li><a href="#lambic">Lambic</a>
+<ul>
+<li><a href="#faro">Faro</a></li>
+<li><a href="#gueuze">Gueuze</a></li>
+<li><a href="#fruit">Fruit</a></li>
+<li><a href="#unblended">Unblended</a></li>
+</ul></li>
+<li><a href="#sahti">Sahti</a></li>
+<li><a href="#belgian-french-ale">Belgian French Ale</a></li>
+<li><a href="#rye-ale">Rye Ale</a></li>
+<li><a href="#german-ale">German Ale</a></li>
+</ul></li>
+<li><a href="#lager">Lager</a>
+<ul>
+<li><a href="#american-lager">American Lager</a></li>
+<li><a href="#pilsner">Pilsner</a></li>
+<li><a href="#european-strong-lager">European Strong Lager</a></li>
+<li><a href="#european-lager">European Lager</a></li>
+<li><a href="#german-lager">German Lager</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
 <section id="thing" class="level2">
 <h2 class="anchored" data-anchor-id="thing">Thing</h2>
 <p><span id="thing"></span></p>
-<p>The concept <code>Thing</code><br>
-with URI <code>https://example.net/my/minimal/thing</code><br>
-is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
+<p>The concept <code>Thing</code> <br> with URI <code>https://example.net/my/minimal/thing</code> <br> is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
 <p>This is the top concept of the vocabulary.</p>
 <p>Immediately narrower concepts:</p>
 <p><a href="#solid"><code>Solid</code></a>, <a href="#liquid"><code>Liquid</code></a></p>
-<p>Definition:<br>
-&nbsp;Any physical thing.<br>
-&nbsp;This concept is for demonstration purposes only.</p>
-<p>History:<br>
-&nbsp;2023-07-26 DV Added explanatory notes.</p>
+<p><strong>Definition:</strong></p>
+<p>Any physical thing. <br> This concept is for demonstration purposes only.</p>
+<p><strong>History:</strong></p>
+<p>2023-07-26 DV Added explanatory notes.</p>
 </section>
 <section id="solid" class="level2">
 <h2 class="anchored" data-anchor-id="solid">Solid</h2>
 <p><span id="solid"></span></p>
-<p>The concept <code>Solid</code><br>
-with URI <code>https://example.net/my/minimal/solid</code><br>
-is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
-<p>Path from the top concept:<br>
-&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#solid"><code>Solid</code></a></p>
-<p>Definition:<br>
-&nbsp;A thing that was considered solid at the time of observation.<br>
-&nbsp;This concept is for demonstration purposes only.</p>
-<p>History:<br>
-&nbsp;2023-07-26 DV Added explanatory notes.</p>
+<p>The concept <code>Solid</code> <br> with URI <code>https://example.net/my/minimal/solid</code> <br> is defined in vocabulary <code>https://example.net/my/minimal/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#solid"><code>Solid</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>A thing that was considered solid at the time of observation. <br> This concept is for demonstration purposes only.</p>
+<p><strong>History:</strong></p>
+<p>2023-07-26 DV Added explanatory notes.</p>
 </section>
 <section id="liquid" class="level2">
 <h2 class="anchored" data-anchor-id="liquid">Liquid</h2>
 <p><span id="liquid"></span></p>
-<p>The concept <code>Liquid</code><br>
-with URI <code>https://example.net/my/extension/liquid</code><br>
-is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
-<p>Path from the top concept:<br>
-&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a></p>
+<p>The concept <code>Liquid</code> <br> with URI <code>https://example.net/my/extension/liquid</code> <br> is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a></p>
 <p>Immediately narrower concepts:</p>
 <p><a href="#water"><code>Water</code></a>, <a href="#beer"><code>Beer</code></a></p>
-<p>Definition:<br>
-&nbsp;A thing that was considered to be of a liquid state at the time of observation.<br>
-&nbsp;This concept is for demonstration purposes only.</p>
+<p><strong>Definition:</strong></p>
+<p>A thing that was considered to be of a liquid state at the time of observation. <br> This concept is for demonstration purposes only.</p>
 </section>
 <section id="water" class="level2">
 <h2 class="anchored" data-anchor-id="water">Water</h2>
 <p><span id="water"></span></p>
-<p>The concept <code>Water</code><br>
-with URI <code>https://example.net/my/extension/water</code><br>
-is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
-<p>Path from the top concept:<br>
-&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#water"><code>Water</code></a></p>
-<p>Definition:<br>
-&nbsp;A thing that was considered to be liquid water at the time of observation.<br>
-&nbsp;This concept is for demonstration purposes only.</p>
-<p>Notes:<br>
-&nbsp;This is the first line of a note.<br>
-&nbsp;&nbsp;Here’s the second line.<br>
-&nbsp;There may be multiple notes in a concept.</p>
-<p>Alternate labels:<br>
-&nbsp;<code>Aqua</code>, <code>H2O</code></p>
+<p>The concept <code>Water</code> <br> with URI <code>https://example.net/my/extension/water</code> <br> is defined in vocabulary <code>https://example.net/my/extension/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#water"><code>Water</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>A thing that was considered to be liquid water at the time of observation. <br> This concept is for demonstration purposes only.</p>
+<p><strong>Notes:</strong></p>
+<p>This is the first line of a note. <br> Here’s the second line.</p>
+<p>There may be multiple notes in a concept.</p>
+<p><strong>Alternate labels:</strong></p>
+<p><code>Aqua</code>, <code>H2O</code></p>
 </section>
 <section id="beer" class="level2">
 <h2 class="anchored" data-anchor-id="beer">Beer</h2>
 <p><span id="beer"></span></p>
-<p>The concept <code>Beer</code><br>
-with URI <code>https://example.net/my/extension2/beer</code><br>
-is defined in vocabulary <code>https://example.net/my/extension2/vocab</code></p>
-<p>Path from the top concept:<br>
-&nbsp;&nbsp;<a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a></p>
-<p>Definition:<br>
-&nbsp;A thing that was considered to be beer in a liquid state at the time of observation.<br>
-&nbsp;This concept is for demonstration purposes only.</p>
+<p>The concept <code>Beer</code> <br> with URI <code>https://example.net/my/extension2/beer</code> <br> is defined in vocabulary <code>https://example.net/my/extension2/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#ale"><code>Ale</code></a>, <a href="#lager"><code>Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>A thing that was considered to be beer in a liquid state at the time of observation. <br> This concept is for demonstration purposes only.</p>
+</section>
+<section id="ale" class="level2">
+<h2 class="anchored" data-anchor-id="ale">Ale</h2>
+<p><span id="ale"></span></p>
+<p>The concept <code>Ale</code> <br> with URI <code>https://example.net/my/beer/ale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#california-common"><code>California Common</code></a>, <a href="#cream-ale"><code>Cream Ale</code></a>, <a href="#irish-ale"><code>Irish Ale</code></a>, <a href="#porter"><code>Stout / Porter</code></a>, <a href="#pale-ale"><code>Pale Ale</code></a>, <a href="#mild-ale"><code>Mild Ale</code></a>, <a href="#vegetable-ale"><code>Vegetable Ale</code></a>, <a href="#american-wild-ale"><code>American Wild Ale</code></a>, <a href="#lambic"><code>Lambic</code></a>, <a href="#sahti"><code>Sahti</code></a>, <a href="#belgian-french-ale"><code>Belgian French Ale</code></a>, <a href="#rye-ale"><code>Rye Ale</code></a>, <a href="#german-ale"><code>German Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Ale is a type of beer originating in medieval England, brewed using a warm fermentation method.</p>
+</section>
+<section id="california-common" class="level2">
+<h2 class="anchored" data-anchor-id="california-common">California Common</h2>
+<p><span id="california-common"></span></p>
+<p>The concept <code>California Common</code> <br> with URI <code>https://example.net/my/beer/californiacommon</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#california-common"><code>California Common</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>California common</p>
+</section>
+<section id="cream-ale" class="level2">
+<h2 class="anchored" data-anchor-id="cream-ale">Cream Ale</h2>
+<p><span id="cream-ale"></span></p>
+<p>The concept <code>Cream Ale</code> <br> with URI <code>https://example.net/my/beer/creamale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#cream-ale"><code>Cream Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Cream ale.</p>
+</section>
+<section id="irish-ale" class="level2">
+<h2 class="anchored" data-anchor-id="irish-ale">Irish Ale</h2>
+<p><span id="irish-ale"></span></p>
+<p>The concept <code>Irish Ale</code> <br> with URI <code>https://example.net/my/beer/irishale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#irish-ale"><code>Irish Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Irish ale</p>
+</section>
+<section id="stout-porter" class="level2">
+<h2 class="anchored" data-anchor-id="stout-porter">Stout / Porter</h2>
+<p><span id="porter"></span></p>
+<p>The concept <code>Stout / Porter</code> <br> with URI <code>https://example.net/my/beer/stoutporter</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#baltic-porter"><code>Baltic Porter</code></a>, <a href="#american-porter"><code>American Porter</code></a>, <a href="#american-stout"><code>American Stout</code></a>, <a href="#oatmeal-stout"><code>Oatmeal Stout</code></a>, <a href="#american-double-stout"><code>American Double Stout</code></a>, <a href="#russian-imperial-stout"><code>Russian Imperial Stout</code></a>, <a href="#flavored-stout"><code>Flavored Stout</code></a>, <a href="#sweet-stout"><code>Sweet Stout</code></a>, <a href="#english-porter"><code>English Porter</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Stouts and Porters.</p>
+</section>
+<section id="baltic-porter" class="level2">
+<h2 class="anchored" data-anchor-id="baltic-porter">Baltic Porter</h2>
+<p><span id="baltic-porter"></span></p>
+<p>The concept <code>Baltic Porter</code> <br> with URI <code>https://example.net/my/beer/balticporter</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#baltic-porter"><code>Baltic Porter</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Baltic Porter.</p>
+</section>
+<section id="american-porter" class="level2">
+<h2 class="anchored" data-anchor-id="american-porter">American Porter</h2>
+<p><span id="american-porter"></span></p>
+<p>The concept <code>American Porter</code> <br> with URI <code>https://example.net/my/beer/americanporter</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#american-porter"><code>American Porter</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>American porter.</p>
+</section>
+<section id="american-stout" class="level2">
+<h2 class="anchored" data-anchor-id="american-stout">American Stout</h2>
+<p><span id="american-stout"></span></p>
+<p>The concept <code>American Stout</code> <br> with URI <code>https://example.net/my/beer/americanstout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#american-stout"><code>American Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>American stout.</p>
+</section>
+<section id="oatmeal-stout" class="level2">
+<h2 class="anchored" data-anchor-id="oatmeal-stout">Oatmeal Stout</h2>
+<p><span id="oatmeal-stout"></span></p>
+<p>The concept <code>Oatmeal Stout</code> <br> with URI <code>https://example.net/my/beer/oatmealstout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#oatmeal-stout"><code>Oatmeal Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Oatmeal stout.</p>
+</section>
+<section id="american-double-stout" class="level2">
+<h2 class="anchored" data-anchor-id="american-double-stout">American Double Stout</h2>
+<p><span id="american-double-stout"></span></p>
+<p>The concept <code>American Double Stout</code> <br> with URI <code>https://example.net/my/beer/americandoublestout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#american-double-stout"><code>American Double Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>American double stout.</p>
+</section>
+<section id="russian-imperial-stout" class="level2">
+<h2 class="anchored" data-anchor-id="russian-imperial-stout">Russian Imperial Stout</h2>
+<p><span id="russian-imperial-stout"></span></p>
+<p>The concept <code>Russian Imperial Stout</code> <br> with URI <code>https://example.net/my/beer/russianimperialstout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#russian-imperial-stout"><code>Russian Imperial Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Russian imperial stout.</p>
+</section>
+<section id="flavored-stout" class="level2">
+<h2 class="anchored" data-anchor-id="flavored-stout">Flavored Stout</h2>
+<p><span id="flavored-stout"></span></p>
+<p>The concept <code>Flavored Stout</code> <br> with URI <code>https://example.net/my/beer/flavoredstout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#flavored-stout"><code>Flavored Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Flavored stout, ugh.</p>
+</section>
+<section id="sweet-stout" class="level2">
+<h2 class="anchored" data-anchor-id="sweet-stout">Sweet Stout</h2>
+<p><span id="sweet-stout"></span></p>
+<p>The concept <code>Sweet Stout</code> <br> with URI <code>https://example.net/my/beer/sweetstout</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#sweet-stout"><code>Sweet Stout</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Sweet stout.</p>
+</section>
+<section id="english-porter" class="level2">
+<h2 class="anchored" data-anchor-id="english-porter">English Porter</h2>
+<p><span id="english-porter"></span></p>
+<p>The concept <code>English Porter</code> <br> with URI <code>https://example.net/my/beer/englishporter</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#porter"><code>Stout / Porter</code></a><code>-&gt;</code><a href="#english-porter"><code>English Porter</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>English porter.</p>
+</section>
+<section id="pale-ale" class="level2">
+<h2 class="anchored" data-anchor-id="pale-ale">Pale Ale</h2>
+<p><span id="pale-ale"></span></p>
+<p>The concept <code>Pale Ale</code> <br> with URI <code>https://example.net/my/beer/paleale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#pale-ale"><code>Pale Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Pale ale.s</p>
+</section>
+<section id="mild-ale" class="level2">
+<h2 class="anchored" data-anchor-id="mild-ale">Mild Ale</h2>
+<p><span id="mild-ale"></span></p>
+<p>The concept <code>Mild Ale</code> <br> with URI <code>https://example.net/my/beer/mildale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#mild-ale"><code>Mild Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Mild ale.</p>
+</section>
+<section id="vegetable-ale" class="level2">
+<h2 class="anchored" data-anchor-id="vegetable-ale">Vegetable Ale</h2>
+<p><span id="vegetable-ale"></span></p>
+<p>The concept <code>Vegetable Ale</code> <br> with URI <code>https://example.net/my/beer/vegetableale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#chile-ale"><code>Chile Ale</code></a>, <a href="#pumpkin-ale"><code>Pumpkin Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Vegetable ale.</p>
+</section>
+<section id="chile-ale" class="level2">
+<h2 class="anchored" data-anchor-id="chile-ale">Chile Ale</h2>
+<p><span id="chile-ale"></span></p>
+<p>The concept <code>Chile Ale</code> <br> with URI <code>https://example.net/my/beer/chileale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#winkoop-pattys-chile"><code>Winkoop Patty's Chile</code></a>, <a href="#rogue-chipotle-ale"><code>Rogue Chipotle Ale</code></a>, <a href="#dogfish-head-theobroma"><code>Dogfish Head Theobroma</code></a>, <a href="#twisted-pine-ghostface-killah"><code>Twisted Pine Ghostface Killah</code></a>, <a href="#no-label-don-jalapeno"><code>No Label Don Jalapeno</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Chile ale.</p>
+</section>
+<section id="winkoop-pattys-chile" class="level2">
+<h2 class="anchored" data-anchor-id="winkoop-pattys-chile">Winkoop Patty’s Chile</h2>
+<p><span id="winkoop-pattys-chile"></span></p>
+<p>The concept <code>Winkoop Patty's Chile</code> <br> with URI <code>https://example.net/my/beer/wynkooppattyschile</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a><code>-&gt;</code><a href="#winkoop-pattys-chile"><code>Winkoop Patty's Chile</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Winkoop Patty’s Chile.</p>
+</section>
+<section id="rogue-chipotle-ale" class="level2">
+<h2 class="anchored" data-anchor-id="rogue-chipotle-ale">Rogue Chipotle Ale</h2>
+<p><span id="rogue-chipotle-ale"></span></p>
+<p>The concept <code>Rogue Chipotle Ale</code> <br> with URI <code>https://example.net/my/beer/roguechipotleale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a><code>-&gt;</code><a href="#rogue-chipotle-ale"><code>Rogue Chipotle Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Rogue Chipotle ale.</p>
+</section>
+<section id="dogfish-head-theobroma" class="level2">
+<h2 class="anchored" data-anchor-id="dogfish-head-theobroma">Dogfish Head Theobroma</h2>
+<p><span id="dogfish-head-theobroma"></span></p>
+<p>The concept <code>Dogfish Head Theobroma</code> <br> with URI <code>https://example.net/my/beer/dogfishheadtheobroma</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a><code>-&gt;</code><a href="#dogfish-head-theobroma"><code>Dogfish Head Theobroma</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Dogfish Head Theobroma.</p>
+</section>
+<section id="twisted-pine-ghostface-killah" class="level2">
+<h2 class="anchored" data-anchor-id="twisted-pine-ghostface-killah">Twisted Pine Ghostface Killah</h2>
+<p><span id="twisted-pine-ghostface-killah"></span></p>
+<p>The concept <code>Twisted Pine Ghostface Killah</code> <br> with URI <code>https://example.net/my/beer/twistedpineghostfacekillah</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a><code>-&gt;</code><a href="#twisted-pine-ghostface-killah"><code>Twisted Pine Ghostface Killah</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Twisted Pine Ghostface Killah.</p>
+</section>
+<section id="no-label-don-jalapeno" class="level2">
+<h2 class="anchored" data-anchor-id="no-label-don-jalapeno">No Label Don Jalapeno</h2>
+<p><span id="no-label-don-jalapeno"></span></p>
+<p>The concept <code>No Label Don Jalapeno</code> <br> with URI <code>https://example.net/my/beer/nolabeldonjalapeno</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#chile-ale"><code>Chile Ale</code></a><code>-&gt;</code><a href="#no-label-don-jalapeno"><code>No Label Don Jalapeno</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>No label Don Jalapeno.</p>
+</section>
+<section id="pumpkin-ale" class="level2">
+<h2 class="anchored" data-anchor-id="pumpkin-ale">Pumpkin Ale</h2>
+<p><span id="pumpkin-ale"></span></p>
+<p>The concept <code>Pumpkin Ale</code> <br> with URI <code>https://example.net/my/beer/pumpkinale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#vegetable-ale"><code>Vegetable Ale</code></a><code>-&gt;</code><a href="#pumpkin-ale"><code>Pumpkin Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Pumpkin ale.</p>
+</section>
+<section id="american-wild-ale" class="level2">
+<h2 class="anchored" data-anchor-id="american-wild-ale">American Wild Ale</h2>
+<p><span id="american-wild-ale"></span></p>
+<p>The concept <code>American Wild Ale</code> <br> with URI <code>https://example.net/my/beer/americanwildale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#american-wild-ale"><code>American Wild Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>American wild ale</p>
+</section>
+<section id="lambic" class="level2">
+<h2 class="anchored" data-anchor-id="lambic">Lambic</h2>
+<p><span id="lambic"></span></p>
+<p>The concept <code>Lambic</code> <br> with URI <code>https://example.net/my/beer/lambic</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#lambic"><code>Lambic</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#faro"><code>Faro</code></a>, <a href="#gueuze"><code>Gueuze</code></a>, <a href="#fruit"><code>Fruit</code></a>, <a href="#unblended"><code>Unblended</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Lambic.</p>
+</section>
+<section id="faro" class="level2">
+<h2 class="anchored" data-anchor-id="faro">Faro</h2>
+<p><span id="faro"></span></p>
+<p>The concept <code>Faro</code> <br> with URI <code>https://example.net/my/beer/faro</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#lambic"><code>Lambic</code></a><code>-&gt;</code><a href="#faro"><code>Faro</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Faro.</p>
+</section>
+<section id="gueuze" class="level2">
+<h2 class="anchored" data-anchor-id="gueuze">Gueuze</h2>
+<p><span id="gueuze"></span></p>
+<p>The concept <code>Gueuze</code> <br> with URI <code>https://example.net/my/beer/Gueuze</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#lambic"><code>Lambic</code></a><code>-&gt;</code><a href="#gueuze"><code>Gueuze</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Gueuze.</p>
+</section>
+<section id="fruit" class="level2">
+<h2 class="anchored" data-anchor-id="fruit">Fruit</h2>
+<p><span id="fruit"></span></p>
+<p>The concept <code>Fruit</code> <br> with URI <code>https://example.net/my/beer/fruit</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#lambic"><code>Lambic</code></a><code>-&gt;</code><a href="#fruit"><code>Fruit</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Fruit.</p>
+</section>
+<section id="unblended" class="level2">
+<h2 class="anchored" data-anchor-id="unblended">Unblended</h2>
+<p><span id="unblended"></span></p>
+<p>The concept <code>Unblended</code> <br> with URI <code>https://example.net/my/beer/unblended</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#lambic"><code>Lambic</code></a><code>-&gt;</code><a href="#unblended"><code>Unblended</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Unblended.</p>
+</section>
+<section id="sahti" class="level2">
+<h2 class="anchored" data-anchor-id="sahti">Sahti</h2>
+<p><span id="sahti"></span></p>
+<p>The concept <code>Sahti</code> <br> with URI <code>https://example.net/my/beer/sahti</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#sahti"><code>Sahti</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Sahti.</p>
+</section>
+<section id="belgian-french-ale" class="level2">
+<h2 class="anchored" data-anchor-id="belgian-french-ale">Belgian French Ale</h2>
+<p><span id="belgian-french-ale"></span></p>
+<p>The concept <code>Belgian French Ale</code> <br> with URI <code>https://example.net/my/beer/belgianfrenchale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#belgian-french-ale"><code>Belgian French Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Belgian French ale.</p>
+</section>
+<section id="rye-ale" class="level2">
+<h2 class="anchored" data-anchor-id="rye-ale">Rye Ale</h2>
+<p><span id="rye-ale"></span></p>
+<p>The concept <code>Rye Ale</code> <br> with URI <code>https://example.net/my/beer/ryeale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#rye-ale"><code>Rye Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Rye ale.</p>
+</section>
+<section id="german-ale" class="level2">
+<h2 class="anchored" data-anchor-id="german-ale">German Ale</h2>
+<p><span id="german-ale"></span></p>
+<p>The concept <code>German Ale</code> <br> with URI <code>https://example.net/my/beer/germanale</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#ale"><code>Ale</code></a><code>-&gt;</code><a href="#german-ale"><code>German Ale</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>German ale.</p>
+</section>
+<section id="lager" class="level2">
+<h2 class="anchored" data-anchor-id="lager">Lager</h2>
+<p><span id="lager"></span></p>
+<p>The concept <code>Lager</code> <br> with URI <code>https://example.net/my/beer/lager</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a></p>
+<p>Immediately narrower concepts:</p>
+<p><a href="#american-lager"><code>American Lager</code></a>, <a href="#pilsner"><code>Pilsner</code></a>, <a href="#european-strong-lager"><code>European Strong Lager</code></a>, <a href="#european-lager"><code>European Lager</code></a>, <a href="#german-lager"><code>German Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Lager is a type of beer originated in Bavaria, which has been brewed and conditioned at low temperature.</p>
+</section>
+<section id="american-lager" class="level2">
+<h2 class="anchored" data-anchor-id="american-lager">American Lager</h2>
+<p><span id="american-lager"></span></p>
+<p>The concept <code>American Lager</code> <br> with URI <code>https://example.net/my/beer/americanlager</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a><code>-&gt;</code><a href="#american-lager"><code>American Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>American lager.</p>
+</section>
+<section id="pilsner" class="level2">
+<h2 class="anchored" data-anchor-id="pilsner">Pilsner</h2>
+<p><span id="pilsner"></span></p>
+<p>The concept <code>Pilsner</code> <br> with URI <code>https://example.net/my/beer/pilsner</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a><code>-&gt;</code><a href="#pilsner"><code>Pilsner</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>Pilsner</p>
+</section>
+<section id="european-strong-lager" class="level2">
+<h2 class="anchored" data-anchor-id="european-strong-lager">European Strong Lager</h2>
+<p><span id="european-strong-lager"></span></p>
+<p>The concept <code>European Strong Lager</code> <br> with URI <code>https://example.net/my/beer/europeanstronglager</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a><code>-&gt;</code><a href="#european-strong-lager"><code>European Strong Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>European strong lager.</p>
+</section>
+<section id="european-lager" class="level2">
+<h2 class="anchored" data-anchor-id="european-lager">European Lager</h2>
+<p><span id="european-lager"></span></p>
+<p>The concept <code>European Lager</code> <br> with URI <code>https://example.net/my/beer/europeanlager</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a><code>-&gt;</code><a href="#european-lager"><code>European Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>European lager.</p>
+</section>
+<section id="german-lager" class="level2">
+<h2 class="anchored" data-anchor-id="german-lager">German Lager</h2>
+<p><span id="german-lager"></span></p>
+<p>The concept <code>German Lager</code> <br> with URI <code>https://example.net/my/beer/germanlager</code> <br> is defined in vocabulary <code>https://example.net/my/beer/vocab</code></p>
+<p>Path from the top concept: <br> <a href="#thing"><code>Thing</code></a><code>-&gt;</code><a href="#liquid"><code>Liquid</code></a><code>-&gt;</code><a href="#beer"><code>Beer</code></a><code>-&gt;</code><a href="#lager"><code>Lager</code></a><code>-&gt;</code><a href="#german-lager"><code>German Lager</code></a></p>
+<p><strong>Definition:</strong></p>
+<p>German lager.</p>
 
 
 </section>
@@ -356,10 +774,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -369,8 +786,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -383,6 +809,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -426,6 +974,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -451,6 +1000,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -511,6 +1086,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
