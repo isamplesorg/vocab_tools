@@ -141,17 +141,16 @@ def describe_vocabulary(
         res.append(f"{'  '*depth}- `{voc.label}` [`{voc.uri}`]({voc.uri})")
 
     # display any history notes recording origin and updates to vocabulary
-    res += (
-        "",
-        "**History:**",
-        "",
-        " <br /> ".join(V.history),
-        "",
-    )
-    # this seems redundant, comment out
-    # for history in store._get_objects(vocab_uri, vocab_tools.skosT("historyNote")):
-    #    res.append(f"* {history}")
+    if len(V.history) > 0:
+        res += (
+            "",
+            "**History:**",
+            "",
+            " <br /> ".join(V.history),
+            "",
+        )
 
+    # display source repository if it is documented in the metadata.
     if V.sourceRepository is not None:
         res.append(f"**Source Repository:** {V.sourceRepository}<br />")
 
