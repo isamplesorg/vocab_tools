@@ -47,7 +47,7 @@ def getDefaultVocabulary(vs:vocab_tools.VocabularyStore, abbreviate:bool=False) 
 @click.group()
 def main():
     logging.basicConfig(
-        level="DEBUG", format=FORMAT, datefmt="[%X]"
+        level="INFO", format=FORMAT, datefmt="[%X]"
     )
 
 @main.command()
