@@ -20,6 +20,8 @@ NS = {
     "owl": "http://www.w3.org/2002/07/owl#",
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "obo": "http://purl.obolibrary.org/obo/",
+    "dcterm": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
     "geosciml": "http://resource.geosciml.org/classifier/cgi/lithology",
 }
 
@@ -36,6 +38,9 @@ def rdfT(term):
 
 
 def rdfsT(term):
+    return rdflib.URIRef(f"{NS['rdfs']}{term}")
+
+def dctermT(term):
     return rdflib.URIRef(f"{NS['rdfs']}{term}")
 
 
@@ -58,11 +63,12 @@ class VocabularyConcept:
     narrower: typing.List[str]
     vocabulary: str
     history: typing.List[str] = dataclasses.field(default_factory=list)
+    sources: typing.List[str] = dataclasses.field(default_factory=list)
     notes: typing.List[str] = dataclasses.field(default_factory=list)
-    scopenote: typing.List[str] = dataclasses.field(default_factory=list)
+    #scopenote: typing.List[str] = dataclasses.field(default_factory=list)
     related: typing.List[str] = dataclasses.field(default_factory=list)
     example: typing.List[str] = dataclasses.field(default_factory=list)
-    changenote: typing.List[str] = dataclasses.field(default_factory=list)
+    #changenote: typing.List[str] = dataclasses.field(default_factory=list)
 
     def get_label(self):
         tag = self.name
@@ -138,6 +144,7 @@ class Vocabulary:
     description: str
     extends: typing.Optional[str] = None
     history: typing.List[str] = dataclasses.field(default_factory=list)
+    sourceRepository: typing.Optional[str] = None
 
 
 class VocabularyStore:
@@ -313,7 +320,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         self._g.namespace_manager.bind(prefix, uri, override=override)
 
     def query(self, q, **bindings):
-        L.debug(q)
+        # L.debug(f"query: {q}")
         sparql = rdflib.plugins.sparql.prepareQuery(VocabularyStore._PFX + q)
         return self._g.query(sparql, initBindings=bindings)
 
@@ -322,12 +329,13 @@ PREFIX rdfs: <{NS['rdfs']}>
 
         Raises KeyError if the vocabulary is not in the graph.
         """
-        q = """SELECT ?vocabulary ?label ?definition ?extends ?history
-        WHERE {
+        q = """SELECT ?vocabulary ?label ?definition ?extends ?repository
+               WHERE {
             ?vocabulary rdf:type skos:ConceptScheme .
             ?vocabulary skos:prefLabel ?label .
             OPTIONAL {?vocabulary skos:definition ?definition .} .
             OPTIONAL {?vocabulary skos:inScheme ?extends .} .
+            OPTIONAL {?vocabulary schema:codeRepository ?repository .} .
         }"""
         qh = """SELECT ?history
         WHERE {
@@ -336,6 +344,8 @@ PREFIX rdfs: <{NS['rdfs']}>
         qres = self.query(q, vocabulary=rdflib.URIRef(uri))
         for res in qres:
             _ext = res[3]
+            _repo = res[4]
+            L.debug(f"sourceRepository: {_repo}")
             qhres = self.query(qh, vocabulary=res[0])
             _hist = [h[0] for h in qhres]
             return Vocabulary(
@@ -343,6 +353,7 @@ PREFIX rdfs: <{NS['rdfs']}>
                 label=str(res[1]),
                 description=str(res[2]),
                 extends=str(_ext) if _ext is not None else None,
+                sourceRepository=str(_repo) if _repo is not None else None,
                 history=_hist,
             )
         raise KeyError(f"Vocabulary '{uri}' not found.")
@@ -388,12 +399,16 @@ PREFIX rdfs: <{NS['rdfs']}>
         name = ab[-1]
         labels = self.objects(term, skosT("prefLabel"))
         labels += self.objects(term, skosT("altLabel"))
-        labels += self.objects(term, rdfT("label"))
+        #labels += self.objects(term, rdfsT("label"))  # these are by convention the same as skos:prefLabel
         tmp = self.objects(term, skosT("definition"))
         definition = "\n".join(tmp)
         broader = self.objects(term, skosT("broader"))
         narrower = self.narrower(term)
         notes = self.objects(term, skosT("note"))
+        notes += self.objects(term, skosT("editorialNote"))
+        notes += self.objects(term, skosT("scopeNote"))
+        notes += self.objects(term, skosT("changeNote"))
+        notes += self.objects(term, rdfsT("comment"))
         vocabulary = self.objects(term, skosT("inScheme"))
         if len(vocabulary) > 0:
             vocabulary = vocabulary[0]
@@ -405,6 +420,7 @@ PREFIX rdfs: <{NS['rdfs']}>
             else:
                 vocabulary = None
         history = self.objects(term, skosT("historyNote"))
+        sources = self.objects(term, dctermT("source"))
         return VocabularyConcept(
             uri=str(term),
             name=name,
@@ -415,29 +431,45 @@ PREFIX rdfs: <{NS['rdfs']}>
             vocabulary=vocabulary,
             history=history,
             notes=notes,
-            scopenote=self.objects(term, skosT("changeNote")),
+            sources=sources,
+            #scopenote=self.objects(term, skosT("scopeNote")),
             related=self.objects(term, skosT("related")),
             example=self.objects(term, skosT("example")),
-            changenote=self.objects(term, skosT("changeNote")),
+            #changenote=self.objects(term, skosT("changeNote")),
         )
 
-    def top_concept(self) -> VocabularyConcept:
-        """Get the root concept of the specified vocabulary.
-
-        This is the concept that is skos:topConceptOf and has no skos:broader
+    def top_concept(self):
+        """Get the root concept(s) in the specified vocabulary.
+        -> typing.List["VocabularyConcept"]
+        This is the concept that is skos:topConceptOf the vocabulary.
+         The top concept in an extension vocabulary is a concept from the parent
+         vocabulary, and likely has skos:broader concepts in that parent vocabulary
         """
         q = """SELECT DISTINCT ?subject
         WHERE {
             ?subject rdf:type skos:Concept .
             ?subject skos:topConceptOf ?vocabulary .
             ?subject ?predicate ?foo .
-            FILTER(?predicate != skos:broader) .
         }"""
+        # remove  FILTER(?predicate != skos:broader) .
+
         qres = self.query(q)
         uri = self._one_res(qres)
+        #L.debug(f"top concept uri: {uri}")
+        L.debug(f"number of top concepts: {len(uri)}")
         if len(uri) < 1:
             raise ValueError("No topConcept found")
-        return self.concept(uri[0])
+
+        conceptList = []
+        for acon in uri:
+            L.debug(f"self.concept(acon) uri: {self.concept(acon).uri}")
+            conceptList.append(self.concept(acon))
+
+        L.debug(f"len(conceptList): {len(conceptList)}")
+        # return self.concept(uri[0])
+        # modify to account for vocabs with >1 top concept.
+        #return [self.concept(arow) for arow in uri]
+        return conceptList
 
     def concepts(
         self, v: typing.Optional[str] = None, abbreviate: bool = False

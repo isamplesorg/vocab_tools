@@ -47,7 +47,7 @@ def getDefaultVocabulary(vs:vocab_tools.VocabularyStore, abbreviate:bool=False) 
 @click.group()
 def main():
     logging.basicConfig(
-        level="INFO", format=FORMAT, datefmt="[%X]"
+        level="DEBUG", format=FORMAT, datefmt="[%X]"
     )
 
 @main.command()
@@ -132,7 +132,7 @@ def uijson(sources, extensions):
         dataset.load(source)
     vocabularies = dataset.vocabularies()
     base_vocabulary = dataset.base_vocabulary()
-    top_concept = dataset.top_concept()
+    top_concept = dataset.top_concept()  # note this returns a list, or throws error
     concept, vocabulary = dataset.getVocabRoot(None)
     L.info("Using vocabulary %s", base_vocabulary)
     L.debug("Using %s as root concept", top_concept)
