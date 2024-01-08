@@ -102,9 +102,21 @@ def describe_concept(
 
 
 def describe_vocabulary(
-    store: vocab_tools.VocabularyStore, vocab_uri: str
-) -> list[str]:
+    store: vocab_tools.VocabularyStore, 
+    vocab_uri: str) -> list[str]:
     V: vocab_tools.Vocabulary = store.vocabulary(vocab_uri)
+
+#    This Python function retrieves a Vocabulary object from a VocabularyStore  
+#
+#   def describe_vocabulary() - Defines the function
+#        store: vocab_tools.VocabularyStore - Accepts a VocabularyStore object as the first parameter called store
+#        vocab_uri: str - Accepts a string for the vocabulary URI as the second parameter
+#    -> list[str] - Annotations saying it returns a list of strings
+# The main logic:
+#    V: vocab_tools.Vocabulary = store.vocabulary(vocab_uri)
+#      Calls the vocabulary() method on the store object, passing the vocab_uri
+#      Saves the returned Vocabulary object into a local variable V
+#
     res = []
     title = V.label
     # Markdown frontmatter
