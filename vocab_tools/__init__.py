@@ -438,12 +438,13 @@ PREFIX rdfs: <{NS['rdfs']}>
             #changenote=self.objects(term, skosT("changeNote")),
         )
 
-    def top_concept(self):
+    def top_concepts(self):
         """Get the root concept(s) in the specified vocabulary.
         -> typing.List["VocabularyConcept"]
-        This is the concept that is skos:topConceptOf the vocabulary.
+        Finds concept(s) that is skos:topConceptOf the vocabulary.
          The top concept in an extension vocabulary is a concept from the parent
-         vocabulary, and likely has skos:broader concepts in that parent vocabulary
+         vocabulary, and likely has skos:broader concepts in that parent vocabulary.
+         A base vocabulary should have only one topConcept
         """
         q = """SELECT DISTINCT ?subject
         WHERE {
@@ -466,9 +467,6 @@ PREFIX rdfs: <{NS['rdfs']}>
             conceptList.append(self.concept(acon))
 
         L.debug(f"len(conceptList): {len(conceptList)}")
-        # return self.concept(uri[0])
-        # modify to account for vocabs with >1 top concept.
-        #return [self.concept(arow) for arow in uri]
         return conceptList
 
     def concepts(
