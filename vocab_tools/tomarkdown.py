@@ -41,15 +41,15 @@ def describe_concept(
         f"{'#' * level} {concept.get_label()}",
         "[]{#" + concept.md_link_label() + "}",
         "",
-        f"The concept `{concept.get_label()}` <br/> ",
-        f"with URI `{concept.uri}` <br/> ",
-        f"is defined in vocabulary `{concept.vocabulary}`",
+        #f"The concept `{concept.get_label()}` <br/> ",
+        f"URI `{concept.uri}` <br/> ",
+        f"defined in vocabulary `{concept.vocabulary}`",
         "",
     ]
     if is_top_concept:
-        res.append(f"This is the top concept of the vocabulary.")
+        res.append(f"This is a top concept of the vocabulary.")
     else:
-        res.append(f"Path from the top concept: <br/>")
+        res.append(f"Path from the top concept: ")
         path = []
         for uri, _ in store.walk_broader(concept.uri):
             path.append(uri)
@@ -63,7 +63,7 @@ def describe_concept(
         res.append(f"{'` -> `'.join(labels)}")
     res += ("", "")
     if len(concept.narrower) > 0:
-        res.append("Immediately narrower concepts:\n")
+        res.append("Immediately narrower concepts: ")
         narrowers = []
         for c in concept.narrower:
             n = vocab_tools.find_concept_in_concept_list(c, concept_list)
@@ -72,30 +72,38 @@ def describe_concept(
         res.append(", ".join([n.md_link(fixed_width=True) for n in narrowers]))
     res += (
         "",
-        "**Definition:**",
-        "",
+        "**Definition: **",
         concept.definition.replace("\n", " <br/> "),
         "",
     )
     if len(concept.notes) > 1:
         res += (
-            "**Notes:**",
-            "",
+            "**Notes: **",
             "\n\n".join([n.replace("\n", " <br/> ") for n in concept.notes]),
             "",
         )
     if len(concept.label) > 1:
         res += (
-            "**Alternate labels:**",
-            "",
+            "**Alternate labels: **",
             ", ".join([f"`{lb}`" for lb in concept.label[1:]]),
             "",
         )
     if len(concept.history) > 0:
         res += (
-            "**History:**",
-            "",
+            "**History: **",
             f" <br/> ".join(concept.history),
+            "",
+        )
+    if len(concept.sources) > 0:
+        res += (
+            "**Sources: **",
+            f" <br/> ".join(concept.sources),
+            "",
+        )
+    if len(concept.example) > 0:
+        res += (
+            "**Example: **",
+            f" <br/> ".join(concept.example),
             "",
         )
     return res
@@ -105,6 +113,8 @@ def describe_vocabulary(
     store: vocab_tools.VocabularyStore, vocab_uri: str
 ) -> list[str]:
     V: vocab_tools.Vocabulary = store.vocabulary(vocab_uri)
+    # res will be a list of strings for each line in the vocabulary
+    #  description, returned as output from this function.
     res = []
     title = V.label
     # Markdown frontmatter
@@ -129,6 +139,8 @@ def describe_vocabulary(
     for uri, depth in store.walk_vocab_tree(vocab_uri):
         voc = store.vocabulary(uri)
         res.append(f"{'  '*depth}- `{voc.label}` [`{voc.uri}`]({voc.uri})")
+
+    # display any history notes recording origin and updates to vocabulary
     res += (
         "",
         "**History:**",
@@ -136,8 +148,15 @@ def describe_vocabulary(
         " <br /> ".join(V.history),
         "",
     )
-    for history in store._get_objects(vocab_uri, vocab_tools.skosT("historyNote")):
-        res.append(f"* {history}")
+    # this seems redundant, comment out
+    # for history in store._get_objects(vocab_uri, vocab_tools.skosT("historyNote")):
+    #    res.append(f"* {history}")
+
+    if V.sourceRepository is not None:
+        res.append(f"**Source Repository:** {V.sourceRepository}<br />")
+
+
+    # display the hierarchy of concepts in this vocabulary
     res += (
         "",
         "**Concept Hierarchy:**",
@@ -149,7 +168,10 @@ def describe_vocabulary(
     all_concepts = [store.concept(uri) for uri in concept_uris]
     top_concepts = []
     try:
-        top_concepts = [store.top_concept(), ]
+        #top_concepts = [store.top_concept(), ]
+        top_concepts = store.top_concept()
+
+        L.debug(f"count Top concepts: {len(top_concepts)}")
     except ValueError as e:
         L.warning("No top level concept found.")
         # Since there's no top concept available, find the concepts
@@ -166,6 +188,8 @@ def describe_vocabulary(
             if len(broaders) < 3:
                 top_concepts.append(concept)
     for top_concept in top_concepts:
+
+        L.debug(f"Top concept.uri: {top_concept.uri}")
         for concept, level in concept_tree(top_concept.uri, all_concepts, level=depth):
             label = f"{'  '*level}- [{concept.get_label()}](#{concept.md_link_label()})"
             res.append(label)
@@ -174,10 +198,11 @@ def describe_vocabulary(
         res += describe_concept(store, top_concept, level=2, is_top_concept=True, concept_list=all_concepts)
     #res += top_concept.markdown(level=2, concept_list=all_concepts)
         res.append("")
-    for top_concept in top_concepts:
+    #for top_concept in top_concepts:
         for uri, level in store.walk_narrower(top_concept.uri, level=3):
+            L.debug(f"walk narrower, uri: {uri}, level: {level}")
             concept = vocab_tools.find_concept_in_concept_list(uri, all_concepts)
             #res += concept.markdown(level=level, concept_list=all_concepts)
-            res += describe_concept(store, concept, level=2, concept_list=all_concepts)
+            res += describe_concept(store, concept, level=level, concept_list=all_concepts)
             res.append("")
     return res
