@@ -21,6 +21,7 @@ NS = {
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "obo": "http://purl.obolibrary.org/obo/",
     "dcterm": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
     "geosciml": "http://resource.geosciml.org/classifier/cgi/lithology",
 }
 
@@ -143,6 +144,7 @@ class Vocabulary:
     description: str
     extends: typing.Optional[str] = None
     history: typing.List[str] = dataclasses.field(default_factory=list)
+    sourceRepository: typing.Optional[str] = None
 
 
 class VocabularyStore:
@@ -327,12 +329,13 @@ PREFIX rdfs: <{NS['rdfs']}>
 
         Raises KeyError if the vocabulary is not in the graph.
         """
-        q = """SELECT ?vocabulary ?label ?definition ?extends ?history
-        WHERE {
+        q = """SELECT ?vocabulary ?label ?definition ?extends ?repository
+               WHERE {
             ?vocabulary rdf:type skos:ConceptScheme .
             ?vocabulary skos:prefLabel ?label .
             OPTIONAL {?vocabulary skos:definition ?definition .} .
             OPTIONAL {?vocabulary skos:inScheme ?extends .} .
+            OPTIONAL {?vocabulary schema:codeRepository ?repository .} .
         }"""
         qh = """SELECT ?history
         WHERE {
@@ -341,6 +344,8 @@ PREFIX rdfs: <{NS['rdfs']}>
         qres = self.query(q, vocabulary=rdflib.URIRef(uri))
         for res in qres:
             _ext = res[3]
+            _repo = res[4]
+            L.debug(f"sourceRepository: {_repo}")
             qhres = self.query(qh, vocabulary=res[0])
             _hist = [h[0] for h in qhres]
             return Vocabulary(
@@ -348,6 +353,7 @@ PREFIX rdfs: <{NS['rdfs']}>
                 label=str(res[1]),
                 description=str(res[2]),
                 extends=str(_ext) if _ext is not None else None,
+                sourceRepository=str(_repo) if _repo is not None else None,
                 history=_hist,
             )
         raise KeyError(f"Vocabulary '{uri}' not found.")
@@ -431,6 +437,7 @@ PREFIX rdfs: <{NS['rdfs']}>
             example=self.objects(term, skosT("example")),
             #changenote=self.objects(term, skosT("changeNote")),
         )
+
 
     def top_concept(self):
         """Get the root concept(s) in the specified vocabulary.

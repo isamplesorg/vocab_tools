@@ -113,6 +113,8 @@ def describe_vocabulary(
     store: vocab_tools.VocabularyStore, vocab_uri: str
 ) -> list[str]:
     V: vocab_tools.Vocabulary = store.vocabulary(vocab_uri)
+    # res will be a list of strings for each line in the vocabulary
+    #  description, returned as output from this function.
     res = []
     title = V.label
     # Markdown frontmatter
@@ -137,15 +139,23 @@ def describe_vocabulary(
     for uri, depth in store.walk_vocab_tree(vocab_uri):
         voc = store.vocabulary(uri)
         res.append(f"{'  '*depth}- `{voc.label}` [`{voc.uri}`]({voc.uri})")
-    res += (
-        "",
-        "**History:**",
-        "",
-        " <br /> ".join(V.history),
-        "",
-    )
-    for history in store._get_objects(vocab_uri, vocab_tools.skosT("historyNote")):
-        res.append(f"* {history}")
+
+    # display any history notes recording origin and updates to vocabulary
+    if len(V.history) > 0:
+        res += (
+            "",
+            "**History:**",
+            "",
+            " <br /> ".join(V.history),
+            "",
+        )
+
+    # display source repository if it is documented in the metadata.
+    if V.sourceRepository is not None:
+        res.append(f"**Source Repository:** {V.sourceRepository}<br />")
+
+
+    # display the hierarchy of concepts in this vocabulary
     res += (
         "",
         "**Concept Hierarchy:**",
