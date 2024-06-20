@@ -21,7 +21,7 @@ NS = {
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "obo": "http://purl.obolibrary.org/obo/",
     "dcterm": "http://purl.org/dc/terms/",
-    "schema": "https://schema.org/",
+    "schema": "http://schema.org/",
     "geosciml": "http://resource.geosciml.org/classifier/cgi/lithology",
 }
 
