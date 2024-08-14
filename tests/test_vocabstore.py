@@ -16,7 +16,8 @@ def test_top_concept():
     s = vocab_tools.VocabularyStore()
     s.load(os.path.join(THIS_FOLDER, "data/example.ttl"))
     tc = s.top_concept()
-    assert tc.uri == "https://example.net/my/minimal/thing"
+    tc_uris = [c.uri for c in tc]
+    assert "https://example.net/my/minimal/thing" in tc_uris
 
 
 def test_concepts():
