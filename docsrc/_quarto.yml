@@ -23,10 +23,8 @@ website:
       - about.qmd
 format:
   html:
-    theme: 
+    theme:
       - cosmo
       - styles.scss
     toc: true
 bibliography: bibliography.bib
-
-

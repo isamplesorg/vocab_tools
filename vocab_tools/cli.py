@@ -22,7 +22,7 @@ FORMAT = "%(message)s"
 L = logging.getLogger("")
 
 
-def get_shape(path:typing.Optional[str] = None) -> typing.Optional[rdflib.Graph]:
+def get_shape(path: typing.Optional[str] = None) -> typing.Optional[rdflib.Graph]:
     """
     Returns the SHACL shape as rdflib graph.
     """
@@ -36,7 +36,9 @@ def get_shape(path:typing.Optional[str] = None) -> typing.Optional[rdflib.Graph]
     return g.parse(path)
 
 
-def getDefaultVocabulary(vs:vocab_tools.VocabularyStore, abbreviate:bool=False) -> str:
+def getDefaultVocabulary(
+    vs: vocab_tools.VocabularyStore, abbreviate: bool = False
+) -> str:
     vocabs = vs.vocabulary_list(abbreviate=abbreviate)
     vocabulary = vocabs[0]
     if len(vocabs) > 1:
@@ -46,31 +48,33 @@ def getDefaultVocabulary(vs:vocab_tools.VocabularyStore, abbreviate:bool=False) 
 
 @click.group()
 def main():
-    logging.basicConfig(
-        level="INFO", format=FORMAT, datefmt="[%X]"
-    )
+    logging.basicConfig(level="INFO", format=FORMAT, datefmt="[%X]")
 
 
 @main.command()
 @click.argument("source", nargs=1)
 @click.option("-v", "--vocab", default=None, help="Vocabulary to load", multiple=True)
-@click.option("-s", "--shape", default=None, help="SHACL shape file for vocabulary structure validation")
-def validate(source: str, vocab:typing.List[str], shape:typing.Optional[str]):
-    """Validate vocabulary structure.
-    """
+@click.option(
+    "-s",
+    "--shape",
+    default=None,
+    help="SHACL shape file for vocabulary structure validation",
+)
+def validate(source: str, vocab: typing.List[str], shape: typing.Optional[str]):
+    """Validate vocabulary structure."""
     dataset = vocab_tools.VocabularyStore()
     dataset.load(source)
     shape_graph = get_shape(shape)
     conforms, results_graph, results = pyshacl.validate(
         dataset.graph,
-        shacl_graph = shape_graph,
-        inference='rdfs',
+        shacl_graph=shape_graph,
+        inference="rdfs",
         abort_on_first=False,
         allow_warnings=True,
         meta_shacl=False,
         advanced=True,
         js=False,
-        debug=False
+        debug=False,
     )
     L.info("SHACL conformance: %s", conforms)
     if not conforms:
@@ -87,18 +91,18 @@ def validate(source: str, vocab:typing.List[str], shape:typing.Optional[str]):
 
 @main.command("uijson")
 @click.argument("sources", nargs=-1)
-@click.option(
-    "-e", "--extensions", is_flag=True, help="Traverse vocabulary extensions"
-)
+@click.option("-e", "--extensions", is_flag=True, help="Traverse vocabulary extensions")
 def uijson(sources, extensions):
-    """Render VOCABULARY as JSON suitable for inclusion in iSamples WebUI.
-    """
+    """Render VOCABULARY as JSON suitable for inclusion in iSamples WebUI."""
+
     def _narrower(s, v, c, indent=0, level=0, max=100):
         ns = s.narrower(c, v, abbreviate=False)
         for n in ns:
             entry = _json_for_uri_ref(n, s)
             if level < max:
-                for nn in _narrower(s, v, n, indent=indent + 2, level=level + 1, max=max):
+                for nn in _narrower(
+                    s, v, n, indent=indent + 2, level=level + 1, max=max
+                ):
                     entry["children"].append(nn)
             yield entry
 
@@ -110,17 +114,13 @@ def uijson(sources, extensions):
             "label": {
                 "en": _c.label[0] if len(_c.label) > 0 else str(s.compact_name(n))
             },
-            "children": []
+            "children": [],
         }
         return entry
 
     def _convert_to_ui_format(entry: dict) -> dict:
-        child_dict = {
-            "label": entry["label"]
-        }
-        ui_dict = {
-            entry["concept"]: child_dict
-        }
+        child_dict = {"label": entry["label"]}
+        ui_dict = {entry["concept"]: child_dict}
         children = []
         for child in entry["children"]:
             children.append(_convert_to_ui_format(child))
@@ -156,8 +156,7 @@ def uijson(sources, extensions):
 @main.command()
 @click.argument("sources", nargs=-1)
 def markdown(sources):
-    """Generate markdown representation of the vocabulary.
-    """
+    """Generate markdown representation of the vocabulary."""
     store = vocab_tools.VocabularyStore()
     for source in sources:
         store.load(source)
@@ -165,7 +164,9 @@ def markdown(sources):
     # TODO: enable presentation of individual extensions
     #   This will require the renderer to handle multiple top level concepts
     #   with those concepts being the external concepts referenced by the extension.
-    vocab_docs = [vocab_tools.tomarkdown.describe_vocabulary(store, vocab.uri), ]
+    vocab_docs = [
+        vocab_tools.tomarkdown.describe_vocabulary(store, vocab.uri),
+    ]
     for document in vocab_docs:
         for line in document:
             print(line)
@@ -183,8 +184,12 @@ def sparqler(sources, host, port):
     try:
         import vocab_tools.sparqlr
     except ImportError:
-        L.error("Please pip install rdflib-endpoint and uvicorn to enable the sparqlet service.")
-        L.info("pip install uvicorn git+https://github.com/vemonet/rdflib-endpoint.git@main")
+        L.error(
+            "Please pip install rdflib-endpoint and uvicorn to enable the sparqlet service."
+        )
+        L.info(
+            "pip install uvicorn git+https://github.com/vemonet/rdflib-endpoint.git@main"
+        )
         return
     store = vocab_tools.VocabularyStore()
     for source in sources:
@@ -194,4 +199,3 @@ def sparqler(sources, host, port):
 
 if __name__ == "__main__":
     sys.exit(main())
-

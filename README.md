@@ -38,11 +38,11 @@ Vocabulary not in conformance. Skipping further tests.
 ## Generate Markdown
 
 ```
-$ vocab markdown example/data/example.ttl > example/example.md 
+$ vocab markdown example/data/example.ttl > example/example.md
 ```
 
-Where a vocabulary is made up from multiple parts (e.g. one or more extensions), all vocabulary 
-parts may be loaded and documented as a single markdown file by including all the source files 
+Where a vocabulary is made up from multiple parts (e.g. one or more extensions), all vocabulary
+parts may be loaded and documented as a single markdown file by including all the source files
 in the command. e.g.:
 
 ```
@@ -56,7 +56,7 @@ $ vocab markdown example/data/example.ttl \
 
 Use poetry for development work.
 
-For other use, create a python virtual environment and 
+For other use, create a python virtual environment and
 
 ```
 pip install git+https://github.com/isamplesorg/vocab_tools.git@main

@@ -10,12 +10,12 @@ import rdflib
 import rdflib.namespace
 import rdflib.plugins.sparql
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
-#TODO: this is too specific:
+# TODO: this is too specific:
 STORE_IDENTIFIER = "https://w3id.org/isample/vocabulary"
 
-#TODO: should use namespaces from rdflib
+# TODO: should use namespaces from rdflib
 NS = {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -42,6 +42,7 @@ def rdfT(term):
 def rdfsT(term):
     return rdflib.URIRef(f"{NS['rdfs']}{term}")
 
+
 def dctermT(term):
     return rdflib.URIRef(f"{NS['rdfs']}{term}")
 
@@ -67,10 +68,10 @@ class VocabularyConcept:
     history: typing.List[str] = dataclasses.field(default_factory=list)
     sources: typing.List[str] = dataclasses.field(default_factory=list)
     notes: typing.List[str] = dataclasses.field(default_factory=list)
-    #scopenote: typing.List[str] = dataclasses.field(default_factory=list)
+    # scopenote: typing.List[str] = dataclasses.field(default_factory=list)
     related: typing.List[str] = dataclasses.field(default_factory=list)
     example: typing.List[str] = dataclasses.field(default_factory=list)
-    #changenote: typing.List[str] = dataclasses.field(default_factory=list)
+    # changenote: typing.List[str] = dataclasses.field(default_factory=list)
 
     def get_label(self):
         tag = self.name
@@ -401,7 +402,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         name = ab[-1]
         labels = self.objects(term, skosT("prefLabel"))
         labels += self.objects(term, skosT("altLabel"))
-        #labels += self.objects(term, rdfsT("label"))  # these are by convention the same as skos:prefLabel
+        # labels += self.objects(term, rdfsT("label"))  # these are by convention the same as skos:prefLabel
         tmp = self.objects(term, skosT("definition"))
         definition = "\n".join(tmp)
         broader = self.objects(term, skosT("broader"))
@@ -434,12 +435,11 @@ PREFIX rdfs: <{NS['rdfs']}>
             history=history,
             notes=notes,
             sources=sources,
-            #scopenote=self.objects(term, skosT("scopeNote")),
+            # scopenote=self.objects(term, skosT("scopeNote")),
             related=self.objects(term, skosT("related")),
             example=self.objects(term, skosT("example")),
-            #changenote=self.objects(term, skosT("changeNote")),
+            # changenote=self.objects(term, skosT("changeNote")),
         )
-
 
     def top_concept(self):
         """Get the root concept(s) in the specified vocabulary.
@@ -458,7 +458,7 @@ PREFIX rdfs: <{NS['rdfs']}>
 
         qres = self.query(q)
         uri = self._one_res(qres)
-        #L.debug(f"top concept uri: {uri}")
+        # L.debug(f"top concept uri: {uri}")
         L.debug(f"number of top concepts: {len(uri)}")
         if len(uri) < 1:
             raise ValueError("No topConcept found")
@@ -471,7 +471,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         L.debug(f"len(conceptList): {len(conceptList)}")
         # return self.concept(uri[0])
         # modify to account for vocabs with >1 top concept.
-        #return [self.concept(arow) for arow in uri]
+        # return [self.concept(arow) for arow in uri]
         return conceptList
 
     def concepts(
@@ -500,7 +500,6 @@ PREFIX rdfs: <{NS['rdfs']}>
                 }"""
             qres = self.query(q, vocabulary=v)
         return self._one_res(qres, abbreviate=abbreviate)
-
 
     def broader(
         self, concept: str, v: typing.Optional[str] = None, abbreviate: bool = False
@@ -569,7 +568,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         q = """SELECT ?vocab
         WHERE  {
             ?src skos:inScheme+ ?vocab .
-        } 
+        }
         """
         qres = self.query(q, src=rdflib.URIRef(self.expand_name(v)))
         return [v[0] for v in qres]
@@ -587,7 +586,7 @@ PREFIX rdfs: <{NS['rdfs']}>
             uri = res[0]
             yield from self.walk_vocab_tree(uri, level=level + 1)
 
-    def vocab_tree(self, v:str) -> typing.List[str]:
+    def vocab_tree(self, v: str) -> typing.List[str]:
         q = """SELECT ?vocab
         WHERE {
             ?src ^skos:inScheme+ ?vocab .

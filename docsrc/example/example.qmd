@@ -1,5 +1,5 @@
 ---
-comment: | 
+comment: |
   WARNING: This file is generated. Any edits will be lost!
 title: "Minimal Example Vocabulary"
 date: "2024-01-02T21:35:28.800016+00:00"
@@ -9,7 +9,7 @@ execute:
   echo: false
 ---
 
-Vocabularies and extensions: 
+Vocabularies and extensions:
 
 - `Minimal Example Vocabulary` [`https://example.net/my/minimal/vocab`](https://example.net/my/minimal/vocab)
   - `Simple Vocabulary Extension` [`https://example.net/my/extension/vocab`](https://example.net/my/extension/vocab)
@@ -73,8 +73,8 @@ Vocabularies and extensions:
 ## Thing
 []{#thing}
 
-The concept `Thing` <br/> 
-with URI `https://example.net/my/minimal/thing` <br/> 
+The concept `Thing` <br/>
+with URI `https://example.net/my/minimal/thing` <br/>
 is defined in vocabulary `https://example.net/my/minimal/vocab`
 
 This is the top concept of the vocabulary.
@@ -96,8 +96,8 @@ Any physical thing.  <br/> This concept is for demonstration purposes only.
 ## Solid
 []{#solid}
 
-The concept `Solid` <br/> 
-with URI `https://example.net/my/minimal/solid` <br/> 
+The concept `Solid` <br/>
+with URI `https://example.net/my/minimal/solid` <br/>
 is defined in vocabulary `https://example.net/my/minimal/vocab`
 
 Path from the top concept: <br/>
@@ -117,8 +117,8 @@ A thing that was considered solid at the time of observation.  <br/> This concep
 ## Liquid
 []{#liquid}
 
-The concept `Liquid` <br/> 
-with URI `https://example.net/my/extension/liquid` <br/> 
+The concept `Liquid` <br/>
+with URI `https://example.net/my/extension/liquid` <br/>
 is defined in vocabulary `https://example.net/my/extension/vocab`
 
 Path from the top concept: <br/>
@@ -137,8 +137,8 @@ A thing that was considered to be of a liquid state at the time of observation. 
 ## Water
 []{#water}
 
-The concept `Water` <br/> 
-with URI `https://example.net/my/extension/water` <br/> 
+The concept `Water` <br/>
+with URI `https://example.net/my/extension/water` <br/>
 is defined in vocabulary `https://example.net/my/extension/vocab`
 
 Path from the top concept: <br/>
@@ -164,8 +164,8 @@ There may be multiple notes in a concept.
 ## Beer
 []{#beer}
 
-The concept `Beer` <br/> 
-with URI `https://example.net/my/extension2/beer` <br/> 
+The concept `Beer` <br/>
+with URI `https://example.net/my/extension2/beer` <br/>
 is defined in vocabulary `https://example.net/my/extension2/vocab`
 
 Path from the top concept: <br/>
@@ -184,8 +184,8 @@ A thing that was considered to be beer in a liquid state at the time of observat
 ## Ale
 []{#ale}
 
-The concept `Ale` <br/> 
-with URI `https://example.net/my/beer/ale` <br/> 
+The concept `Ale` <br/>
+with URI `https://example.net/my/beer/ale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -204,8 +204,8 @@ Ale is a type of beer originating in medieval England, brewed using a warm ferme
 ## California Common
 []{#california-common}
 
-The concept `California Common` <br/> 
-with URI `https://example.net/my/beer/californiacommon` <br/> 
+The concept `California Common` <br/>
+with URI `https://example.net/my/beer/californiacommon` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -221,8 +221,8 @@ California common
 ## Cream Ale
 []{#cream-ale}
 
-The concept `Cream Ale` <br/> 
-with URI `https://example.net/my/beer/creamale` <br/> 
+The concept `Cream Ale` <br/>
+with URI `https://example.net/my/beer/creamale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -238,8 +238,8 @@ Cream ale.
 ## Irish Ale
 []{#irish-ale}
 
-The concept `Irish Ale` <br/> 
-with URI `https://example.net/my/beer/irishale` <br/> 
+The concept `Irish Ale` <br/>
+with URI `https://example.net/my/beer/irishale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -255,8 +255,8 @@ Irish ale
 ## Stout / Porter
 []{#porter}
 
-The concept `Stout / Porter` <br/> 
-with URI `https://example.net/my/beer/stoutporter` <br/> 
+The concept `Stout / Porter` <br/>
+with URI `https://example.net/my/beer/stoutporter` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -275,8 +275,8 @@ Stouts and Porters.
 ## Baltic Porter
 []{#baltic-porter}
 
-The concept `Baltic Porter` <br/> 
-with URI `https://example.net/my/beer/balticporter` <br/> 
+The concept `Baltic Porter` <br/>
+with URI `https://example.net/my/beer/balticporter` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -292,8 +292,8 @@ Baltic Porter.
 ## American Porter
 []{#american-porter}
 
-The concept `American Porter` <br/> 
-with URI `https://example.net/my/beer/americanporter` <br/> 
+The concept `American Porter` <br/>
+with URI `https://example.net/my/beer/americanporter` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -309,8 +309,8 @@ American porter.
 ## American Stout
 []{#american-stout}
 
-The concept `American Stout` <br/> 
-with URI `https://example.net/my/beer/americanstout` <br/> 
+The concept `American Stout` <br/>
+with URI `https://example.net/my/beer/americanstout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -326,8 +326,8 @@ American stout.
 ## Oatmeal Stout
 []{#oatmeal-stout}
 
-The concept `Oatmeal Stout` <br/> 
-with URI `https://example.net/my/beer/oatmealstout` <br/> 
+The concept `Oatmeal Stout` <br/>
+with URI `https://example.net/my/beer/oatmealstout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -343,8 +343,8 @@ Oatmeal stout is a stout with a proportion of oats, normally a maximum of 30%, a
 ## American Double Stout
 []{#american-double-stout}
 
-The concept `American Double Stout` <br/> 
-with URI `https://example.net/my/beer/americandoublestout` <br/> 
+The concept `American Double Stout` <br/>
+with URI `https://example.net/my/beer/americandoublestout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -360,8 +360,8 @@ American double stout.
 ## Russian Imperial Stout
 []{#russian-imperial-stout}
 
-The concept `Russian Imperial Stout` <br/> 
-with URI `https://example.net/my/beer/russianimperialstout` <br/> 
+The concept `Russian Imperial Stout` <br/>
+with URI `https://example.net/my/beer/russianimperialstout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -377,8 +377,8 @@ Russian imperial stout.
 ## Flavored Stout
 []{#flavored-stout}
 
-The concept `Flavored Stout` <br/> 
-with URI `https://example.net/my/beer/flavoredstout` <br/> 
+The concept `Flavored Stout` <br/>
+with URI `https://example.net/my/beer/flavoredstout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -394,8 +394,8 @@ Flavored stout, ugh.
 ## Sweet Stout
 []{#sweet-stout}
 
-The concept `Sweet Stout` <br/> 
-with URI `https://example.net/my/beer/sweetstout` <br/> 
+The concept `Sweet Stout` <br/>
+with URI `https://example.net/my/beer/sweetstout` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -411,8 +411,8 @@ Sweet stout.
 ## English Porter
 []{#english-porter}
 
-The concept `English Porter` <br/> 
-with URI `https://example.net/my/beer/englishporter` <br/> 
+The concept `English Porter` <br/>
+with URI `https://example.net/my/beer/englishporter` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -428,8 +428,8 @@ English porter.
 ## Pale Ale
 []{#pale-ale}
 
-The concept `Pale Ale` <br/> 
-with URI `https://example.net/my/beer/paleale` <br/> 
+The concept `Pale Ale` <br/>
+with URI `https://example.net/my/beer/paleale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -445,8 +445,8 @@ Pale ale.s
 ## Mild Ale
 []{#mild-ale}
 
-The concept `Mild Ale` <br/> 
-with URI `https://example.net/my/beer/mildale` <br/> 
+The concept `Mild Ale` <br/>
+with URI `https://example.net/my/beer/mildale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -462,8 +462,8 @@ Mild ale.
 ## Vegetable Ale
 []{#vegetable-ale}
 
-The concept `Vegetable Ale` <br/> 
-with URI `https://example.net/my/beer/vegetableale` <br/> 
+The concept `Vegetable Ale` <br/>
+with URI `https://example.net/my/beer/vegetableale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -482,8 +482,8 @@ Vegetable ale.
 ## Chile Ale
 []{#chile-ale}
 
-The concept `Chile Ale` <br/> 
-with URI `https://example.net/my/beer/chileale` <br/> 
+The concept `Chile Ale` <br/>
+with URI `https://example.net/my/beer/chileale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -502,8 +502,8 @@ Chile ale.
 ## Winkoop Patty's Chile
 []{#winkoop-pattys-chile}
 
-The concept `Winkoop Patty's Chile` <br/> 
-with URI `https://example.net/my/beer/wynkooppattyschile` <br/> 
+The concept `Winkoop Patty's Chile` <br/>
+with URI `https://example.net/my/beer/wynkooppattyschile` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -519,8 +519,8 @@ Winkoop Patty's Chile.
 ## Rogue Chipotle Ale
 []{#rogue-chipotle-ale}
 
-The concept `Rogue Chipotle Ale` <br/> 
-with URI `https://example.net/my/beer/roguechipotleale` <br/> 
+The concept `Rogue Chipotle Ale` <br/>
+with URI `https://example.net/my/beer/roguechipotleale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -536,8 +536,8 @@ Rogue Chipotle ale.
 ## Dogfish Head Theobroma
 []{#dogfish-head-theobroma}
 
-The concept `Dogfish Head Theobroma` <br/> 
-with URI `https://example.net/my/beer/dogfishheadtheobroma` <br/> 
+The concept `Dogfish Head Theobroma` <br/>
+with URI `https://example.net/my/beer/dogfishheadtheobroma` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -553,8 +553,8 @@ Dogfish Head Theobroma.
 ## Twisted Pine Ghostface Killah
 []{#twisted-pine-ghostface-killah}
 
-The concept `Twisted Pine Ghostface Killah` <br/> 
-with URI `https://example.net/my/beer/twistedpineghostfacekillah` <br/> 
+The concept `Twisted Pine Ghostface Killah` <br/>
+with URI `https://example.net/my/beer/twistedpineghostfacekillah` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -570,8 +570,8 @@ Twisted Pine Ghostface Killah.
 ## No Label Don Jalapeno
 []{#no-label-don-jalapeno}
 
-The concept `No Label Don Jalapeno` <br/> 
-with URI `https://example.net/my/beer/nolabeldonjalapeno` <br/> 
+The concept `No Label Don Jalapeno` <br/>
+with URI `https://example.net/my/beer/nolabeldonjalapeno` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -587,8 +587,8 @@ No label Don Jalapeno.
 ## Pumpkin Ale
 []{#pumpkin-ale}
 
-The concept `Pumpkin Ale` <br/> 
-with URI `https://example.net/my/beer/pumpkinale` <br/> 
+The concept `Pumpkin Ale` <br/>
+with URI `https://example.net/my/beer/pumpkinale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -604,8 +604,8 @@ Pumpkin ale.
 ## American Wild Ale
 []{#american-wild-ale}
 
-The concept `American Wild Ale` <br/> 
-with URI `https://example.net/my/beer/americanwildale` <br/> 
+The concept `American Wild Ale` <br/>
+with URI `https://example.net/my/beer/americanwildale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -621,8 +621,8 @@ American wild ale
 ## Lambic
 []{#lambic}
 
-The concept `Lambic` <br/> 
-with URI `https://example.net/my/beer/lambic` <br/> 
+The concept `Lambic` <br/>
+with URI `https://example.net/my/beer/lambic` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -641,8 +641,8 @@ Lambic.
 ## Faro
 []{#faro}
 
-The concept `Faro` <br/> 
-with URI `https://example.net/my/beer/faro` <br/> 
+The concept `Faro` <br/>
+with URI `https://example.net/my/beer/faro` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -658,8 +658,8 @@ Faro.
 ## Gueuze
 []{#gueuze}
 
-The concept `Gueuze` <br/> 
-with URI `https://example.net/my/beer/Gueuze` <br/> 
+The concept `Gueuze` <br/>
+with URI `https://example.net/my/beer/Gueuze` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -675,8 +675,8 @@ Gueuze.
 ## Fruit
 []{#fruit}
 
-The concept `Fruit` <br/> 
-with URI `https://example.net/my/beer/fruit` <br/> 
+The concept `Fruit` <br/>
+with URI `https://example.net/my/beer/fruit` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -692,8 +692,8 @@ Fruit.
 ## Unblended
 []{#unblended}
 
-The concept `Unblended` <br/> 
-with URI `https://example.net/my/beer/unblended` <br/> 
+The concept `Unblended` <br/>
+with URI `https://example.net/my/beer/unblended` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -709,8 +709,8 @@ Unblended.
 ## Sahti
 []{#sahti}
 
-The concept `Sahti` <br/> 
-with URI `https://example.net/my/beer/sahti` <br/> 
+The concept `Sahti` <br/>
+with URI `https://example.net/my/beer/sahti` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -726,8 +726,8 @@ Sahti.
 ## Belgian French Ale
 []{#belgian-french-ale}
 
-The concept `Belgian French Ale` <br/> 
-with URI `https://example.net/my/beer/belgianfrenchale` <br/> 
+The concept `Belgian French Ale` <br/>
+with URI `https://example.net/my/beer/belgianfrenchale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -743,8 +743,8 @@ Belgian French ale.
 ## Rye Ale
 []{#rye-ale}
 
-The concept `Rye Ale` <br/> 
-with URI `https://example.net/my/beer/ryeale` <br/> 
+The concept `Rye Ale` <br/>
+with URI `https://example.net/my/beer/ryeale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -760,8 +760,8 @@ Rye ale.
 ## German Ale
 []{#german-ale}
 
-The concept `German Ale` <br/> 
-with URI `https://example.net/my/beer/germanale` <br/> 
+The concept `German Ale` <br/>
+with URI `https://example.net/my/beer/germanale` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -777,8 +777,8 @@ German ale.
 ## Lager
 []{#lager}
 
-The concept `Lager` <br/> 
-with URI `https://example.net/my/beer/lager` <br/> 
+The concept `Lager` <br/>
+with URI `https://example.net/my/beer/lager` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -797,8 +797,8 @@ Lager is a type of beer originated in Bavaria, which has been brewed and conditi
 ## American Lager
 []{#american-lager}
 
-The concept `American Lager` <br/> 
-with URI `https://example.net/my/beer/americanlager` <br/> 
+The concept `American Lager` <br/>
+with URI `https://example.net/my/beer/americanlager` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -814,8 +814,8 @@ American lager.
 ## Pilsner
 []{#pilsner}
 
-The concept `Pilsner` <br/> 
-with URI `https://example.net/my/beer/pilsner` <br/> 
+The concept `Pilsner` <br/>
+with URI `https://example.net/my/beer/pilsner` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -831,8 +831,8 @@ Pilsner
 ## European Strong Lager
 []{#european-strong-lager}
 
-The concept `European Strong Lager` <br/> 
-with URI `https://example.net/my/beer/europeanstronglager` <br/> 
+The concept `European Strong Lager` <br/>
+with URI `https://example.net/my/beer/europeanstronglager` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -848,8 +848,8 @@ European strong lager.
 ## European Lager
 []{#european-lager}
 
-The concept `European Lager` <br/> 
-with URI `https://example.net/my/beer/europeanlager` <br/> 
+The concept `European Lager` <br/>
+with URI `https://example.net/my/beer/europeanlager` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -865,8 +865,8 @@ European lager.
 ## German Lager
 []{#german-lager}
 
-The concept `German Lager` <br/> 
-with URI `https://example.net/my/beer/germanlager` <br/> 
+The concept `German Lager` <br/>
+with URI `https://example.net/my/beer/germanlager` <br/>
 is defined in vocabulary `https://example.net/my/beer/vocab`
 
 Path from the top concept: <br/>
@@ -877,5 +877,3 @@ Path from the top concept: <br/>
 **Definition:**
 
 German lager.
-
-

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vocab-tools"
-version = "0.1.0"
+version = "0.2.0"
 description = "Tools for validating and working with iSamples SKOS vocabularies."
 authors = ["datadave <605409+datadavev@users.noreply.github.com>"]
 license = "MIT"
@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "vocab_tools"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 click = "^8"
 rich = "^13"
 rdflib = "^7"
@@ -20,10 +20,12 @@ optional=true
 # Update version with e.g. "poetry version patch"
 [tool.poetry_bumpversion.file."vocab_tools/__init__.py"]
 
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
 jupyter = "^1"
 graphviz = "^0"
+
 
 [tool.poetry.group.service]
 optional=true
@@ -35,6 +37,7 @@ uvicorn = {version = "^0", optional=true}
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
 
 [tool.poetry.scripts]
 vocab = 'vocab_tools.cli:main'

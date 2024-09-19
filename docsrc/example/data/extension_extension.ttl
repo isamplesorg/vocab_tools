@@ -20,4 +20,3 @@ ext2:beer
     skos:inScheme ext2:vocab ;
     skos:broader ext:liquid ;
 .
-

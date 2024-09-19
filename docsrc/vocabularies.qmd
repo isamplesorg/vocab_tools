@@ -2,7 +2,7 @@
 title: Vocabularies in iSamples
 reference-location: margin
 format:
-  html: 
+  html:
     code-overflow: wrap
 jupyter: python3
 filters:
@@ -51,11 +51,11 @@ eg:liquid
 rdfdot(data=data)
 ```
 
-A vocabulary as used in iSamples is an [RDF graph](https://en.wikipedia.org/wiki/Resource_Description_Framework) composed of one instance of [`skos:ConceptScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)[^skos] and one or more instances of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept). 
+A vocabulary as used in iSamples is an [RDF graph](https://en.wikipedia.org/wiki/Resource_Description_Framework) composed of one instance of [`skos:ConceptScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)[^skos] and one or more instances of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept).
 
 [^skos]: Herein "`skos`" is a [namespace name](https://www.w3.org/TR/1999/REC-xml-names-19990114/#dt-NSName) that refers to `http://www.w3.org/2004/02/skos/core#`
 
-The top level (i.e. broadest definition) `skos:Concept` must include a [`skos:topConceptOf`](https://www.w3.org/2009/08/skos-reference/skos.html#topConceptOf) predicate, the object of which is the vocabulary `skos:ConceptScheme` instance. If a `skos:Concept` does not include a `skos:topConceptOf` predicate, then it must contain a [`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme) predicate that refers to the `skos:ConceptScheme` instance.[^a] 
+The top level (i.e. broadest definition) `skos:Concept` must include a [`skos:topConceptOf`](https://www.w3.org/2009/08/skos-reference/skos.html#topConceptOf) predicate, the object of which is the vocabulary `skos:ConceptScheme` instance. If a `skos:Concept` does not include a `skos:topConceptOf` predicate, then it must contain a [`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme) predicate that refers to the `skos:ConceptScheme` instance.[^a]
 
 A `skos:Concept` instance that does not include a `skos:topConceptOf` predicate must include a [`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader) predicate, the object of which is an instance of `skos:Concept` with a broader definition.
 
@@ -64,8 +64,8 @@ Each `skos:Concept` instance must include a [`skos:prefLabel`](https://www.w3.or
 The following is a simple vocabulary that defines two concepts (for structural reference only). The `thing` concept is the broadest concept as indicated by the `skos:topConceptOf` property, and the `liquid` concept is a narrower definition of `thing`, as indicated by the `skos:broader` property with `thing` as the object. The concepts are contained within the vocabulary with URI `https://example.net/my/minimal/vocab` as indicated by the `skos:topConceptOf` and `skos:inScheme` references by the concepts. A graph representation of the vocabulary is shown in @fig-minimal.
 
 ```{.ttl include="../example/data/example.ttl"}
-#|  
-#| code-overflow: wrap 
+#|
+#| code-overflow: wrap
 #| caption: "test"
 ```
 
@@ -79,7 +79,7 @@ rdfdot(filenames=["../example/data/example.ttl", ])
 
 ## Extending a Vocabulary
 
-A vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts ("narrower terms"). 
+A vocabulary extension is used to augment an existing vocabulary, typically by adding more narrowly construed concepts ("narrower terms").
 
 In iSamples, a vocabulary extension is a vocabulary where the `skos:ConceptScheme` instance includes a `skos:inScheme` predicate that refers to the `skos:ConceptScheme` of the vocabulary being extended. This is used programmatically to identify the vocabulary being extended and to help ensure that `skos:Concept` instances directly or indirectly extend the base vocabulary.
 
@@ -96,9 +96,9 @@ ext:vocab
     rdf:type skos:ConceptScheme ;
     skos:prefLabel "Simple Vocabulary Extension"@en ;
     skos:inScheme eg:vocab ;
-.    
+.
 
-ext:liquid 
+ext:liquid
     rdf:type skos:Concept ;
     skos:prefLabel "liquid"@en ;
     skos:definition "A thing that was considered to be of a liquid state at the time of observation"@en ;
@@ -124,7 +124,7 @@ The entire vocabulary is interpreted by loading the extension and referenced voc
 rdfdot(
     filenames=[
         "../example/data/example.ttl",
-        "../example/data/extension_example.ttl", 
+        "../example/data/extension_example.ttl",
     ]
 )
 ```
@@ -146,7 +146,7 @@ In many cases it is desireable to cross reference vocabulary concepts with conce
 
 ## Additional Vocabulary and Concept Metadata
 
-Additional properties may be associated with the vocabulary or any of their defined concepts to provide metadata apart from the structural or semantic aspects of the graph. 
+Additional properties may be associated with the vocabulary or any of their defined concepts to provide metadata apart from the structural or semantic aspects of the graph.
 
 The `skos:historyNote` property is used to add human readable notes concerning revision history. A `skos:historyNote` entry should follow a convention of `ISO-Date Initials Note`, for example:
 
@@ -186,4 +186,3 @@ eg:vocab
 [^a]: The containing vocabulary may be inferred by traversing semantic relations such as `skos:broader` to find a semantically related concept that includes `skos:inScheme` or `skos:topConceptOf`, but including `skos:inScheme` with each concept provides a more explicit construct for consumers and simplifies processing.
 
 [^b]: Only one `skos:prefLabel` and one `skos:definition` per language is permitted.
-

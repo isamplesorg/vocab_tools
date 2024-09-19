@@ -11,6 +11,7 @@ import vocab_tools
 
 L = logging.getLogger("tomarkdown")
 
+
 def concept_tree(
     top_concept_uri: str,
     concepts: typing.List[vocab_tools.VocabularyConcept],
@@ -41,7 +42,7 @@ def describe_concept(
         f"{'#' * level} {concept.get_label()}",
         "[]{#" + concept.md_link_label() + "}",
         "",
-        #f"The concept `{concept.get_label()}` <br/> ",
+        # f"The concept `{concept.get_label()}` <br/> ",
         f"URI `{concept.uri}` <br/> ",
         f"defined in vocabulary `{concept.vocabulary}`",
         "",
@@ -56,7 +57,7 @@ def describe_concept(
         path.reverse()
         labels = []
         for uri in path:
-            #c = store.concept(uri)
+            # c = store.concept(uri)
             c = vocab_tools.find_concept_in_concept_list(uri, concept_list)
             if not c is None:
                 labels.append(c.md_link(fixed_width=True))
@@ -154,7 +155,6 @@ def describe_vocabulary(
     if V.sourceRepository is not None:
         res.append(f"**Source Repository:** {V.sourceRepository}<br />")
 
-
     # display the hierarchy of concepts in this vocabulary
     res += (
         "",
@@ -167,7 +167,7 @@ def describe_vocabulary(
     all_concepts = [store.concept(uri) for uri in concept_uris]
     top_concepts = []
     try:
-        #top_concepts = [store.top_concept(), ]
+        # top_concepts = [store.top_concept(), ]
         top_concepts = store.top_concept()
 
         L.debug(f"count Top concepts: {len(top_concepts)}")
@@ -194,14 +194,18 @@ def describe_vocabulary(
             res.append(label)
         res += ("", "")
     for top_concept in top_concepts:
-        res += describe_concept(store, top_concept, level=2, is_top_concept=True, concept_list=all_concepts)
-    #res += top_concept.markdown(level=2, concept_list=all_concepts)
+        res += describe_concept(
+            store, top_concept, level=2, is_top_concept=True, concept_list=all_concepts
+        )
+        # res += top_concept.markdown(level=2, concept_list=all_concepts)
         res.append("")
-    #for top_concept in top_concepts:
+        # for top_concept in top_concepts:
         for uri, level in store.walk_narrower(top_concept.uri, level=3):
             L.debug(f"walk narrower, uri: {uri}, level: {level}")
             concept = vocab_tools.find_concept_in_concept_list(uri, all_concepts)
-            #res += concept.markdown(level=level, concept_list=all_concepts)
-            res += describe_concept(store, concept, level=level, concept_list=all_concepts)
+            # res += concept.markdown(level=level, concept_list=all_concepts)
+            res += describe_concept(
+                store, concept, level=level, concept_list=all_concepts
+            )
             res.append("")
     return res
