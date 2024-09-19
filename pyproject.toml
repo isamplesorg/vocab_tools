@@ -17,6 +17,9 @@ pyshacl = {git = "https://github.com/datadavev/pySHACL.git", rev = "report_metri
 [tool.poetry.group.dev]
 optional=true
 
+# Update version with e.g. "poetry version patch"
+[tool.poetry_bumpversion.file."vocab_tools/__init__.py"]
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
 jupyter = "^1"

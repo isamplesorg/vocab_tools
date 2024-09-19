@@ -50,6 +50,7 @@ def main():
         level="INFO", format=FORMAT, datefmt="[%X]"
     )
 
+
 @main.command()
 @click.argument("source", nargs=1)
 @click.option("-v", "--vocab", default=None, help="Vocabulary to load", multiple=True)

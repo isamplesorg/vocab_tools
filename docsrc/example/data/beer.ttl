@@ -259,7 +259,7 @@ beer:americanstout
 beer:oatmealstout
     rdf:type skos:Concept ;
     skos:prefLabel "Oatmeal Stout"@en ;
-    skos:definition "Oatmeal stout."@en ;
+    skos:definition "Oatmeal stout is a stout with a proportion of oats, normally a maximum of 30%, added during the brewing process [ref](https://en.wikipedia.org/wiki/Stout#Oatmeal_stout)."@en ;
     skos:inScheme beer:vocab ;
     skos:broader beer:stoutporter ;
 .

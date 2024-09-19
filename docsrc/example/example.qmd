@@ -2,7 +2,7 @@
 comment: | 
   WARNING: This file is generated. Any edits will be lost!
 title: "Minimal Example Vocabulary"
-date: "2024-01-02T13:16:41.187230+00:00"
+date: "2024-01-02T21:35:28.800016+00:00"
 subtitle: |
   This is an example of a minimal iSamples vocabulary.
 execute:
@@ -337,7 +337,7 @@ Path from the top concept: <br/>
 
 **Definition:**
 
-Oatmeal stout.
+Oatmeal stout is a stout with a proportion of oats, normally a maximum of 30%, added during the brewing process [Wikipedia](https://en.wikipedia.org/wiki/Stout#Oatmeal_stout).
 
 
 ## American Double Stout

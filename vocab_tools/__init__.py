@@ -10,6 +10,8 @@ import rdflib
 import rdflib.namespace
 import rdflib.plugins.sparql
 
+__version__ = "0.1.0"
+
 #TODO: this is too specific:
 STORE_IDENTIFIER = "https://w3id.org/isample/vocabulary"
 
