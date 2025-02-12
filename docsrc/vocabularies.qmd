@@ -17,18 +17,23 @@ lightbox: auto
 import io
 import graphviz
 import rdflib
-import rdflib.tools.rdf2dot
+import vocab_tools.rdf2dot2
 
 def rdfdot(filenames=None, data=None):
-    g = rdflib.ConjunctiveGraph()
+    options = {
+      "HREFCOLOR": "black"
+    }
+    g = rdflib.Dataset()
     if data is not None:
         g.parse(data=data)
     else:
         for filename in filenames:
             g.parse(filename)
     fp = io.StringIO()
-    rdflib.tools.rdf2dot.rdf2dot(g, fp)
+    vocab_tools.rdf2dot2.rdf2dot(g, fp, options=options)
+    foo = 2
     return graphviz.Source(fp.getvalue())
+
 ```
 
 Vocabularies in iSamples are used to provide discrete groups for categorizing physical sample records.
@@ -61,7 +66,7 @@ A `skos:Concept` instance that does not include a `skos:topConceptOf` predicate 
 
 Each `skos:Concept` instance must include a [`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel) and should include a [`skos:definition`](https://www.w3.org/2009/08/skos-reference/skos.html#definition) that provides a clear textual description of the concept.[^b]
 
-The following is a simple vocabulary that defines two concepts (for structural reference only). The `thing` concept is the broadest concept as indicated by the `skos:topConceptOf` property, and the `liquid` concept is a narrower definition of `thing`, as indicated by the `skos:broader` property with `thing` as the object. The concepts are contained within the vocabulary with URI `https://example.net/my/minimal/vocab` as indicated by the `skos:topConceptOf` and `skos:inScheme` references by the concepts. A graph representation of the vocabulary is shown in @fig-minimal.
+The following is a simple vocabulary that defines two concepts (for structural reference only). The `thing` concept is the broadest concept as indicated by the `skos:topConceptOf` property, and the `solid` concept is a narrower definition of `thing`, as indicated by the `skos:broader` property with `thing` as the object. The concepts are contained within the vocabulary with URI `https://example.net/my/minimal/vocab` as indicated by the `skos:topConceptOf` and `skos:inScheme` references by the concepts. A graph representation of the vocabulary is shown in @fig-minimal.
 
 ```{.ttl include="../example/data/example.ttl"}
 #|
@@ -72,7 +77,7 @@ The following is a simple vocabulary that defines two concepts (for structural r
 ```{python }
 #| echo: false
 #| label: fig-minimal
-#| fig-cap: 'A minimal vocabulary that defines two concepts "thing" and "living_thing" within the vocabulary `<https://example.net/my/minimal/vocabulary>`.'
+#| fig-cap: 'A minimal vocabulary that defines two concepts "thing" and "solid" within the vocabulary `<https://example.net/my/minimal/vocabulary>`.'
 
 rdfdot(filenames=["../example/data/example.ttl", ])
 ```

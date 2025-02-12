@@ -6,9 +6,9 @@ reference-location: margin
 
 ## Validate a vocabulary
 
-Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in `vocab_tools/data` and are included with the code when this packae is installed.
+Vocabulary validation checks the structure of the vocabulary graph by applying SHACL rules using the pySHACL library[^modified]. The SHACL rules are located in `vocab_tools/data` and are included with the code when this package is installed.
 
-^[modified]: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from [github.com/datadavev/pyshacl](https://github.com/datadavev/pyshacl) and is kept in sync with changes from upstream.
+[^modified]: The version of pySHACL used here is slightly modified to provide more metrics on rules applied during the validation process. It is retrieved from [github.com/datadavev/pyshacl](https://github.com/datadavev/pyshacl) and is kept in sync with changes from upstream.
 
 Validation is generally performed on a single base or extension vocabulary using the `vocab validate` command with the target vocabulary source file as the only parameter:
 

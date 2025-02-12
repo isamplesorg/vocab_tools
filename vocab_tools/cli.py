@@ -32,7 +32,7 @@ def get_shape(path: typing.Optional[str] = None) -> typing.Optional[rdflib.Graph
             return None
     else:
         path = str(importlib.resources.files(vocab_tools).joinpath(DEFAULT_SHAPE))
-    g = rdflib.ConjunctiveGraph()
+    g = rdflib.Dataset()
     return g.parse(path)
 
 

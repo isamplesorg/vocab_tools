@@ -25,6 +25,8 @@ format:
   html:
     theme:
       - cosmo
-      - styles.scss
+      # - styles.scss
     toc: true
+    grid:
+      body-width: 2000px
 bibliography: bibliography.bib

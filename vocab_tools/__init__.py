@@ -178,7 +178,7 @@ PREFIX rdfs: <{NS['rdfs']}>
         return len(self._g)
 
     def _initialize_store(self, purge=False, store="default"):
-        graph = rdflib.ConjunctiveGraph(store=store, identifier=self.store_identifier)
+        graph = rdflib.Dataset(store=store, default_graph_base=self.store_identifier)
         if purge:
             graph.destroy(self.storage_uri)
         graph.open(self.storage_uri, create=True)
